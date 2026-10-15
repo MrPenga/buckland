@@ -1,0 +1,14 @@
+BUCKLAND ANGLING CLUB — Registro di Pesca e forniture
+
+Aprire index.html o pubblicare l’intera cartella su GitHub Pages.
+Pagine: index.html (listini), wiki.html (mappe e ricette da pesca), eventi.html (gara pesca), regole.html, ordini.html.
+
+Il catalogo mantiene prezzi pesca e quantità, con limiti 10 trappole pesca e 70 esche per pesci grandi.
+Le esche per trappole pesca sono nella sezione Trappole; le canne in Attrezzi.
+Caccia, bracconaggio, vendita calmierata e relative ricette/competenze sono stati rimossi dall'interfaccia.
+
+Loghi e sfondi: theme-assets/buckland-angling-club-logo.png e theme-assets/buckland-bg-*.png.
+Tema: buckland-theme.css (caricato alla fine delle pagine).
+
+La configurazione Firebase del progetto precedente è stata mantenuta per preservare ordini e gare pesca.
+Questo pacchetto non modifica né elimina i dati preesistenti da Firestore.

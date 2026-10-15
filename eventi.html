@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English+SC&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stile.css">
+  <title>Buckland Angling Club · Eventi di pesca</title>
+  <style>
+    /* Unica gara del club: pesca */
+    .eventi-main{max-width:none;width:100%;margin:0 auto 50px}
+    .eventi-intro{margin:0 0 18px;color:var(--inchiostro,#3d3025);line-height:1.55}
+    .eventi-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:20px}
+    .evento-col{min-width:0;display:flex;flex-direction:column;gap:14px}
+    .evento-col>.box{margin:0;min-width:0}
+    .evento-banner{border-top:5px solid #3b6570;padding-top:16px;background:linear-gradient(114deg,rgba(234,220,191,.98),rgba(196,206,182,.84))}
+    .evento-banner h2{font-family:'Rye',Georgia,serif;letter-spacing:.5px;font-weight:400;margin:0 0 8px;font-size:clamp(22px,2.3vw,32px)}
+    .evento-banner p{margin:0;color:var(--inchiostro,#625744);opacity:.85;font-size:.92em}
+    .evento-form h3,.evento-totali h3,.evento-elenco h3{font-family:'IM Fell English SC',Georgia,serif;font-weight:400;font-size:1.45rem;margin:0 0 12px}
+    .evento-campi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:10px}
+    .evento-campi label,.evento-data label{display:flex;flex-direction:column;gap:5px;font-weight:700;font-size:.9rem;min-width:0}
+    .evento-campi input,.evento-data input{box-sizing:border-box;width:100%;min-width:0;max-width:100%;padding:9px;border:1px solid #a38e6d;background:#faf1de;color:#30271f;font:inherit}
+    .evento-campi .campo-oggetto{grid-column:1/-1}
+    .evento-data{margin:16px 0 0;max-width:260px}
+    .evento-data input{margin-top:2px}
+    .evento-form button,.aggiungi-qty button,.azioni-riga .x{cursor:pointer}
+    .evento-form button{margin-top:6px}
+    .evento-errore{display:none;color:#942f25;padding:10px 12px;border:1px solid #b87d71;background:#fce8df;margin:0}
+    .evento-errore:not(:empty){display:block}
+    .evento-totali .tot{display:flex;gap:8px;flex-wrap:wrap}
+    .evento-totali .tot span{background:linear-gradient(#344b3b,#1f3429);color:#f5e8d0;border:1px solid #6e855f;padding:6px 10px;border-radius:3px}
+    .nota-aggiunta{margin:0 0 12px;font-size:.87em;opacity:.82;line-height:1.5}
+    .tabella-scroll{width:100%;overflow-x:auto}
+    .evento-elenco table{width:100%;border-collapse:collapse;font-size:.89rem}
+    .evento-elenco th,.evento-elenco td{padding:9px 7px;vertical-align:middle;border-bottom:1px solid rgba(95,73,43,.23)}
+    .evento-elenco td:first-child,.evento-elenco th:first-child{text-align:left}
+    .evento-elenco .n{text-align:right}
+    .azioni-riga{display:flex;justify-content:flex-end;align-items:center;gap:7px;flex-wrap:wrap}
+    .aggiungi-qty{display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:nowrap}
+    .aggiungi-qty input{width:62px;min-width:62px;box-sizing:border-box;padding:7px;border:1px solid #a38e6d;background:#faf1de;font:inherit}
+    .aggiungi-qty button,.azioni-riga .x{white-space:nowrap;padding:7px 9px}
+    .evento-elenco .x{color:#842b25}
+    .evento-vuoto{font-size:.93em;opacity:.85}
+    @media(max-width:1000px){.eventi-grid{grid-template-columns:minmax(0,1fr)}.evento-col{gap:12px}}
+    @media(max-width:500px){.eventi-main{width:calc(100% - 16px)}.evento-campi{grid-template-columns:1fr}.evento-campi .campo-oggetto{grid-column:auto}.evento-elenco table{min-width:460px}}
+  </style>
+
+<link rel="stylesheet" href="buckland-theme.css">
+</head>
+<body class="page-eventi">
+<div class="mp-page-shell"><header class="site-hero"><div class="site-hero-inner">
+  <div class="site-hero-copy"><div class="site-eyebrow">Competizioni del club · Pesca sportiva</div>
+    <h1>Gara di pesca del Buckland Angling Club</h1><p class="site-hero-sub">La gara di pesca: partecipanti, consegne e classifiche per specie.</p></div>
+  <a class="site-bell" href="ordini.html" data-order-bell hidden aria-label="Ordini da gestire"><span class="bell-symbol">🔔</span><span class="bell-count" data-bell-count>0</span></a>
+  <a href="index.html" class="site-logo" aria-label="Buckland Angling Club · Registro"><img src="theme-assets/buckland-angling-club-logo.png" alt="Buckland Angling Club, insegna vittoriana con trota"></a>
+</div></header><div id="nav"></div>
+<main class="eventi-main">
+<div class="section-heading"><span class="section-kicker">Gare e consegne</span></div>
+  <p class="eventi-intro page-lead">Il registro della gara di pesca raccoglie le catture e le consegne dei partecipanti. Puoi aggiornare le quantità, consultare i totali e cancellare le registrazioni.</p>
+  <div class="eventi-grid">
+    <section class="evento-col" data-tipo="pesca" aria-labelledby="titolo-pesca">
+      <div class="box evento-banner">
+        <h2 id="titolo-pesca">🎣 Gara di pesca</h2>
+        <p>Evento fisso · Registro delle consegne di pesca</p>
+        <div class="evento-data"><label>Data della consegna <input id="data-pesca" type="date"></label></div>
+      </div>
+      <p id="err-pesca" class="evento-errore" role="alert"></p>
+      <form class="box evento-form" id="form-pesca">
+        <h3>Consegna di un partecipante</h3>
+        <div class="evento-campi">
+          <label>Persona<input id="persona-pesca" required autocomplete="off"></label>
+          <label>Quantità<input id="qty-pesca" type="number" min="0" step="1" value="0" required></label>
+          <label class="campo-oggetto">Oggetto<input id="oggetto-pesca" required autocomplete="off"></label>
+        </div>
+        <button type="submit">Registra consegna pesca</button>
+      </form>
+      <div class="box evento-totali"><h3>Totali per oggetto · Pesca</h3><div class="tot" id="tot-pesca"></div></div>
+      <div class="box evento-elenco">
+        <h3>Consegne registrate · Pesca</h3>
+        <p class="nota-aggiunta">Puoi aggiungere quantità (anche 0) a un partecipante già censito oppure eliminare completamente la registrazione.</p>
+        <div id="lista-pesca"></div>
+      </div>
+    </section>
+  </div>
+</main></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="app.js"></script>
+<script>
+'use strict';
+$('#nav').innerHTML=nav('e');
+
+const EVENTI_FISSI={pesca:'Gara di pesca'};
+let rows=[];
+let busy=0;
+const gruppiVista={pesca:[]};
+try{
+  const mem=JSON.parse(localStorage.getItem('mp_eventi')||'[]');
+  if(Array.isArray(mem))rows=mem;
+}catch(e){}
+
+function mostraErrore(tipo,msg){$('#err-'+tipo).textContent=msg||'';}
+function salvaCache(){try{localStorage.setItem('mp_eventi',JSON.stringify(rows));}catch(e){}}
+
+// Includiamo anche le gare vecchie chiamate, ad esempio, "Gara di pesca storica".
+// Le righe con altri nomi non vengono modificate né cancellate.
+function appartieneA(r,tipo){
+  const nome=String(r.evento||'').toLocaleLowerCase('it').trim();
+  return tipo==='pesca' && /\bpesca\b/.test(nome);
+}
+
+function gruppoPerTipo(tipo){
+  const gruppi=new Map();
+  for(const r of rows.filter(r=>appartieneA(r,tipo))){
+    const persona=String(r.persona||'').trim();
+    const oggetto=String(r.oggetto||'').trim();
+    const key=persona+'\u0000'+oggetto;
+    if(!gruppi.has(key))gruppi.set(key,{persona,oggetto,qty:0});
+    gruppi.get(key).qty+=Number(r.qty)||0;
+  }
+  return [...gruppi.values()];
+}
+
+function disegnaTipo(tipo){
+  const elenco=rows.filter(r=>appartieneA(r,tipo));
+  const totali=new Map();
+  for(const r of elenco){
+    const oggetto=String(r.oggetto||'').trim();
+    totali.set(oggetto,(totali.get(oggetto)||0)+(Number(r.qty)||0));
+  }
+  $('#tot-'+tipo).innerHTML=totali.size
+    ? [...totali].map(([k,v])=>'<span>'+esc(k)+': <b>'+esc(v)+'</b></span>').join('')
+    : '<span class="evento-vuoto">Nessuna consegna ancora registrata.</span>';
+
+  const gruppi=gruppoPerTipo(tipo);
+  gruppiVista[tipo]=gruppi;
+  $('#lista-'+tipo).innerHTML=gruppi.length
+    ? '<div class="tabella-scroll"><table><thead><tr><th>Persona</th><th>Oggetto</th><th class="n">Qtà totale</th><th class="n">Azioni</th></tr></thead><tbody>'+
+      gruppi.map((r,i)=>
+        '<tr><td><b>'+esc(r.persona)+'</b></td><td>'+esc(r.oggetto)+'</td><td class="n"><b>'+esc(r.qty)+'</b></td>'+
+        '<td class="n"><div class="azioni-riga"><div class="aggiungi-qty">'+
+        '<input id="add_'+tipo+'_'+i+'" type="number" min="0" step="1" value="0" aria-label="Quantità da aggiungere a '+esc(r.persona)+'">'+
+        '<button type="button" onclick="aggiungi(\''+tipo+'\','+i+')">+ Aggiungi</button></div>'+
+        '<button type="button" class="x" onclick="eliminaGruppo(\''+tipo+'\','+i+')">✕ Elimina</button>'+
+        '</div></td></tr>'
+      ).join('')+'</tbody></table></div>'
+    : '<p class="evento-vuoto">Nessuna consegna registrata. Usa il modulo qui sopra per iniziare.</p>';
+
+  // Mostra l'ultima data registrata senza sovrascrivere una data scelta dall'utente.
+  const dataEl=$('#data-'+tipo);
+  if(!dataEl.value){
+    const dataEsistente=[...elenco].reverse().find(r=>r.data);
+    if(dataEsistente)dataEl.value=dataEsistente.data;
+  }
+}
+function disegna(){disegnaTipo('pesca');}
+
+async function carica(){
+  if(busy)return;
+  try{
+    const risposta=await api('list','Eventi');
+    if(busy)return;
+    rows=Array.isArray(risposta.rows)?risposta.rows:[];
+    salvaCache();
+    disegna();
+    mostraErrore('pesca','');
+
+  }catch(e){
+    // Manteniamo sullo schermo i dati della cache in caso di problemi di rete.
+    mostraErrore('pesca','Sincronizzazione non riuscita: '+e.message);
+
+  }
+}
+
+async function registra(tipo,row,nuovaConsegna){
+  const temp={id:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),...row};
+  rows.push(temp);
+  salvaCache();
+  disegna();
+  mostraErrore(tipo,'');
+  busy++;
+  try{
+    await api('add','Eventi',{row});
+    if(nuovaConsegna){
+      $('#persona-'+tipo).value='';
+      $('#qty-'+tipo).value='0';
+      $('#persona-'+tipo).focus();
+    }
+  }catch(e){
+    rows=rows.filter(r=>r!==temp);
+    salvaCache();
+    disegna();
+    mostraErrore(tipo,'Errore durante la registrazione: '+e.message);
+  }finally{
+    busy--;
+    // Sincronizza con gli ID generati dal server e con gli altri utenti.
+    // Non cancelliamo qui l'errore per poterlo mostrare all'utente.
+    try{
+      if(!busy){
+        const result=await api('list','Eventi');
+        if(!busy&&Array.isArray(result.rows)){rows=result.rows;salvaCache();disegna();}
+      }
+    }catch(e){}
+  }
+}
+
+async function aggiungi(tipo,i){
+  const g=gruppiVista[tipo]?.[i];
+  if(!g)return;
+  const input=$('#add_'+tipo+'_'+i);
+  const delta=Number(input.value);
+  if(!Number.isInteger(delta)||delta<0){
+    mostraErrore(tipo,'Inserisci un numero intero uguale o maggiore di 0.');input.focus();return;
+  }
+  await registra(tipo,{evento:EVENTI_FISSI[tipo],data:$('#data-'+tipo).value,
+    persona:g.persona,oggetto:g.oggetto,qty:delta},false);
+}
+
+async function eliminaGruppo(tipo,i){
+  const g=gruppiVista[tipo]?.[i];
+  if(!g)return;
+  const corrispondenti=rows.filter(r=>appartieneA(r,tipo)
+    &&String(r.persona||'').trim()===g.persona
+    &&String(r.oggetto||'').trim()===g.oggetto);
+  if(!corrispondenti.length)return;
+  if(!confirm('Eliminare tutte le consegne di '+g.persona+' – '+g.oggetto+' dalla gara di '+tipo+'?'))return;
+  // Elimina solo gli oggetti corrispondenti, senza toccare eventuali altre righe prive di ID.
+  rows=rows.filter(r=>!corrispondenti.includes(r));
+  salvaCache();disegna();mostraErrore(tipo,'');busy++;
+  try{
+    for(const r of corrispondenti){
+      if(r.id && !String(r.id).startsWith('tmp'))await api('delete','Eventi',{id:r.id});
+    }
+  }catch(e){
+    mostraErrore(tipo,'Errore durante la cancellazione: '+e.message);
+  }finally{
+    busy--;
+    try{
+      if(!busy){const result=await api('list','Eventi');
+        if(!busy&&Array.isArray(result.rows)){rows=result.rows;salvaCache();disegna();}}
+    }catch(e){}
+  }
+}
+
+for(const tipo of Object.keys(EVENTI_FISSI)){
+  $('#form-'+tipo).addEventListener('submit',async e=>{
+    e.preventDefault();
+    const persona=$('#persona-'+tipo).value.trim();
+    const oggetto=$('#oggetto-'+tipo).value.trim();
+    const qty=Number($('#qty-'+tipo).value);
+    if(!persona||!oggetto){mostraErrore(tipo,'Inserisci persona e oggetto.');return;}
+    if(!Number.isInteger(qty)||qty<0){mostraErrore(tipo,'La quantità deve essere un intero uguale o maggiore di 0.');return;}
+    await registra(tipo,{evento:EVENTI_FISSI[tipo],data:$('#data-'+tipo).value,persona,oggetto,qty},true);
+  });
+}
+
+disegna();
+avvia(carica,'Eventi');
+</script>
+</body>
+</html>

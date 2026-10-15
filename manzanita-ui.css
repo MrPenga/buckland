@@ -1,0 +1,38 @@
+/* Buckland Angling Club - Identita e notifiche ordini (comune a tutte le pagine). */
+.mp-header-tools{display:flex;align-items:center;justify-content:flex-end;gap:15px;flex-shrink:0;min-width:0}
+.mp-brand{display:block;flex:0 0 auto;line-height:0;border-radius:10px;text-decoration:none;transition:transform .15s ease}
+.mp-brand:hover{transform:translateY(-1px)}
+.mp-brand img{display:block;width:234px;height:auto;max-width:100%;filter:drop-shadow(0 3px 6px rgba(0,0,0,.24))}
+.mp-bell{position:relative;display:none;place-items:center;flex:0 0 48px;width:48px;height:48px;border:1px solid #c7a663;border-radius:50%;background:linear-gradient(145deg,#314631,#16251a);color:#f7ddb1;text-decoration:none;box-shadow:0 2px 9px rgba(0,0,0,.25);transition:transform .15s, background .15s}
+.mp-bell.mp-visible{display:grid}
+.mp-bell:hover{transform:translateY(-2px);background:#40543d}
+.mp-bell svg{display:block;width:26px;height:26px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.mp-order-count,.mp-nav-badge{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;border-radius:15px;color:#fff!important;background:#b52f27;border:2px solid #f8e7c5;box-shadow:0 2px 5px rgba(0,0,0,.27);font:bold 12px/1 Arial,sans-serif;letter-spacing:0}
+.mp-order-count{position:absolute;right:-8px;top:-9px}
+.mp-nav-badge{position:absolute;right:4px;top:2px}
+.mp-orders-link{position:relative!important}
+.mp-pulse{animation:mp-bell-pulse .65s ease-in-out 2}
+@keyframes mp-bell-pulse{0%,100%{transform:rotate(0)}25%{transform:rotate(-13deg)}55%{transform:rotate(12deg)}80%{transform:rotate(-6deg)}}
+@media(prefers-reduced-motion:reduce){.mp-pulse{animation:none}}
+/* Le pagine classiche (Ordini, Eventi, Regole) hanno una testata a 2 righe. */
+body > header{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"mp-title mp-tools" "mp-nav mp-nav";align-items:center;gap:8px 14px}
+body > header > h1{grid-area:mp-title;margin-bottom:0}
+body > header > #nav{grid-area:mp-nav;min-width:0}
+body > header > .mp-header-tools{grid-area:mp-tools}
+/* Registro e Wiki hanno gia una testata con griglia interna. */
+.hero-inner > .mp-header-tools{justify-self:end}
+@media(max-width:760px){
+ .mp-header-tools{gap:10px}
+ .mp-brand img{width:190px}
+ .hero-inner > .mp-header-tools{justify-self:start}
+ body > header .mp-brand img{width:168px}
+ .mp-bell{flex-basis:43px;width:43px;height:43px}
+}
+@media(max-width:440px){
+ body > header{grid-template-columns:minmax(0,1fr) auto;gap:8px}
+ body > header > h1{font-size:clamp(20px,6vw,27px)}
+ body > header .mp-brand img{width:132px}
+ body > header .mp-bell{width:38px;height:38px;flex-basis:38px}
+ .mp-brand img{width:174px}
+ .mp-order-count{right:-8px;top:-7px}
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English+SC&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="stile.css"><title>Buckland Angling Club · Ordini fattura</title>
+<link rel="stylesheet" href="buckland-theme.css">
+</head>
+<body class="page-ordini"><div class="mp-page-shell">
+<header class="site-hero"><div class="site-hero-inner">
+  <div class="site-hero-copy"><div class="site-eyebrow">Registro commerciale · Buckland Angling Club</div>
+    <h1>Ordini & Fatture</h1><p class="site-hero-sub">Richieste dei clienti, preparazione delle forniture da pesca e consegne del club.</p></div>
+  <a class="site-bell" href="ordini.html" data-order-bell hidden aria-label="Ordini da gestire"><span class="bell-symbol">🔔</span><span class="bell-count" data-bell-count>0</span></a>
+  <a href="index.html" class="site-logo" aria-label="Buckland Angling Club · Registro"><img src="theme-assets/buckland-angling-club-logo.png" alt="Buckland Angling Club, insegna vittoriana con trota"></a>
+</div></header><div id="nav"></div>
+<main class="orders-main">
+<div class="section-heading"><span class="section-kicker">Registro commerciale</span></div>
+<p class="page-lead">Registra un ordine sulla sinistra e segui le consegne sulla destra. Premi sullo stato per passare da <strong>Da fare</strong> a <strong>Preparato</strong> e infine a <strong>Consegnato</strong>.</p>
+<p id="err" role="alert"></p>
+<div class="orders-grid">
+<section class="box orders-form"><div class="box-head"><span class="head-emblem">✒</span><div><h2>Nuovo ordine</h2><p>Compila la richiesta per il cliente.</p></div></div>
+<form id="form"><div class="form-grid">
+<label class="full">Cliente<input id="cliente" required autocomplete="off"></label>
+<label class="full">Articolo<input id="articolo" required autocomplete="off"></label>
+<label>Quantità<input id="qty" type="number" min="1" value="1" required></label>
+<label>Importo $<input id="importo" type="number" step="0.01" min="0"></label>
+<label class="full">Note<input id="note" autocomplete="off"></label>
+</div><button type="submit">✒ Registra ordine</button></form></section>
+<section class="box orders-list"><div class="box-head"><span class="head-emblem">📜</span><div><h2>Ordini registrati</h2><p>Fatture, stato di lavorazione e consegne.</p></div></div>
+<div class="filter-row"><label>Mostra<select id="filtro"><option value="">Tutti gli ordini</option><option>Da fare</option><option>Preparato</option><option>Consegnato</option></select></label>
+<div class="tot" id="tot"></div></div><div id="lista" aria-live="polite"></div></section>
+</div></main></div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="app.js"></script><script>
+$('#nav').innerHTML=nav('o');const STATI=['Da fare','Preparato','Consegnato'];let rows=[];
+let busy=0;try{rows=JSON.parse(localStorage.getItem('mp_ordini')||'[]')}catch(e){}
+async function carica(){if(busy)return;try{const r=(await api('list','Ordini')).rows;if(busy)return;rows=r;disegna();try{localStorage.setItem('mp_ordini',JSON.stringify(rows))}catch(e){}$('#err').textContent=''}catch(e){$('#err').textContent='Errore: '+e.message}}
+function disegna(){const f=$('#filtro').value,l=rows.filter(r=>!f||r.stato===f).reverse();
+$('#tot').innerHTML='<span>'+l.length+' ordini</span><span>$'+l.reduce((s,r)=>s+(+r.importo||0),0).toFixed(2)+' da fatturare</span>';
+$('#lista').innerHTML=l.map(r=>'<div class="card"><div><b>'+esc(r.articolo)+' × '+esc(r.qty)+'</b><br><small>'+esc(r.cliente)+' · '+esc(r.data)+(r.importo!==''?' · $'+esc(r.importo):'')+(r.note?'<br>'+esc(r.note):'')+'</small></div><button class="st s'+STATI.indexOf(r.stato)+'" onclick="avanza(\''+esc(r.id)+'\')">'+esc(r.stato)+'</button><button class="x" title="Elimina" onclick="elimina(\''+esc(r.id)+'\')">✕</button></div>').join('')||'<p>Nessun ordine. Aggiungine uno qui sopra.</p>'}
+async function avanza(id){if(id.startsWith('tmp'))return;const r=rows.find(x=>x.id===id);r.stato=STATI[(STATI.indexOf(r.stato)+1)%3];disegna();busy++;try{await api('update','Ordini',{id,row:{stato:r.stato}})}catch(e){$('#err').textContent='Errore: '+e.message}busy--}
+async function elimina(id){if(id.startsWith('tmp')||!confirm('Eliminare questo ordine?'))return;rows=rows.filter(x=>x.id!==id);disegna();busy++;try{await api('delete','Ordini',{id})}catch(e){$('#err').textContent='Errore: '+e.message}busy--;carica()}
+$('#filtro').onchange=disegna;
+$('#form').onsubmit=async e=>{e.preventDefault();const row={cliente:$('#cliente').value,articolo:$('#articolo').value,qty:+$('#qty').value,importo:$('#importo').value,note:$('#note').value,stato:'Da fare'};
+rows.push({id:'tmp'+Date.now(),data:new Date().toISOString().slice(0,10),...row});disegna();e.target.reset();$('#qty').value=1;busy++;
+try{await api('add','Ordini',{row})}catch(er){$('#err').textContent='Errore: '+er.message}busy--;carica()};
+if(rows.length)disegna();avvia(carica,'Ordini');</script></body></html>

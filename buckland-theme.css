@@ -1,0 +1,65 @@
+/* Buckland Angling Club — Victorian river & lake fishing */
+:root{
+ --forest-950:#10282f;--forest-900:#15323b;--forest-800:#234650;
+ --forest-700:#315b62;--forest-600:#4b7477;
+ --paper:#d8e0cd;--paper-2:#cad8c2;--paper-soft:#eef0df;
+ --ink:#1b353a;--ink-soft:#536763;--line:rgba(28,74,81,.26);
+ --brass:#b79b6f;--brass-light:#e0d1a6;
+ --bosco:#102c34;--bosco2:#153c42;--bosco3:#295d64;
+ --carta:#d3e0cd;--carta2:#e5e8d6;--carta3:#aec4af;
+ --inchiostro:#183d43;--soft:#536c6c;--ottone:#b5a06e;--ottone2:#e2ce9f;
+ --ruggine:#a35448;--linea:rgba(43,86,90,.3);
+}
+body{font-family:'Libre Baskerville',Georgia,serif;background-color:#446e77!important;color:var(--ink)}
+body.page-index{background-image:linear-gradient(rgba(6,29,38,.33),rgba(119,156,149,.40)),url('theme-assets/buckland-bg-index.png')!important}
+body.page-ordini{background-image:linear-gradient(rgba(6,29,38,.31),rgba(119,156,149,.42)),url('theme-assets/buckland-bg-ordini.png')!important}
+body.page-wiki{background-image:linear-gradient(rgba(6,29,38,.26),rgba(119,156,149,.37)),url('theme-assets/buckland-bg-wiki.png')!important}
+body.page-eventi{background-image:linear-gradient(rgba(6,29,38,.23),rgba(119,156,149,.35)),url('theme-assets/buckland-bg-eventi.png')!important}
+body.page-regole{background-image:linear-gradient(rgba(6,29,38,.35),rgba(119,156,149,.40)),url('theme-assets/buckland-bg-regole.png')!important}
+.hero, header.site-hero, header:not(.hero){background:linear-gradient(112deg,rgba(7,35,44,.97),rgba(23,69,75,.95))!important;border-color:#b5a06e!important}
+.hero h1,header.site-hero h1,header h1{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;letter-spacing:1px!important;text-transform:none!important}
+.hero h1{font-size:clamp(40px,6vw,70px)!important;line-height:1.06!important}
+header.site-hero h1{font-size:clamp(37px,5vw,57px)!important}
+h1,h2,h3,.section-kicker,.category-head h2,.sidebar-title,.section-heading,.site-nav-label,.quick a,.craft-summary,.poster-modal-head h2{font-family:'Cormorant Garamond',Georgia,serif!important}
+h2{color:#24464d}
+.eyebrow,.site-eyebrow{color:#e2ce9f!important;letter-spacing:2.4px!important}
+.hero-sub,.site-hero-sub{color:#e0e8dc!important}
+.hero .logo-mark,.site-logo{width:245px!important;max-width:42vw!important}
+.hero .logo-mark img,.site-logo img{width:100%!important;filter:drop-shadow(0 6px 17px rgba(0,0,0,.45))!important}
+.site-quick a,.quick a,.sidebar,.category-head{background:linear-gradient(125deg,#10313a,#275660)!important;color:#f2edde!important;border-color:#577b7b!important}
+.site-quick a:hover,.quick a:hover,.sidebar a:hover{background:#376a73!important}
+.site-quick a.on{border-top-color:#e4cb92!important}
+.category,.box,.fish-card,.recipe-card,.fish-map-explorer,.rules-main .box{background:linear-gradient(125deg,rgba(239,240,219,.97),rgba(204,224,210,.97))!important;border-color:rgba(45,91,91,.4)!important;color:#193e43!important}
+.category-head h2{font-weight:700!important;color:#f7f0da!important}
+.category .category-body{background:rgba(227,236,220,.94)!important}
+.category.negative{border-top:4px solid #477b82!important}
+.category.positive{border-top:4px solid #b5a06e!important}
+.category .item-name,.row-total,.item-price,.summary-name,.summary-total{color:#193e43!important}
+.section-kicker{color:#1a4952!important;font-size:clamp(22px,3vw,30px)!important;font-weight:700!important}
+.section-heading::after{background:linear-gradient(90deg,#527e82,transparent)!important}
+.summary-panel{background:linear-gradient(#153b45,#0f3038)!important;color:#f2ecdb!important;border-color:#bdab7e!important}
+.summary-panel .summary-head,.summary-panel .summary-totals{background:rgba(255,255,255,.04)!important}
+.summary-panel .summary-name,.summary-panel .summary-qty,.summary-panel .summary-val{color:#f5ecd8!important}
+.guide{background:linear-gradient(105deg,#d8e5d5,#eef0dc)!important;border-color:#567b79!important}
+.craft-summary{background:linear-gradient(110deg,#1b4852,#356c71)!important;color:#f8efd9!important;border-color:#9eae96!important;font-size:25px!important}
+.craft-summary .section-kicker{color:#f7eacb!important}
+.craft-summary:hover{background:#31636b!important}
+.fish-map-btn.active,button:not(.x):not(.fish-map-btn),.footer-bar{background:linear-gradient(125deg,#153a45,#356b72)!important;color:#f8eed9!important}
+.fish-map-btn.active{border-color:#a1b5a0!important}
+footer,.footer-bar{border-color:#b5a06e!important}
+.regole-actions{background:linear-gradient(#d1e1cf,#e9ecda)!important;border-color:#6d9695!important}
+.regole-create,.regole-download{background:#16434c!important;color:#f2ead3!important}
+.regole-preview{background:#b0c9c2!important}
+.eventi-main .evento-col>.evento-banner{background:linear-gradient(114deg,#d7e9dd,#b4d1cb)!important;border-top:5px solid #2a6370!important}
+.eventi-grid{grid-template-columns:minmax(0,1fr)!important;max-width:1000px;margin:0 auto}
+@media (max-width:700px){.hero .logo-mark,.site-logo{max-width:200px!important}.hero h1{font-size:44px!important}.site-quick a{min-width:0}}
+
+/* Contrasto dei registri sui fondali acquatici */
+.section-heading .section-kicker {color:#f7edd3!important;text-shadow:0 2px 5px #0c2b30,0 1px 1px #0c2b30!important}
+.summary-panel .summary-title,.summary-panel .summary-sub,.summary-panel .summary-total,.summary-panel .summary-total>span,.summary-panel .summary-total strong {color:#f8efdc!important}
+.summary-panel .summary-row-main span, .summary-panel .summary-row-nums span{color:#f5eddb!important}
+.footer-bar .grand-total .label,.footer-bar .grand-total .amount,.footer-bar .footer-inner {color:#f8eddb!important}
+.footer-bar .grand-total.invoice .amount {color:#f2cf85!important}
+.category .category-head .badge.invoice{color:#e3c4a0!important;background:#4d5f60!important;border-color:#b79b6f!important}
+.category .category-head .badge.buy{color:#edf0d6!important;background:#376b69!important;border-color:#b2c0aa!important}
+.eventi-main .section-heading .section-kicker, .rules-main~.section-heading .section-kicker {color:#f7edd3!important}

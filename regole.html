@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Buckland Angling Club · Regole</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English+SC&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stile.css">
+<style>
+main p,main li{max-width:80ch}li{margin-bottom:8px}.b{font-size:11px;font-weight:700;border:1px solid currentColor;padding:1px 6px;text-transform:uppercase}.f1{color:var(--ruggine,#8f3f2f)}.f2{color:var(--bosco2,#334a38)}.pena{color:var(--ruggine,#8f3f2f)}
+.regole-actions{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;padding:22px;margin:25px 0;background:#e7d4a9;border:2px solid #896439;box-shadow:0 4px 15px #33231021;color:#322114;font-family:'Merriweather',Georgia,serif}
+.regole-actions .description{flex:1;min-width:230px}.regole-actions h2{margin:0 0 5px;font-family:'IM Fell English SC',Georgia,serif;font-size:26px;color:#34251b}.regole-actions p{margin:0;font-size:13px;line-height:1.6}
+.regole-create,.regole-download{border:2px solid #553820;background:#273b2c;color:#f5e5c5;padding:14px 22px;font:20px 'IM Fell English SC',Georgia,serif;cursor:pointer;letter-spacing:.2px;box-shadow:inset 0 0 0 2px #ad8b4a}
+.regole-create:hover,.regole-download:hover:not(:disabled){background:#37543d}.regole-create:focus-visible,.regole-download:focus-visible{outline:3px solid #9f7137;outline-offset:3px}
+.regole-download:disabled{opacity:.5;cursor:not-allowed}
+.regole-modal[hidden]{display:none!important}.regole-modal{position:fixed;inset:0;background:rgba(23,18,14,.82);z-index:99999;display:flex;justify-content:center;align-items:center;padding:20px;overflow:auto}
+.regole-dialog{background:#e7d5b0;color:#362517;border:4px double #744d2c;width:min(880px,100%);max-height:95vh;display:flex;flex-direction:column;box-shadow:0 20px 70px #0009;min-height:0}
+.regole-modal-header,.regole-modal-footer{padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#dec69b}
+.regole-modal-header h2{font:26px 'IM Fell English SC',Georgia,serif;margin:0}.regole-modal-header p{font:12px Georgia,serif;margin:3px 0 0}
+.regole-close{border:1px solid #775239;background:transparent;color:#482d1c;padding:6px 13px;cursor:pointer;font-size:26px}.regole-close:hover{background:#c2a374}
+.regole-preview{overflow:auto;min-height:170px;flex:1;padding:14px;text-align:center;display:flex;justify-content:center;align-items:flex-start;background:#bd9f72;box-shadow:inset 0 2px 8px #0002}
+.regole-preview canvas{width:auto;height:auto;max-height:65vh;max-width:100%;box-shadow:0 8px 20px #21170a77}
+.regole-modal-footer .status{font:12px Georgia,serif;flex:1}
+.regole-modal-footer .regole-download{font-size:17px;padding:10px 16px}
+body.regole-modal-open{overflow:hidden}
+@media(max-width:620px){.regole-modal{padding:6px}.regole-modal-footer{flex-wrap:wrap}.regole-modal-header{padding:9px}.regole-preview{padding:8px}.regole-preview canvas{max-height:57vh}}
+</style>
+
+<link rel="stylesheet" href="buckland-theme.css">
+</head>
+<body class="page-regole">
+<div class="mp-page-shell"><header class="site-hero"><div class="site-hero-inner">
+  <div class="site-hero-copy"><div class="site-eyebrow">Regolamento ufficiale · Buckland Angling Club</div>
+    <h1>Regole del Buckland Angling Club</h1><p class="site-hero-sub">Norme del club, pesca responsabile e istruzioni del registro.</p></div>
+  <a class="site-bell" href="ordini.html" data-order-bell hidden aria-label="Ordini da gestire"><span class="bell-symbol">🔔</span><span class="bell-count" data-bell-count>0</span></a>
+  <a href="index.html" class="site-logo" aria-label="Buckland Angling Club · Registro"><img src="theme-assets/buckland-angling-club-logo.png" alt="Buckland Angling Club, insegna vittoriana con trota"></a>
+</div></header><div id="nav"></div>
+<main class="rules-main">
+<div class="section-heading"><span class="section-kicker">Codice e disposizioni</span></div>
+<p class="page-lead">Le regole per accedere al club, vendere il pescato e acquistare forniture. Il manifesto completo si può generare e scaricare in PNG.</p>
+<div class="rules-primary">
+<div class="box rules-regulation">
+  <h2>Regolamento · Buckland Angling Club</h2>
+  <ol id="regoleBuckland">
+    <li>Chiunque si lamenta dei prezzi è bandito per <b class="pena">3 giorni</b>.</li>
+    <li>Chiunque raggira o tratta male i dipendenti è bandito <b class="pena">a vita</b>.</li>
+    <li>Chiunque lascia incustoditi i cavalli all'interno del recinto è bandito per <b class="pena">3 giorni</b>.</li>
+    <li>Chiunque salta la fila, o tenta di farlo, è bandito per <b class="pena">1 giorno</b>.</li>
+    <li>Non entrare in casa, attendere il proprio turno fuori. Chi non rispetta questa regola è bandito per <b class="pena">1 giorno</b>.</li>
+  </ol>
+  <p id="noticeOne">Ricordiamo inoltre che noi non siamo tenuti a comprare né a servire nessuno.</p>
+  <p id="noticeTwo">Chi non rispetta tali regole può rivolgersi agli altri commercianti.</p>
+  <p id="noticeThree">Per le altre forniture è possibile rivolgersi anche all’Emporio.</p>
+</div>
+</div>
+<div class="section-heading"><span class="section-kicker">Guida al registro</span></div>
+<div class="rules-guide">
+<div class="box"><h2>Più casse dello stesso articolo</h2>
+<p>Ogni casella di un articolo è una cassa o uno stack. Premi <b>+</b> per aggiungerne un'altra: la colonna <b>Qtà</b> somma tutto da sola.</p>
+<p>Esempio: 18 + 23 + 11 danno Qtà 52.</p></div>
+<div class="box"><h2>Acquisti e forniture</h2><ul>
+<li><span class="b f2">acquisto</span> Articoli che compriamo dal cliente. Il totale va in <b>Da dare</b>, cioè quanto paghiamo.</li>
+<li><span class="b f1">fattura</span> Articoli che vendiamo al cliente. Il totale va in <b>Fattura</b>, cioè quanto gli addebitiamo.</li>
+<li>Le categorie si aprono e si chiudono con un tocco sul titolo.</li></ul></div>
+<div class="box"><h2>Forniture da pesca</h2><ul>
+<li>Il registro comprende pescato, pesci leggendari, canne, esche e trappole da pesca.</li>
+<li><b>Trappole per pesci:</b> massimo 10 per cliente.</li>
+<li><b>Esche per pesci grandi:</b> massimo 70 per cliente.</li>
+</ul></div>
+<div class="box"><h2>Registro corrente</h2><ul>
+<li>Il pannello a lato mostra solo gli articoli con una quantità inserita.</li>
+<li><b>Svuota registro</b> cancella tutte le quantità: usalo quando inizi con un nuovo cliente.</li></ul></div>
+
+</div>
+<section class="regole-actions" aria-label="Generatore manifesto delle regole">
+ <div class="description"><h2>Manifesto delle regole · Buckland Angling Club</h2><p>Genera il manifesto vittoriano del club, con regolamento e avvisi ai visitatori.</p></div>
+ <button class="regole-create" id="generaRegole" type="button">↓ Genera manifesto delle regole</button>
+</section>
+<p><a href="index.html">Torna al registro</a></p>
+</main></div>
+
+<div class="regole-modal" id="regoleModal" role="dialog" aria-modal="true" aria-labelledby="regoleModalTitle" hidden>
+ <div class="regole-dialog">
+  <div class="regole-modal-header"><div><h2 id="regoleModalTitle">Regole del Buckland Angling Club</h2><p>Manifesto western 1900 · anteprima e download PNG</p></div><button id="regoleClose" type="button" class="regole-close" aria-label="Chiudi anteprima">×</button></div>
+  <div id="regolePreview" class="regole-preview">Preparazione del manifesto…</div>
+  <div class="regole-modal-footer"><span class="status" id="regoleStatus" role="status">Pronto per generare.</span><button id="regoleCancel" type="button" class="regole-close" style="font-size:16px">Chiudi</button><button type="button" id="regoleDownload" class="regole-download" disabled>↓ Scarica PNG</button></div>
+ </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="app.js"></script>
+<script>if(typeof nav==='function') document.getElementById('nav').innerHTML=nav('r'); else document.getElementById('nav').innerHTML='<a href="index.html">Registro</a> · <strong>Regole</strong>';</script>
+<script src="listino-assets/offline-assets.js"></script>
+<script>
+(function(){
+'use strict';
+const byId=id=>document.getElementById(id);
+const modal=byId('regoleModal'),preview=byId('regolePreview'),status=byId('regoleStatus'),button=byId('regoleDownload');
+let currentCanvas=null,busy=false;
+function lines(ctx,s,width){const parts=s.split(/\s+/),result=[];let line='';for(const w of parts){const next=line?line+' '+w:w;if(line&&ctx.measureText(next).width>width){result.push(line);line=w}else{line=next}}if(line)result.push(line);return result;}
+function print(ctx,s,x,y,width,size=32,height=47,align='left'){
+ ctx.font=`${size}px Georgia,serif`;ctx.textAlign=align;
+ for(const line of lines(ctx,s,width)){ctx.fillText(line,x,y);y+=height;}return y;
+}
+function panel(ctx,x,y,w,h){ctx.fillStyle='rgba(242,231,204,.86)';ctx.fillRect(x,y,w,h);ctx.strokeStyle='#57797a';ctx.lineWidth=4;ctx.strokeRect(x,y,w,h);ctx.lineWidth=1.5;ctx.strokeRect(x+11,y+11,w-22,h-22);}
+async function create(){
+ if(document.fonts?.ready)await document.fonts.ready;
+ const c=document.createElement('canvas');c.width=1500;c.height=2190;const ctx=c.getContext('2d',{alpha:false});
+ const bg=new Image();await new Promise(resolve=>{bg.onload=resolve;bg.onerror=resolve;bg.src='theme-assets/buckland-bg-regole.png'});
+ ctx.fillStyle='#c8d4c7';ctx.fillRect(0,0,c.width,c.height);
+ if(bg.naturalWidth){ctx.globalAlpha=.25;ctx.drawImage(bg,0,0,c.width,c.height);ctx.globalAlpha=1}
+ ctx.fillStyle='#0b3039';ctx.fillRect(40,40,1420,340);
+ ctx.strokeStyle='#bfaa7e';ctx.lineWidth=7;ctx.strokeRect(58,58,1384,304);
+ ctx.textAlign='center';ctx.fillStyle='#eadfc4';ctx.font='75px "Cormorant Garamond",Georgia,serif';ctx.fillText('BUCKLAND ANGLING CLUB',750,164);
+ ctx.font='48px "IM Fell English SC",Georgia,serif';ctx.fillText('REGOLAMENTO DEL CLUB',750,243);
+ ctx.font='26px Georgia';ctx.fillText('Pesca d’acqua dolce · Fiumi e laghi · Anno 1900',750,302);
+ const rules=[...byId('regoleBuckland').querySelectorAll('li')].map(el=>el.textContent.trim());
+ panel(ctx,90,432,1320,1060);
+ ctx.fillStyle='#234d55';ctx.textAlign='center';ctx.font='55px "IM Fell English SC",serif';ctx.fillText('REGOLE PER I VISITATORI',750,525);
+ let y=615;
+ rules.forEach((rule,i)=>{ctx.fillStyle='#b0884d';ctx.font='bold 43px Georgia';ctx.textAlign='left';ctx.fillText(String(i+1).padStart(2,'0'),155,y);ctx.fillStyle='#203e43';y=print(ctx,rule,250,y,1090,32,49)+34;});
+ panel(ctx,90,1545,1320,455);ctx.fillStyle='#234d55';ctx.textAlign='center';ctx.font='55px "IM Fell English SC",serif';ctx.fillText('AVVISI E FORNITURE',750,1637);
+ const notes=['noticeOne','noticeTwo','noticeThree'].map(id=>byId(id).textContent.trim());
+ y=1712;notes.forEach(note=>{ctx.fillStyle='#263d3b';y=print(ctx,note,750,y,1150,28,43,'center')+23;});
+ ctx.fillStyle='#15343b';ctx.textAlign='center';ctx.font='29px "IM Fell English SC",serif';ctx.fillText('BUCKLAND ANGLING CLUB · REGISTRO DI PESCA E FORNITURE',750,2113);
+ return c;
+}
+function close(){modal.hidden=true;document.body.classList.remove('regole-modal-open')}
+async function open(){if(busy)return;modal.hidden=false;document.body.classList.add('regole-modal-open');byId('regoleClose').focus();busy=true;button.disabled=true;currentCanvas=null;preview.textContent='Preparazione del manifesto…';
+ try{const c=await create();currentCanvas=c;preview.replaceChildren(c);status.textContent=`Manifesto pronto · ${c.width} × ${c.height} px`;button.disabled=false;}
+ catch(e){status.textContent=e.message;preview.textContent='Impossibile generare il manifesto.'}
+ finally{busy=false}
+}
+function download(){if(!currentCanvas)return;currentCanvas.toBlob(blob=>{if(!blob){status.textContent='Errore durante l’esportazione.';return}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Buckland_Angling_Club_Regole.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)},'image/png')}
+byId('generaRegole').addEventListener('click',open);byId('regoleClose').addEventListener('click',close);byId('regoleCancel').addEventListener('click',close);button.addEventListener('click',download);modal.addEventListener('click',e=>{if(e.target===modal)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)close()});
+})();
+</script>
+</body>
+</html>

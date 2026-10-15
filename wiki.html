@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Wiki · Buckland Angling Club</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=IM+Fell+English+SC&amp;family=Libre+Baskerville:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--forest-950:#17211a;--forest-900:#1d2b21;--forest-800:#27382b;--forest-700:#334a38;--forest-600:#44624a;--paper:#e8dcc0;--paper-2:#dfcfaa;--paper-soft:#f0e7d1;--ink:#2b2118;--ink-soft:#725f46;--line:rgba(54,42,29,.25);--brass:#aa8444;--brass-light:#d7b975;--rust:#8f3f2f;--shadow:0 12px 28px rgba(22,18,13,.16);--shadow-soft:0 5px 14px rgba(22,18,13,.12);box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:'Merriweather',Georgia,'Times New Roman',serif;padding:20px 16px 70px;background-color:#9e8556;background-image:linear-gradient(rgba(70,51,31,.44),rgba(214,193,149,.79)),url('theme-assets/bg-index.png');background-position:center center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse 900px 460px at -8% -5%,rgba(41,68,45,.13),transparent 62%),radial-gradient(ellipse 800px 520px at 108% 106%,rgba(103,52,36,.10),transparent 64%)}.shell{max-width:1380px;margin:0 auto}
+.hero{position:relative;overflow:hidden;background:linear-gradient(115deg,rgba(23,33,26,.98),rgba(39,56,43,.96)),var(--forest-900);color:#f3ead6;border:1px solid rgba(29,43,33,.8);box-shadow:var(--shadow);margin-bottom:16px}.hero::before,.hero::after{content:"";position:absolute;border:1px solid rgba(215,185,117,.24);pointer-events:none}.hero::before{inset:7px}.hero::after{inset:12px;border-style:dashed;opacity:.55}.hero-inner{position:relative;z-index:1;padding:24px 28px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center}.eyebrow{font-family:'Merriweather',Georgia,serif;text-transform:uppercase;letter-spacing:2px;font-size:10px;color:var(--brass-light);margin-bottom:6px}.hero h1{margin:0;font-family:'Rye',Georgia,serif;font-weight:400;font-size:clamp(30px,5vw,52px);line-height:1;letter-spacing:1.5px}.hero-sub{margin:9px 0 0;color:#d9ceb6;font-size:13px;letter-spacing:.3px;max-width:760px}.hero-mark{width:92px;height:92px;border:1px solid rgba(215,185,117,.5);outline:1px solid rgba(215,185,117,.18);outline-offset:6px;display:grid;place-items:center;text-align:center;transform:rotate(2deg);color:var(--brass-light)}.hero-mark .big{font-size:34px;line-height:1}.hero-mark .small{margin-top:5px;font-family:'IM Fell English SC',Georgia,serif;font-size:11px;letter-spacing:1px}.logo-mark{width:230px;height:auto;outline:none;border:0;background:none;display:block}.logo-mark img{display:block;width:230px;height:auto;filter:drop-shadow(0 8px 16px rgba(0,0,0,.26))}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}.quick a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 10px;text-decoration:none;text-align:center;font-family:'Rye',Georgia,serif;font-size:clamp(18px,3vw,26px);letter-spacing:1.5px;color:#f3ead6;background:linear-gradient(115deg,var(--forest-950),var(--forest-700));border:1px solid var(--forest-950);border-top:4px solid var(--brass);box-shadow:var(--shadow-soft)}.quick a:hover{background:var(--forest-600)}.quick a span{font-size:24px}.quick a small{font-family:'Merriweather',Georgia,serif;font-size:11px;font-weight:700;letter-spacing:.3px;color:var(--brass-light)}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px;align-items:start}.sidebar{position:sticky;top:16px;overflow:hidden;background:linear-gradient(rgba(31,45,35,.98),rgba(24,35,27,.99));color:#efe6d1;border:1px solid #162019;border-top:4px solid var(--brass);box-shadow:var(--shadow)}.sidebar-head{padding:14px 14px 10px;border-bottom:1px solid rgba(255,255,255,.10)}.sidebar-title{margin:0;font-family:'IM Fell English SC',Georgia,serif;font-size:18px;font-weight:400;letter-spacing:.5px}.sidebar-sub{margin:4px 0 0;color:#b7aa8e;font-size:10px;font-family:'Courier New',monospace}.side-links{display:flex;flex-direction:column;padding:8px 10px 14px}.side-links a{display:flex;align-items:center;gap:8px;color:#f2e6cb;text-decoration:none;padding:10px 10px;border-bottom:1px dashed rgba(255,255,255,.10);font-size:13px}.side-links a:last-child{border-bottom:0}.side-links a span{font-size:18px}.side-links a:hover{background:rgba(255,255,255,.06)}
+.section-heading{display:flex;align-items:center;gap:10px;margin:0 0 10px;color:var(--forest-800)}.section-heading::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(51,74,56,.55),transparent)}.section-kicker{font-family:'IM Fell English SC',Georgia,serif;letter-spacing:.8px;font-size:19px;white-space:nowrap}.wiki-section{margin-bottom:24px}
+.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px}.fish-card,.recipe-card{background:linear-gradient(rgba(227,211,175,.96),rgba(227,211,175,.96)),repeating-linear-gradient(0deg,rgba(79,60,39,.025) 0 1px,transparent 1px 5px);border:1px solid rgba(65,49,32,.22);border-top:4px solid var(--brass);box-shadow:var(--shadow-soft)}.fish-card{padding:16px}.fish-card h3{margin:0 0 8px;font-family:'IM Fell English SC',Georgia,serif;font-size:22px}.fish-card p{margin:0 0 10px;font-size:13px;line-height:1.55}.fish-tip{font-size:12px;color:var(--forest-800)}
+.cards-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.recipe-card{padding:16px}.card-top{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px;align-items:center;margin-bottom:14px}.icon-frame{display:grid;place-items:center;background:linear-gradient(rgba(17,17,17,.97),rgba(27,27,27,.97));border:1px solid rgba(65,49,32,.35);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}.icon-frame img{display:block;max-width:100%;height:auto}.card-meta h3{margin:0 0 8px;font-family:'IM Fell English SC',Georgia,serif;font-size:24px;line-height:1.1}.card-meta p{margin:0;font-size:13px;line-height:1.6;color:var(--ink)}.meta-line{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}.tag{display:inline-flex;align-items:center;padding:4px 9px;border:1px solid currentColor;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}.tag.level{color:var(--rust)}.tag.qty{color:var(--forest-700)}.recipe-box{border:1px solid rgba(65,49,32,.22);background:rgba(255,255,255,.22)}.recipe-box-head{padding:8px 10px;border-bottom:1px dashed rgba(65,49,32,.22);font-family:'IM Fell English SC',Georgia,serif;font-size:16px;color:var(--forest-800)}.recipe-grid{display:block;width:100%;height:auto;background:#111}
+
+@media(max-width:1100px){.layout{grid-template-columns:1fr}.sidebar{position:static}}
+@media(max-width:900px){.cards-grid,.info-grid{grid-template-columns:1fr}.card-top{grid-template-columns:1fr}.icon-frame{max-width:220px}}
+@media(max-width:700px){body{padding:10px 8px 50px}.hero-inner{padding:20px 18px;grid-template-columns:1fr}.hero-mark{display:none}.quick{grid-template-columns:1fr 1fr}.quick a:last-child{grid-column:1/-1}.section-kicker{white-space:normal}}
+.craft-details{background:transparent;border:0}.craft-summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:15px 18px;border:1px solid #8b6a3b;border-left:5px solid #bd9650;background:linear-gradient(115deg,#3a2a21 0%,#5c3c2b 48%,#2b241d 100%);border-radius:5px;color:#f4e6cb;user-select:none;box-shadow:inset 0 1px rgba(255,235,198,.16),inset 0 -1px rgba(0,0,0,.35),0 5px 14px rgba(45,27,18,.2);transition:background .15s ease,border-color .15s ease}.craft-summary::-webkit-details-marker{display:none}.craft-summary:hover{background:linear-gradient(115deg,#513727 0%,#744b33 48%,#392b20 100%);border-color:#d2ab68}.craft-summary:focus-visible{outline:3px solid #d2ab68;outline-offset:3px}.craft-summary::after{content:"APRI  ▾";margin-left:auto;font-family:'IM Fell English SC',Georgia,serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#eed4a0;white-space:nowrap}.craft-details[open]>.craft-summary{border-color:#b79051;background:linear-gradient(115deg,#33271f,#59402c 60%,#33271f)}.craft-details[open]>.craft-summary::after{content:"CHIUDI  ▴"}.craft-summary .section-kicker{margin:0;color:#f7e7c5;text-shadow:0 1px 1px rgba(0,0,0,.45)}.craft-details .cards-grid,.craft-details .info-grid{margin-top:12px}
+.legend-list{display:grid;gap:8px;margin-top:14px}.legend-fish{display:grid;grid-template-columns:1fr;gap:5px;padding:9px 11px;background:rgba(255,255,255,.19);border-left:3px solid var(--brass);font-size:12px;line-height:1.4}.legend-fish strong{font-size:13px;color:var(--forest-800)}.legend-fish span:nth-child(2)::before{content:"Esca: ";font-weight:bold}.legend-fish span:nth-child(3)::before{content:"Luogo: ";font-weight:bold}
+
+
+.fish-map-explorer{grid-column:1 / -1;min-width:0;margin-top:2px;background:linear-gradient(rgba(227,211,175,.96),rgba(227,211,175,.96)),repeating-linear-gradient(0deg,rgba(79,60,39,.025) 0 1px,transparent 1px 5px);border:1px solid rgba(65,49,32,.22);border-top:4px solid var(--brass);box-shadow:var(--shadow-soft);padding:16px}
+.fish-map-intro{margin:0 0 14px;font-size:13px;line-height:1.55;color:var(--ink)}
+.fish-map-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(235px,280px);gap:16px;align-items:start;margin:0 0 16px}
+.fish-map-toolbar{display:flex;flex-wrap:wrap;align-content:start;gap:8px;margin:0;min-width:0}
+.fish-map-btn{appearance:none;border:1px solid rgba(57,40,23,.35);background:linear-gradient(180deg,#f1e4c8,#e0cb9d);color:var(--ink);padding:8px 12px;border-radius:999px;font:700 12px/1.2 'Merriweather',Georgia,serif;letter-spacing:.2px;cursor:pointer;box-shadow:var(--shadow-soft)}
+.fish-map-btn:hover{filter:brightness(1.03)}
+.fish-map-btn.active{background:linear-gradient(135deg,#355240,#203326);color:#f5e7cc;border-color:#294233}
+.fish-map-stage{display:block;width:100%;min-width:0}
+.fish-map-info{min-width:0;background:rgba(255,255,255,.22);border:1px solid rgba(65,49,32,.18);padding:14px}
+.fish-map-kicker{font:700 11px/1 'Merriweather',Georgia,serif;letter-spacing:1.2px;text-transform:uppercase;color:var(--forest-700);margin-bottom:6px}
+.fish-map-info h3{margin:0 0 8px;font-family:'IM Fell English SC',Georgia,serif;font-size:26px;color:var(--forest-800)}
+.fish-map-info p{margin:0 0 9px;font-size:13px;line-height:1.55}
+.fish-map-note{font-size:12px;color:var(--ink-soft)}
+.fish-map-frame{width:100%;min-width:0;overflow:visible;background:rgba(255,255,255,.18);border:1px solid rgba(65,49,32,.22);padding:10px}
+.fish-map-frame img{display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;object-position:center;border:1px solid rgba(65,49,32,.15);box-shadow:var(--shadow-soft)}
+@media(max-width:740px){.fish-map-top{grid-template-columns:1fr}.fish-map-info h3{font-size:24px}}
+
+/* Richieste attive: notifica comune a tutto il sito */
+.wiki-hero-tools{display:flex;align-items:center;gap:20px}
+.wiki-order-bell{position:relative;display:grid;place-items:center;flex:none;width:56px;height:56px;border-radius:50%;color:#f7e7c6;text-decoration:none;background:linear-gradient(135deg,#39523c,#1b2b21);border:1px solid #d2a968;box-shadow:0 5px 15px #0005}
+.wiki-order-bell .bell-symbol{font-size:25px}
+.wiki-order-bell .bell-count{position:absolute;top:-8px;right:-5px;color:#fff;background:#b7352b;border:2px solid #f4e2c2;border-radius:99px;min-width:27px;text-align:center;padding:4px;font:bold 12px Arial,sans-serif}
+.wiki-order-bell[hidden]{display:none!important}
+@media(max-width:700px){.wiki-hero-tools{width:100%;justify-content:space-between}.wiki-hero-tools .hero-mark{display:block;width:155px;height:auto}.wiki-hero-tools .hero-mark img{width:155px}}
+
+/* La cartografia occupa le due colonne interne senza debordare dalla Wiki. */
+.layout > main, .wiki-section, .craft-details, .info-grid,
+.fish-map-explorer, .fish-map-stage, .fish-map-frame {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.info-grid > .fish-map-explorer {
+  grid-column: 1 / -1;
+  width: 100%;
+  overflow: hidden;
+}
+.fish-map-top {
+  min-width: 0;
+  grid-template-columns: minmax(0,1fr) minmax(0,280px);
+}
+.fish-map-frame {overflow: hidden}
+.fish-map-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+}
+@media (max-width:740px) {
+  .fish-map-top {grid-template-columns: minmax(0,1fr)}
+}
+</style>
+<link href="buckland-theme.css" rel="stylesheet"/>
+</head>
+<body class="page-wiki">
+<div class="shell">
+<header class="hero">
+<div class="hero-inner">
+<div>
+<div class="eyebrow">Manuale illustrato · Pesca e forniture</div>
+<h1>Manuale di pesca</h1>
+<p class="hero-sub">Specie d’acqua dolce, mappe delle zone di pesca, canne, trappole e ricette utili ai pescatori.</p>
+</div>
+<div class="wiki-hero-tools"><a aria-label="Ordini da gestire" class="wiki-order-bell" data-order-bell="" hidden="" href="ordini.html"><span class="bell-symbol">🔔</span><span class="bell-count" data-bell-count="">0</span></a><div class="hero-mark logo-mark"><img alt="Logo Buckland Angling Club" src="theme-assets/buckland-angling-club-logo.png"/></div></div>
+</div>
+</header>
+<nav class="quick">
+<a href="index.html"><span>🏠</span>REGISTRO<small>Torna alla pagina principale</small></a>
+<a href="#sec-1"><span>🛠️</span>CRAFTING<small>Ricette e componenti</small></a>
+<a href="#fish-types"><span>🐟</span>PESCI<small>Tipologie e uso esche</small></a>
+<a href="#sec-5"><span>🪱</span>ESCHE<small>Solo pesca</small></a>
+</nav>
+<div class="layout">
+<main>
+<section class="wiki-section" id="fish-types">
+<details class="craft-details">
+<summary class="craft-summary"><span class="section-kicker">🐟 Tipologie di pesci</span></summary>
+<div class="info-grid">
+<article class="fish-card"><h3>Pesci piccoli</h3><p><strong>Specie:</strong> Perca di Scoglio Piccolo · Perca Gialla Piccolo · Pesce Gatto Nebuloso Piccolo · Pickerel Piccolo · Pickerel Rosso Piccolo · Salmone Rosso Piccolo</p><div class="fish-tip"><strong>Esche consigliate:</strong> Esca per Pesci Piccoli · Grilli · Libellula</div></article>
+<article class="fish-card"><h3>Pesci medi</h3><p><strong>Specie:</strong> Perca di Scoglio Medio · Perca Gialla Medio · Pesce Gatto Nebuloso Medio · Pickerel Medio · Pickerel Rosso Medio · Salmone Rosso Medio · Persico Trota Dolomeu Medio · Trota Iridea Media · Boccalone Medio</p><div class="fish-tip"><strong>Esche consigliate:</strong> Esca per Pesci Medi · Esca di Libellula</div></article>
+<article class="fish-card"><h3>Pesci grandi</h3><p><strong>Specie:</strong> Luccio dal naso lungo (Northern Pike) · Pescegatto Grande · Pesce Storione</p><div class="fish-tip"><strong>Esche consigliate:</strong> Esca per Pesci Grandi · Esca per Granchio · Esca di Pesce</div></article>
+<article class="fish-card"><h3>Pesci leggendari</h3><p>Le catture speciali del Buckland Angling Club. Per ciascun pesce sono indicati esca richiesta e luogo.</p>
+<div class="legend-list">
+<div class="legend-fish"><strong>Boccalone Grande</strong><span>Esca di Pesce Leggendaria</span><span>O'Creagh's Run</span></div>
+<div class="legend-fish"><strong>Salmone Rosso Grande</strong><span>Esca Spinner V4 Leggendaria</span><span>Lake Isabella</span></div>
+<div class="legend-fish"><strong>Trota Iridea Grande</strong><span>Esca Spinner V6 Leggendaria</span><span>Elysian Pool</span></div>
+<div class="legend-fish"><strong>Persico Trota Dolomeu Grande</strong><span>Esca di Pesce</span><span>Lago del Calumet Ravine</span></div>
+</div></article>
+<div class="fish-map-explorer" id="fish-map-explorer">
+<p class="fish-map-intro"><strong>Mappe delle zone di pesca:</strong> seleziona una specie per visualizzare le aree consigliate. Le zone rosse indicano i punti migliori sulla mappa.</p>
+<div class="fish-map-top">
+<div aria-label="Seleziona la specie di pesce" class="fish-map-toolbar" id="fish-map-toolbar">
+<button class="fish-map-btn active" data-category="Pesce piccolo" data-fish-map-btn="" data-map="wiki-assets/fish-maps/persico_branchie_blu.png" data-title="Persico branchie blu" type="button">Persico branchie blu</button>
+<button class="fish-map-btn" data-category="Pesce piccolo/medio" data-fish-map-btn="" data-map="wiki-assets/fish-maps/pickerel.png" data-title="Pickerel" type="button">Pickerel</button>
+<button class="fish-map-btn" data-category="Pesce piccolo/medio" data-fish-map-btn="" data-map="wiki-assets/fish-maps/pickerel_rosso.png" data-title="Pickerel rosso" type="button">Pickerel rosso</button>
+<button class="fish-map-btn" data-category="Pesce piccolo/medio" data-fish-map-btn="" data-map="wiki-assets/fish-maps/perca_di_scoglio.png" data-title="Perca di scoglio" type="button">Perca di scoglio</button>
+<button class="fish-map-btn" data-category="Pesce medio" data-fish-map-btn="" data-map="wiki-assets/fish-maps/persico_trota_dolomeu.png" data-title="Persico trota dolomeu" type="button">Persico trota dolomeu</button>
+<button class="fish-map-btn" data-category="Pesce piccolo/medio" data-fish-map-btn="" data-map="wiki-assets/fish-maps/pesce_gatto_nebuloso.png" data-title="Pesce gatto nebuloso" type="button">Pesce gatto nebuloso</button>
+<button class="fish-map-btn" data-category="Pesce piccolo/medio" data-fish-map-btn="" data-map="wiki-assets/fish-maps/perca_gialla.png" data-title="Perca gialla" type="button">Perca gialla</button>
+<button class="fish-map-btn" data-category="Pesce grande" data-fish-map-btn="" data-map="wiki-assets/fish-maps/pesce_storione.png" data-title="Pesce storione" type="button">Pesce storione</button>
+<button class="fish-map-btn" data-category="Pesce medio" data-fish-map-btn="" data-map="wiki-assets/fish-maps/boccalone.png" data-title="Boccalone" type="button">Boccalone</button>
+<button class="fish-map-btn" data-category="Pesce medio" data-fish-map-btn="" data-map="wiki-assets/fish-maps/trota_iridea.png" data-title="Trota iridea" type="button">Trota iridea</button>
+<button class="fish-map-btn" data-category="Pesce medio/grande" data-fish-map-btn="" data-map="wiki-assets/fish-maps/pesce_gatto_di_canale.png" data-title="Pesce gatto di canale" type="button">Pesce gatto di canale</button>
+<button class="fish-map-btn" data-category="Pesce grande" data-fish-map-btn="" data-map="wiki-assets/fish-maps/luccio_dal_naso_lungo.png" data-title="Luccio dal naso lungo" type="button">Luccio dal naso lungo</button>
+<button class="fish-map-btn" data-category="Pesce grande" data-fish-map-btn="" data-map="wiki-assets/fish-maps/luccio_muschiato.png" data-title="Muskie" type="button">Muskie</button>
+<button class="fish-map-btn" data-category="Pesce grande" data-fish-map-btn="" data-map="wiki-assets/fish-maps/luccio_del_nord.png" data-title="Northerpike" type="button">Northerpike</button>
+<button class="fish-map-btn" data-category="Pesce piccolo/medio" data-fish-map-btn="" data-map="wiki-assets/fish-maps/salmone_rosso.png" data-title="Salmone rosso" type="button">Salmone rosso</button>
+</div>
+<div class="fish-map-info">
+<div class="fish-map-kicker">Zona di pesca</div>
+<h3 id="fish-map-title">Persico branchie blu</h3>
+<p id="fish-map-category"><strong>Categoria:</strong> Pesce piccolo</p>
+<p class="fish-map-note">Le aree rosse mostrano i punti consigliati per trovare la specie selezionata.</p>
+</div>
+</div>
+<div class="fish-map-stage">
+<div class="fish-map-frame">
+<img alt="Mappa zone di pesca: Persico branchie blu" id="fish-map-image" src="wiki-assets/fish-maps/persico_branchie_blu.png"/>
+</div>
+</div>
+</div>
+</div>
+</details>
+</section>
+<section class="wiki-section" id="sec-1">
+<details class="craft-details">
+<summary class="craft-summary"><span class="section-kicker">🎣 Attrezzatura e utilità per pescatori</span></summary>
+<div class="cards-grid">
+<article class="recipe-card" id="card-canna_da_pesca">
+<div class="card-top">
+<div class="icon-frame"><img alt="Canna da Pesca" src="wiki-assets/canna_da_pesca_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Canna da Pesca</h3>
+<div class="meta-line"><span class="tag level">Lvl 0 Artigiani</span><span class="tag qty">Produce x1</span></div>
+<p>La canna da pesca base per iniziare a pescare nelle acque delle Wildlands.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Canna da Pesca" class="recipe-grid" src="wiki-assets/canna_da_pesca_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-borraccia">
+<div class="card-top">
+<div class="icon-frame"><img alt="Borraccia" src="wiki-assets/borraccia_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Borraccia</h3>
+<div class="meta-line"><span class="tag level">Lvl 0 Artigiano</span><span class="tag qty">Produce x1</span></div>
+<p>Compagna silenziosa dei viaggiatori, custodisce l’acqua e rende più leggere le lunghe traversate.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Borraccia" class="recipe-grid" src="wiki-assets/borraccia_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-binocolo">
+<div class="card-top">
+<div class="icon-frame"><img alt="Binocolo" src="wiki-assets/binocolo_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Binocolo</h3>
+<div class="meta-line"><span class="tag level">Lvl 0 Artigiano</span><span class="tag qty">Produce x1</span></div>
+<p>Strumento d’osservazione utile per esplorare, controllare la distanza e scrutare l’orizzonte.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Binocolo" class="recipe-grid" src="wiki-assets/binocolo_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-fuoco_da_campo">
+<div class="card-top">
+<div class="icon-frame"><img alt="Fuoco da Campo" src="wiki-assets/fuoco_da_campo_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Fuoco da Campo</h3>
+<div class="meta-line"><span class="tag level">Lvl 0 Artigiano</span><span class="tag qty">Produce x2</span></div>
+<p>Il cuore pulsante dell’avventura: scalda, illumina e offre un punto di sosta nelle notti all’aperto.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Fuoco da Campo" class="recipe-grid" src="wiki-assets/fuoco_da_campo_recipe.png"/>
+</div>
+</article>
+</div>
+</details>
+</section>
+<section class="wiki-section" id="sec-2">
+<details class="craft-details">
+<summary class="craft-summary"><span class="section-kicker">🪤 Trappole ed esche per trappole da pesca</span></summary>
+<div class="cards-grid">
+<article class="recipe-card" id="card-trappola_pesci">
+<div class="card-top">
+<div class="icon-frame"><img alt="Trappola per Pesci" src="wiki-assets/trappola_pesci_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Trappola per Pesci</h3>
+<div class="meta-line"><span class="tag level">Lvl 0 Artigiano</span><span class="tag qty">Produce x3</span></div>
+<p>Trappola acquatica per catturare pesci e piccole creature d’acqua in modo sicuro.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Trappola per Pesci" class="recipe-grid" src="wiki-assets/trappola_pesci_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-esca_granchio">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca per Granchio" src="wiki-assets/esca_granchio_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca per Granchio</h3>
+<div class="meta-line"><span class="tag level">Lvl 25 Artigiano</span><span class="tag qty">Produce x10</span></div>
+<p>Esca marina dal profilo salmastro, efficace in acque costiere o per grandi prede acquatiche.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca per Granchio" class="recipe-grid" src="wiki-assets/esca_granchio_recipe.png"/>
+</div>
+</article><article class="recipe-card" id="card-esca_pesci_piccoli">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca per Pesci Piccoli" src="wiki-assets/esca_pesci_piccoli_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca per Pesci Piccoli</h3>
+<div class="meta-line"><span class="tag level">Lvl 30 Artigiano</span><span class="tag qty">Produce x10</span></div>
+<p>Esca specifica per pesci piccoli.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca per Pesci Piccoli" class="recipe-grid" src="wiki-assets/esca_pesci_piccoli_recipe.png"/>
+</div>
+</article><article class="recipe-card" id="card-esca_pesci_medi">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca per Pesci Medi" src="wiki-assets/esca_pesci_medi_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca per Pesci Medi</h3>
+<div class="meta-line"><span class="tag level">Lvl 30 Artigiano</span><span class="tag qty">Produce x10</span></div>
+<p>Esca specifica per pesci medi.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca per Pesci Medi" class="recipe-grid" src="wiki-assets/esca_pesci_medi_recipe.png"/>
+</div>
+</article><article class="recipe-card" id="card-esca_pesci_grandi">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca per Pesci Grandi" src="wiki-assets/esca_pesci_grandi_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca per Pesci Grandi</h3>
+<div class="meta-line"><span class="tag level">Lvl 40 Artigiano</span><span class="tag qty">Produce x10</span></div>
+<p>Esca specifica per pesci grandi.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca per Pesci Grandi" class="recipe-grid" src="wiki-assets/esca_pesci_grandi_recipe.png"/>
+</div>
+</article></div>
+</details>
+</section>
+<section class="wiki-section" id="sec-3">
+<details class="craft-details">
+<summary class="craft-summary"><span class="section-kicker">🎣 Componenti canna da pesca</span></summary>
+<div class="cards-grid">
+<article class="recipe-card" id="card-impugnatura_canna">
+<div class="card-top">
+<div class="icon-frame"><img alt="Impugnatura per Canna da Pesca" src="wiki-assets/impugnatura_canna_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Impugnatura per Canna da Pesca</h3>
+<div class="meta-line"><span class="tag level">Lvl 30 Artigiano</span><span class="tag qty">Produce x5</span></div>
+<p>Riduce l’usura della canna da pesca e migliora la presa durante la cattura.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Impugnatura per Canna da Pesca" class="recipe-grid" src="wiki-assets/impugnatura_canna_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-fusto_canna">
+<div class="card-top">
+<div class="icon-frame"><img alt="Fusto per Canna da Pesca" src="wiki-assets/fusto_canna_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Fusto per Canna da Pesca</h3>
+<div class="meta-line"><span class="tag level">Lvl 30 Artigiano</span><span class="tag qty">Produce x5</span></div>
+<p>Il corpo della canna: rende l’attrezzo più stabile e affidabile durante l’uso.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Fusto per Canna da Pesca" class="recipe-grid" src="wiki-assets/fusto_canna_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-mulinello_canna">
+<div class="card-top">
+<div class="icon-frame"><img alt="Mulinello per Canna da Pesca" src="wiki-assets/mulinello_canna_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Mulinello per Canna da Pesca</h3>
+<div class="meta-line"><span class="tag level">Lvl 30 Artigiano</span><span class="tag qty">Produce x5</span></div>
+<p>Aumenta la possibilità di pescare un pesce aggiuntivo.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Mulinello per Canna da Pesca" class="recipe-grid" src="wiki-assets/mulinello_canna_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-mulinello_metallo_canna">
+<div class="card-top">
+<div class="icon-frame"><img alt="Mulinello in Metallo per Canna da Pesca" src="wiki-assets/mulinello_metallo_canna_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Mulinello in Metallo per Canna da Pesca</h3>
+<div class="meta-line"><span class="tag level">Lvl 50 Artigiano</span><span class="tag qty">Produce x5</span></div>
+<p>Versione avanzata del mulinello che aumenta ancora di più le prestazioni della pesca.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Mulinello in Metallo per Canna da Pesca" class="recipe-grid" src="wiki-assets/mulinello_metallo_canna_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-lenza_canna">
+<div class="card-top">
+<div class="icon-frame"><img alt="Lenza per Canna da Pesca" src="wiki-assets/lenza_canna_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Lenza per Canna da Pesca</h3>
+<div class="meta-line"><span class="tag level">Lvl 50 Artigiano</span><span class="tag qty">Produce x5</span></div>
+<p>Riduce il rischio che si spezzi il filo della canna da pesca.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Lenza per Canna da Pesca" class="recipe-grid" src="wiki-assets/lenza_canna_recipe.png"/>
+</div>
+</article>
+</div>
+</details>
+</section>
+<section class="wiki-section" id="sec-5">
+<details class="craft-details">
+<summary class="craft-summary"><span class="section-kicker">🪱 Esche di pesca</span></summary>
+<div class="cards-grid">
+<article class="recipe-card" id="card-esca_grilli">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca di Grilli" src="wiki-assets/esca_grilli_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca di Grilli</h3>
+<div class="meta-line"><span class="tag level">Lvl 0 Artigiano</span><span class="tag qty">Produce x20</span></div>
+<p>Esca da pesca base con grilli, ottima per predatori acquatici e usi generici.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca di Grilli" class="recipe-grid" src="wiki-assets/esca_grilli_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-esca_libellula">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca di Libellula" src="wiki-assets/esca_libellula_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca di Libellula</h3>
+<div class="meta-line"><span class="tag level">Lvl 0 Artigiano</span><span class="tag qty">Produce x20</span></div>
+<p>Esca da pesca a base di libellula, utile per ingannare pesci attratti da piccole prede in superficie.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca di Libellula" class="recipe-grid" src="wiki-assets/esca_libellula_recipe.png"/>
+</div>
+</article>
+
+
+
+
+<article class="recipe-card" id="card-esca_pesce">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca di Pesce" src="wiki-assets/esca_pesce_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca di Pesce</h3>
+<div class="meta-line"><span class="tag level">Lvl 50 Artigiano</span><span class="tag qty">Produce x1</span></div>
+<p>Esca di pesce dalla forte attrattiva, utile per predatori e catture più impegnative.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca di Pesce" class="recipe-grid" src="wiki-assets/esca_pesce_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-esca_libellula_leggendaria">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca di Libellula Leggendaria" src="wiki-assets/esca_libellula_leggendaria_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca di Libellula Leggendaria</h3>
+<div class="meta-line"><span class="tag level">Lvl 20 Artigiano</span><span class="tag qty">Produce x1</span></div>
+<p>Versione leggendaria della classica esca di libellula.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca di Libellula Leggendaria" class="recipe-grid" src="wiki-assets/esca_libellula_leggendaria_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-esca_spinner_v4_leggendaria">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca Spinner V4 Leggendaria" src="wiki-assets/esca_spinner_v4_leggendaria_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca Spinner V4 Leggendaria</h3>
+<div class="meta-line"><span class="tag level">Lvl 30 Artigiano</span><span class="tag qty">Produce x1</span></div>
+<p>Esca spinner leggendaria V4, pensata per attirare pesci con vibrazioni e rotazione.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca Spinner V4 Leggendaria" class="recipe-grid" src="wiki-assets/esca_spinner_v4_leggendaria_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-esca_pesce_leggendaria">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca di Pesce Leggendaria" src="wiki-assets/esca_pesce_leggendaria_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca di Pesce Leggendaria</h3>
+<div class="meta-line"><span class="tag level">Lvl 40 Artigiano</span><span class="tag qty">Produce x3</span></div>
+<p>Esca leggendaria di pesce, adatta alle catture più rare.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca di Pesce Leggendaria" class="recipe-grid" src="wiki-assets/esca_pesce_leggendaria_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-esca_spinner_v6_leggendaria">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca Spinner V6 Leggendaria" src="wiki-assets/esca_spinner_v6_leggendaria_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca Spinner V6 Leggendaria</h3>
+<div class="meta-line"><span class="tag level">Lvl 40 Artigiano</span><span class="tag qty">Produce x1</span></div>
+<p>Versione V6 della spinner leggendaria, più avanzata e raffinata.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca Spinner V6 Leggendaria" class="recipe-grid" src="wiki-assets/esca_spinner_v6_leggendaria_recipe.png"/>
+</div>
+</article>
+<article class="recipe-card" id="card-esca_aragosta_leggendaria">
+<div class="card-top">
+<div class="icon-frame"><img alt="Esca di Aragosta Leggendaria" src="wiki-assets/esca_aragosta_leggendaria_icon.png"/></div>
+<div class="card-meta">
+<div class="eyebrow">Ricetta</div>
+<h3>Esca di Aragosta Leggendaria</h3>
+<div class="meta-line"><span class="tag level">Lvl 50 Artigiano</span><span class="tag qty">Produce x2</span></div>
+<p>Esca leggendaria dal richiamo marino, pensata per creature acquatiche imponenti.</p>
+</div>
+</div>
+<div class="recipe-box">
+<div class="recipe-box-head">Schema di crafting</div>
+<img alt="Schema di crafting per Esca di Aragosta Leggendaria" class="recipe-grid" src="wiki-assets/esca_aragosta_leggendaria_recipe.png"/>
+</div>
+</article>
+</div>
+</details>
+</section>
+</main>
+<aside class="sidebar">
+<div class="sidebar-head"><h2 class="sidebar-title">Indice rapido</h2><p class="sidebar-sub">Collegamenti interni</p></div>
+<nav class="side-links">
+<a href="#fish-types"><span>🐟</span>Tipologie di pesci</a>
+<a href="#sec-1"><span>🛠️</span>Attrezzatura e utilità</a><a href="#sec-2">🪤 Trappole ed esche da pesca</a><a href="#sec-3"><span>🎣</span>Componenti canna da pesca</a><a href="#sec-5"><span>🪱</span>Esche di pesca</a>
+</nav>
+</aside>
+</div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="app.js"></script>
+<script>initChrome();</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const openSection=(hash)=>{
+    if(!hash||!(hash.startsWith('#sec-')||hash==='#fish-types')) return;
+    const section=document.getElementById(hash.slice(1));
+    if(!section) return;
+    const details=section.querySelector('.craft-details');
+    if(details) details.open=true;
+  };
+  openSection(location.hash);
+  document.querySelectorAll('a[href^="#sec-"], a[href="#fish-types"]').forEach(a=>{
+    a.addEventListener('click',()=>openSection(a.getAttribute('href')));
+  });
+  window.addEventListener('hashchange',()=>openSection(location.hash));
+
+  const fishMapButtons = [...document.querySelectorAll('[data-fish-map-btn]')];
+  const fishMapImage = document.getElementById('fish-map-image');
+  const fishMapTitle = document.getElementById('fish-map-title');
+  const fishMapCategory = document.getElementById('fish-map-category');
+  fishMapButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      fishMapButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const title = btn.dataset.title;
+      const category = btn.dataset.category;
+      const map = btn.dataset.map;
+      fishMapImage.src = map;
+      fishMapImage.alt = 'Mappa zone di pesca: ' + title;
+      fishMapTitle.textContent = title;
+      fishMapCategory.innerHTML = '<strong>Categoria:</strong> ' + category;
+    });
+  });
+});
+</script>
+</body>
+</html>
