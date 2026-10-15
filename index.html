@@ -91,6 +91,31 @@
 .quick .quick-orders{position:relative}
 .quick .quick-order-count{position:absolute;top:5px;right:8px;border-radius:99px;border:2px solid #efddbd;padding:4px 7px;min-width:29px;color:#fff;background:#b7352b;font:bold 13px Arial,sans-serif;text-align:center;box-shadow:0 2px 8px #0005}
 @media(max-width:760px){.index-hero-tools{justify-content:space-between;width:100%}.index-hero-tools .hero-mark{display:block;width:155px;height:auto}.index-hero-tools .hero-mark img{width:155px}}
+
+/* Layout compatto del registro: due colonne bilanciate, senza titoli "Forniture" ripetuti. */
+.catalog-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 12px;padding:13px 18px;background:linear-gradient(110deg,rgba(17,51,59,.96),rgba(44,94,98,.94));border:1px solid #bda677;border-top:3px solid #d0b888;box-shadow:var(--shadow-soft);color:#f4efde}
+.catalog-top .catalog-eyebrow{display:block;color:#e0d1a6;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.catalog-top h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:#f7f0da;font-size:30px;line-height:1;margin:0}
+.catalog-top p{font-size:11px;line-height:1.5;max-width:330px;margin:0;color:#e5e8d9;text-align:right}
+.ledger-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:14px}
+.ledger-column{display:flex;flex-direction:column;gap:14px;min-width:0}
+.ledger-column .category{width:100%;min-width:0;margin:0;border-radius:3px}
+.ledger-column .category-head{min-height:52px;padding:11px 14px}
+.ledger-column .category-head h2{font-size:20px!important;line-height:1.15}
+.ledger-column .column-heads{display:none}
+.ledger-column .row{display:grid;grid-template-columns:minmax(0,1fr) 58px 95px;grid-template-areas:"item item price" "cubes qty total";align-items:center;column-gap:10px;row-gap:6px;min-height:69px;padding:10px 13px}
+.ledger-column .item-name{grid-area:item;font-size:13px;line-height:1.35}
+.ledger-column .item-price{grid-area:price;font-size:12px;text-align:right}
+.ledger-column .qty-cubes{grid-area:cubes;gap:5px;min-width:0}
+.ledger-column .qty-sum{grid-area:qty;text-align:center;font-size:13px}
+.ledger-column .qty-sum::before{content:"Qtà ";font-family:'Libre Baskerville',Georgia,serif;font-size:10px;font-weight:normal;color:#56706e}
+.ledger-column .qty-sum::after{content:none!important}
+.ledger-column .row-total{grid-area:total;text-align:right;font-size:13px;white-space:nowrap;min-width:0}
+.ledger-column .category-subtotal{padding:10px 14px;font-size:12px}
+.ledger-column .category:not(.collapsed) .category-head .arrow{transform:rotate(0)}
+@media(max-width:1270px){.layout{grid-template-columns:1fr}.summary-panel{position:static}.summary-list{max-height:none}}
+@media(max-width:860px){.ledger-columns{grid-template-columns:1fr}.catalog-top{align-items:flex-start}.ledger-column{gap:12px}}
+@media(max-width:490px){.catalog-top{flex-direction:column;gap:6px}.catalog-top p{text-align:left;max-width:unset}.ledger-column .row{padding:9px 10px;grid-template-columns:minmax(0,1fr) 45px 82px;column-gap:5px}.ledger-column .qty-cube{width:43px}.ledger-column .cube-btn{width:24px}.ledger-column .category-head h2{font-size:19px!important}}
 </style>
 
 <link rel="stylesheet" href="buckland-theme.css">
@@ -126,10 +151,24 @@ const data=[
   {group:"esche",name:"Esche Pesca",icon:"🪱",negative:true,items:[{n:"Esca Di Aragosta Leggendaria",p:5.00},{n:"Esca di Libellula",p:.15},{n:"Esca di Libellula Leggendaria",p:5.00},{n:"Esca Di Pesce",p:12.00},{n:"Esca Di Pesce Leggendaria",p:3.00},{n:"Esca Spinner V4 Leggendaria",p:10.00},{n:"Esca Spinner V6 Leggendaria",p:12.00},{n:"Grilli",p:.15}]}
 ];
 
-const groups=[{id:"raccolta",title:"Acquisti · Pescato"},{id:"attrezzatura",title:"Forniture · Attrezzi e canne"},{id:"trappole",title:"Forniture · Trappole ed esche per trappole"},{id:"esche",title:"Forniture · Esche da pesca"}];
 const sections=document.getElementById("sections");
-function makeColumns(cat){const full=cat.full?" span-2":"";const typeClass=cat.negative?" negative":" positive";const legendaryFishing=cat.legendaryFishing?" pesca-leggendaria":"";const catDiv=document.createElement("article");catDiv.className=`category${typeClass}${full}${legendaryFishing}`;if(!["Pesca","Pesca Leggendaria"].includes(cat.name))catDiv.classList.add("collapsed");const ci=data.indexOf(cat);const statusBadge=cat.negative?`<span class="badge invoice">fattura</span>`:`<span class="badge buy">acquisto</span>`;catDiv.innerHTML=`<div class="category-head"><span class="icon">${cat.icon}</span><h2>${cat.name} ${statusBadge}</h2><span class="arrow">▼</span></div><div class="category-body"><div class="column-heads"><span class="column-head">Articolo</span><span class="column-head right">Prezzo</span><span class="column-head center">Casse / Stack</span><span class="column-head center">Qtà</span><span class="column-head right">Importo</span></div><div class="rows"></div><div class="category-subtotal"><span>Subtotale</span><strong id="subtotal-${ci}">$0.00</strong></div></div>`;catDiv.querySelector(".category-head").onclick=()=>catDiv.classList.toggle("collapsed");const rows=catDiv.querySelector(".rows");cat.items.forEach((item,ii)=>{const row=document.createElement("div");row.className="row";const price=item.tierQty?`$${item.p.toFixed(2)}<br><small>$${item.tierPrice.toFixed(2)} da ${item.tierQty}+</small>`:`$${item.p.toFixed(2)}`;row.innerHTML=`<span class="item-name">${item.n}${item.maxQty?`<span class="max-note">MAX ${item.maxQty}</span>`:""}</span><span class="item-price">${price}</span><span class="qty-cubes" id="cubes-${ci}-${ii}"><input type="number" min="0" ${item.maxQty?`max="${item.maxQty}"`:""} step="1" value="" placeholder="0" class="qty-cube" data-ci="${ci}" data-ii="${ii}" aria-label="${item.n} · Cassa 1" title="Cassa 1" oninput="calculate()"><button type="button" class="cube-btn add" onclick="addCube(${ci},${ii})" title="Aggiungi un'altra cassa/stack" aria-label="Aggiungi un'altra cassa">+</button><button type="button" class="cube-btn remove" onclick="removeCube(${ci},${ii})" title="Rimuovi l'ultima cassa/stack" aria-label="Rimuovi l'ultima cassa">−</button></span><span class="qty-sum" id="qty-${ci}-${ii}">0</span><span class="row-total" id="total-${ci}-${ii}">$0.00</span>`;rows.appendChild(row)});return catDiv}
-groups.forEach(group=>{const wrap=document.createElement("section");wrap.className="section-block";const heading=document.createElement("div");heading.className="section-heading";heading.innerHTML=`<span class="section-kicker">${group.title}</span>`;wrap.appendChild(heading);const grid=document.createElement("div");grid.className="section-grid";data.filter(cat=>cat.group===group.id).forEach(cat=>grid.appendChild(makeColumns(cat)));wrap.appendChild(grid);sections.appendChild(wrap)});
+function makeColumns(cat){const full=cat.full?" span-2":"";const typeClass=cat.negative?" negative":" positive";const legendaryFishing=cat.legendaryFishing?" pesca-leggendaria":"";const catDiv=document.createElement("article");catDiv.className=`category${typeClass}${full}${legendaryFishing}`;const ci=data.indexOf(cat);const statusBadge=cat.negative?`<span class="badge invoice">fattura</span>`:`<span class="badge buy">acquisto</span>`;catDiv.innerHTML=`<div class="category-head"><span class="icon">${cat.icon}</span><h2>${cat.name} ${statusBadge}</h2><span class="arrow">▼</span></div><div class="category-body"><div class="column-heads"><span class="column-head">Articolo</span><span class="column-head right">Prezzo</span><span class="column-head center">Casse / Stack</span><span class="column-head center">Qtà</span><span class="column-head right">Importo</span></div><div class="rows"></div><div class="category-subtotal"><span>Subtotale</span><strong id="subtotal-${ci}">$0.00</strong></div></div>`;catDiv.querySelector(".category-head").onclick=()=>catDiv.classList.toggle("collapsed");const rows=catDiv.querySelector(".rows");cat.items.forEach((item,ii)=>{const row=document.createElement("div");row.className="row";const price=item.tierQty?`$${item.p.toFixed(2)}<br><small>$${item.tierPrice.toFixed(2)} da ${item.tierQty}+</small>`:`$${item.p.toFixed(2)}`;row.innerHTML=`<span class="item-name">${item.n}${item.maxQty?`<span class="max-note">MAX ${item.maxQty}</span>`:""}</span><span class="item-price">${price}</span><span class="qty-cubes" id="cubes-${ci}-${ii}"><input type="number" min="0" ${item.maxQty?`max="${item.maxQty}"`:""} step="1" value="" placeholder="0" class="qty-cube" data-ci="${ci}" data-ii="${ii}" aria-label="${item.n} · Cassa 1" title="Cassa 1" oninput="calculate()"><button type="button" class="cube-btn add" onclick="addCube(${ci},${ii})" title="Aggiungi un'altra cassa/stack" aria-label="Aggiungi un'altra cassa">+</button><button type="button" class="cube-btn remove" onclick="removeCube(${ci},${ii})" title="Rimuovi l'ultima cassa/stack" aria-label="Rimuovi l'ultima cassa">−</button></span><span class="qty-sum" id="qty-${ci}-${ii}">0</span><span class="row-total" id="total-${ci}-${ii}">$0.00</span>`;rows.appendChild(row)});return catDiv}
+// Layout su due colonne indipendenti: niente intestazioni ripetute e niente spazi vuoti.
+sections.innerHTML = `<div class="catalog-top">
+  <div><span class="catalog-eyebrow">Registro del club</span><h2>Listino di pesca</h2></div>
+  <p>Pescato, canne, trappole ed esche. Inserisci le quantità per compilare il registro.</p>
+</div><div class="ledger-columns"><div class="ledger-column" id="ledgerLeft"></div><div class="ledger-column" id="ledgerRight"></div></div>`;
+const placement = [
+  {target:"ledgerLeft", names:["Pesca", "Esche Pesca"]},
+  {target:"ledgerRight",names:["Pesca Leggendaria", "Attrezzi", "Trappole"]}
+];
+placement.forEach(({target,names}) => {
+  const column=document.getElementById(target);
+  names.forEach(name => {
+    const cat=data.find(entry=>entry.name===name);
+    if(cat)column.appendChild(makeColumns(cat));
+  });
+});
 function updateCubeLabels(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);if(!container)return;const cubes=container.querySelectorAll(".qty-cube");const item=data[ci].items[ii];cubes.forEach((cube,idx)=>{cube.title=`Cassa ${idx+1}`;cube.setAttribute("aria-label",`${item.n} · Cassa ${idx+1}`)})}
 function addCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const input=document.createElement("input");input.type="number";input.min="0";const item=data[ci].items[ii];if(item.maxQty)input.max=String(item.maxQty);input.step="1";input.placeholder="0";input.className="qty-cube";input.dataset.ci=ci;input.dataset.ii=ii;input.oninput=calculate;const addBtn=container.querySelector(".cube-btn.add");container.insertBefore(input,addBtn);updateCubeLabels(ci,ii);input.focus();calculate()}
 function removeCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const cubes=container.querySelectorAll(".qty-cube");if(cubes.length>1){container.removeChild(cubes[cubes.length-1]);updateCubeLabels(ci,ii);calculate()}else{cubes[0].value="";calculate()}}
