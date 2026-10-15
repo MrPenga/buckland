@@ -116,6 +116,82 @@
 @media(max-width:1270px){.layout{grid-template-columns:1fr}.summary-panel{position:static}.summary-list{max-height:none}}
 @media(max-width:860px){.ledger-columns{grid-template-columns:1fr}.catalog-top{align-items:flex-start}.ledger-column{gap:12px}}
 @media(max-width:490px){.catalog-top{flex-direction:column;gap:6px}.catalog-top p{text-align:left;max-width:unset}.ledger-column .row{padding:9px 10px;grid-template-columns:minmax(0,1fr) 45px 82px;column-gap:5px}.ledger-column .qty-cube{width:43px}.ledger-column .cube-btn{width:24px}.ledger-column .category-head h2{font-size:19px!important}}
+
+/* Registro orizzontale: articolo e controlli numerici sulla stessa riga. */
+.ledger-column .row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 42px 73px;
+  grid-template-areas:"entry qty total";
+  gap:7px;
+  align-items:center;
+  min-height:42px;
+  padding:6px 11px;
+}
+.ledger-column .item-entry{
+  grid-area:entry;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+}
+.ledger-column .item-details{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+  flex:0 1 auto;
+}
+.ledger-column .item-name{
+  display:block;
+  font-size:12px;
+  line-height:1.25;
+  overflow-wrap:break-word;
+}
+.ledger-column .item-price{
+  display:block;
+  font-size:10.5px;
+  line-height:1.2;
+  text-align:left;
+  color:var(--ink-soft);
+}
+.ledger-column .qty-cubes{
+  flex:0 0 auto;
+  min-width:0;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:3px;
+  max-width:115px;
+}
+.ledger-column .qty-cube{
+  width:38px;
+  height:28px;
+  padding:2px;
+  font-size:12px;
+}
+.ledger-column .cube-btn{width:23px;height:26px;font-size:14px}
+.ledger-column .qty-sum{grid-area:qty;font-size:12px;text-align:center;white-space:nowrap}
+.ledger-column .qty-sum::before{font-size:9px}
+.ledger-column .row-total{grid-area:total;font-size:12px;text-align:right;white-space:nowrap}
+.ledger-column .category-subtotal{padding:7px 11px}
+@media(max-width:490px){
+  .ledger-column .row{
+    grid-template-columns:minmax(0,1fr) 36px 66px;
+    gap:5px;
+    min-height:42px;
+    padding:6px 8px;
+  }
+  .ledger-column .item-entry{gap:6px}
+  .ledger-column .item-name{font-size:11.5px}
+  .ledger-column .item-price{font-size:10px}
+  .ledger-column .qty-cubes{gap:2px;max-width:104px}
+  .ledger-column .qty-cube{width:35px;height:27px}
+  .ledger-column .cube-btn{width:22px;height:25px}
+  .ledger-column .qty-sum{font-size:11px}
+  .ledger-column .qty-sum::before{font-size:8px}
+  .ledger-column .row-total{font-size:11px}
+}
 </style>
 
 <link rel="stylesheet" href="buckland-theme.css">
@@ -152,7 +228,7 @@ const data=[
 ];
 
 const sections=document.getElementById("sections");
-function makeColumns(cat){const full=cat.full?" span-2":"";const typeClass=cat.negative?" negative":" positive";const legendaryFishing=cat.legendaryFishing?" pesca-leggendaria":"";const catDiv=document.createElement("article");catDiv.className=`category${typeClass}${full}${legendaryFishing}`;const ci=data.indexOf(cat);const statusBadge=cat.negative?`<span class="badge invoice">fattura</span>`:`<span class="badge buy">acquisto</span>`;catDiv.innerHTML=`<div class="category-head"><span class="icon">${cat.icon}</span><h2>${cat.name} ${statusBadge}</h2><span class="arrow">▼</span></div><div class="category-body"><div class="column-heads"><span class="column-head">Articolo</span><span class="column-head right">Prezzo</span><span class="column-head center">Casse / Stack</span><span class="column-head center">Qtà</span><span class="column-head right">Importo</span></div><div class="rows"></div><div class="category-subtotal"><span>Subtotale</span><strong id="subtotal-${ci}">$0.00</strong></div></div>`;catDiv.querySelector(".category-head").onclick=()=>catDiv.classList.toggle("collapsed");const rows=catDiv.querySelector(".rows");cat.items.forEach((item,ii)=>{const row=document.createElement("div");row.className="row";const price=item.tierQty?`$${item.p.toFixed(2)}<br><small>$${item.tierPrice.toFixed(2)} da ${item.tierQty}+</small>`:`$${item.p.toFixed(2)}`;row.innerHTML=`<span class="item-name">${item.n}${item.maxQty?`<span class="max-note">MAX ${item.maxQty}</span>`:""}</span><span class="item-price">${price}</span><span class="qty-cubes" id="cubes-${ci}-${ii}"><input type="number" min="0" ${item.maxQty?`max="${item.maxQty}"`:""} step="1" value="" placeholder="0" class="qty-cube" data-ci="${ci}" data-ii="${ii}" aria-label="${item.n} · Cassa 1" title="Cassa 1" oninput="calculate()"><button type="button" class="cube-btn add" onclick="addCube(${ci},${ii})" title="Aggiungi un'altra cassa/stack" aria-label="Aggiungi un'altra cassa">+</button><button type="button" class="cube-btn remove" onclick="removeCube(${ci},${ii})" title="Rimuovi l'ultima cassa/stack" aria-label="Rimuovi l'ultima cassa">−</button></span><span class="qty-sum" id="qty-${ci}-${ii}">0</span><span class="row-total" id="total-${ci}-${ii}">$0.00</span>`;rows.appendChild(row)});return catDiv}
+function makeColumns(cat){const full=cat.full?" span-2":"";const typeClass=cat.negative?" negative":" positive";const legendaryFishing=cat.legendaryFishing?" pesca-leggendaria":"";const catDiv=document.createElement("article");catDiv.className=`category${typeClass}${full}${legendaryFishing}`;const ci=data.indexOf(cat);const statusBadge=cat.negative?`<span class="badge invoice">fattura</span>`:`<span class="badge buy">acquisto</span>`;catDiv.innerHTML=`<div class="category-head"><span class="icon">${cat.icon}</span><h2>${cat.name} ${statusBadge}</h2><span class="arrow">▼</span></div><div class="category-body"><div class="column-heads"><span class="column-head">Articolo</span><span class="column-head right">Prezzo</span><span class="column-head center">Casse / Stack</span><span class="column-head center">Qtà</span><span class="column-head right">Importo</span></div><div class="rows"></div><div class="category-subtotal"><span>Subtotale</span><strong id="subtotal-${ci}">$0.00</strong></div></div>`;catDiv.querySelector(".category-head").onclick=()=>catDiv.classList.toggle("collapsed");const rows=catDiv.querySelector(".rows");cat.items.forEach((item,ii)=>{const row=document.createElement("div");row.className="row";const price=item.tierQty?`$${item.p.toFixed(2)}<br><small>$${item.tierPrice.toFixed(2)} da ${item.tierQty}+</small>`:`$${item.p.toFixed(2)}`;row.innerHTML=`<div class="item-entry"><div class="item-details"><span class="item-name">${item.n}${item.maxQty?`<span class="max-note">MAX ${item.maxQty}</span>`:""}</span><span class="item-price">${price}</span></div><span class="qty-cubes" id="cubes-${ci}-${ii}"><input type="number" min="0" ${item.maxQty?`max="${item.maxQty}"`:""} step="1" value="" placeholder="0" class="qty-cube" data-ci="${ci}" data-ii="${ii}" aria-label="${item.n} · Cassa 1" title="Cassa 1" oninput="calculate()"><button type="button" class="cube-btn add" onclick="addCube(${ci},${ii})" title="Aggiungi un'altra cassa/stack" aria-label="Aggiungi un'altra cassa">+</button><button type="button" class="cube-btn remove" onclick="removeCube(${ci},${ii})" title="Rimuovi l'ultima cassa/stack" aria-label="Rimuovi l'ultima cassa">−</button></span></div><span class="qty-sum" id="qty-${ci}-${ii}">0</span><span class="row-total" id="total-${ci}-${ii}">$0.00</span>`;rows.appendChild(row)});return catDiv}
 // Layout su due colonne indipendenti: niente intestazioni ripetute e niente spazi vuoti.
 sections.innerHTML = `<div class="catalog-top">
   <div><span class="catalog-eyebrow">Registro del club</span><h2>Listino di pesca</h2></div>
