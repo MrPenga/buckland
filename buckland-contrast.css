@@ -1,0 +1,113 @@
+/* Buckland Angling Club | Dark Contrast & Twin Accordion Columns (2026-10-16)
+ * Presentation only: all prices, quantities, limits, Firebase and operations remain unchanged. */
+:root{--bac-text:#f0eadd;--bac-subtle:#becfca;--bac-sand:#e5c994;--bac-surface:#091c24;--bac-surface2:#0e2932;--bac-edge:rgba(157,202,202,.32)}
+/* A consistent readable palette, even for nested elements with an old light-theme color. */
+body{color:var(--bac-text)!important}
+body p,body li,body label,body dd,body dt,body td,body th,body caption,body summary,body small,body fieldset,body legend{color:var(--bac-text)}
+body a{color:#c5e6e5}
+body a:hover{color:#fff2d0}
+body h1,body h2,body h3,body h4{color:#f6ebd5!important}
+body ::placeholder{color:#aebebd!important;opacity:1}
+body input,body select,body textarea{color:#f3e9d7!important;background-color:#071d24!important;caret-color:#f4d19b!important}
+body input[type="checkbox"],body input[type="radio"]{accent-color:#a8cac3}
+body select{color-scheme:dark!important;appearance:auto}
+body select option,body select optgroup{color:#f3ead5!important;background:#0a2029!important}
+body textarea,body input,body select{border-color:rgba(161,200,198,.38)!important}
+body button:disabled,body input:disabled,body select:disabled{opacity:.58}
+body a:focus-visible,body button:focus-visible,body input:focus-visible,body select:focus-visible,body summary:focus-visible,.category-head:focus-visible{outline:2px solid #ebce91!important;outline-offset:3px!important}
+/* Make all expansion widgets distinctly dark, including non-index ones. */
+body details{color:#eee5d5}
+body details>summary,body .craft-summary,body .fish-map-details>summary,body .fish-accordion>summary{background:linear-gradient(115deg,#09252e,#153944)!important;border:1px solid rgba(172,205,196,.29)!important;color:#f1e7d7!important;text-shadow:none!important;box-shadow:inset 0 1px rgba(255,255,255,.05)!important}
+body details>summary:hover,body .craft-summary:hover{background:linear-gradient(115deg,#16434e,#225463)!important;color:#fff3db!important}
+body details[open]>summary{border-color:rgba(216,181,117,.46)!important;color:#f4d59c!important}
+body details>summary *,body .craft-summary *{color:inherit!important}
+body .category .category-head{background:linear-gradient(110deg,#103540,#0b2932)!important;color:#f1e7d4!important;border-color:rgba(141,184,187,.24)!important}
+body .category .category-head:hover{background:linear-gradient(110deg,#1b4853,#123541)!important}
+body .category.collapsed .category-head{background:linear-gradient(110deg,#0b2a35,#09212a)!important}
+body .category .category-head h2,body .category .category-head .arrow{color:#f4ead6!important}
+body .category .category-body{background:#0a242c!important}
+body .category .column-heads{background:#0c2b34!important}
+body .category .column-head{color:#c4d9d4!important}
+body .category .item-name{color:#f1e8d9!important}
+body .category .item-price{color:#e9d4ad!important}
+body .category .row-total{color:#f6d08a!important}
+body .category .qty-sum{color:#cce4de!important}
+body .category .category-subtotal{background:#0f323b!important;color:#e8d7bb!important}
+body .category .category-subtotal strong{color:#f3d08d!important}
+body .category .row:hover{background:rgba(88,153,156,.09)!important}
+body .item-name .max-note{color:#f1c59a!important}
+body .cube-btn{color:#f2e5cf!important}
+body .cube-btn.remove{color:#f4ac99!important}
+body .badge.buy{color:#d4f4e9!important}
+body .badge.invoice{color:#f3deb4!important}
+body .summary-panel .summary-name,body .summary-panel .summary-total strong{color:#f6eddd!important}
+body .summary-panel .summary-sub,body .summary-panel .summary-cat,body .summary-panel .summary-qty{color:#bacbc5!important}
+body .ledger-help,body .ledger-help>summary{background:#0b2630!important;color:#e9e0d2!important}
+body .ledger-help p,body .ledger-help strong{color:#e9e0d2!important}
+body .ledger-tab{background:#102e38!important;color:#dcece7!important}
+body .ledger-tab.active{background:#245866!important;color:#fff1d5!important}
+body .ledger-search{background:#071d25!important;color:#f2e4cd!important}
+body .ledger-search input{background:transparent!important}
+/* Secondary pages: eliminate inherited pale panels/dark text from old western CSS. */
+body .mp-page-shell .box,body .mp-page-shell .card,body .eventi-main .evento-col>.evento-banner,
+body .regole-actions,body .regole-dialog,body .regole-modal-header,body .regole-modal-footer,
+body .fish-map-explorer,body .fish-map-info,body .recipe-box,body .fish-card,body .recipe-card,
+body .eventi-main .evento-form,body .eventi-main .evento-totali,body .eventi-main .evento-elenco{
+ color:#ece4d5!important;border-color:rgba(148,191,190,.31)!important}
+body .mp-page-shell .box p,body .mp-page-shell .box span:not(.status-dot),body .mp-page-shell .box strong,
+body .mp-page-shell .box label,body .mp-page-shell .box small,body .mp-page-shell .box td,body .mp-page-shell .box th,
+body .fish-map-explorer p,body .recipe-card p,body .fish-card p{color:#e3e0d5!important}
+body .mp-page-shell .box .muted,body .mp-page-shell .box .small,body .mp-page-shell .box .subtle{color:#b7c9c5!important}
+body .mp-page-shell .card{background:#0f3039!important}
+body .mp-page-shell table{background:rgba(4,21,27,.46)!important;color:#ece3d5!important}
+body .mp-page-shell table th{background:#113541!important;color:#f4dfb6!important}
+body .mp-page-shell table td{border-color:rgba(149,194,194,.23)!important}
+body .mp-page-shell table tr:nth-child(even){background:rgba(146,198,199,.06)!important}
+body .fish-map-btn{background:#102e39!important;color:#f1e4cf!important;border-color:rgba(147,190,190,.35)!important}
+body .fish-map-btn.active{background:#245969!important;color:#fff2d8!important}
+body .fish-map-tip,body .fish-map-note,body .wiki-chapter-nav a{color:#d5e1d6!important}
+body .regole-actions,body .regole-dialog,body .regole-modal-header,body .regole-modal-footer{background:#102f3a!important}
+body .regole-close{background:#0c2630!important;color:#f5e8d2!important}
+body .regole-modal-header h2,body .regole-modal-header p{color:#f3e6d2!important}
+body .eventi-main .evento-banner{background:linear-gradient(115deg,#112f3a,#184450)!important}
+body .eventi-main .evento-form h3,body .eventi-main .evento-totali h3,body .eventi-main .evento-elenco h3{color:#f1dfc0!important}
+body .eventi-main .tot span{color:#f5ead8!important;background:#102c37!important}
+/* Index: two accordion panels per line, with neatly aligned controls even in a narrow card. */
+@media(min-width:850px){
+ body.page-index .section-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start!important;gap:13px!important}
+ body.page-index .section-grid>.category{grid-column:auto!important;min-width:0!important}
+}
+body.page-index .section-grid>.category{min-width:0!important}
+body.page-index .category .column-heads{display:none!important}
+body.page-index .category .row{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) 69px 39px 82px!important;
+ grid-template-rows:auto auto!important;
+ grid-template-areas:"item item price price" "cubes cubes count value"!important;
+ gap:7px 7px!important;
+ align-items:center!important;
+ padding:10px 14px!important;
+ min-height:71px!important;
+}
+body.page-index .category .row .item-name{grid-area:item!important;min-width:0!important;font-size:12px!important;line-height:1.48!important}
+body.page-index .category .row .item-price{grid-area:price!important;text-align:right!important;font-size:11px!important;white-space:nowrap!important}
+body.page-index .category .row .qty-cubes{grid-area:cubes!important;min-width:0!important;flex-wrap:wrap!important;justify-content:flex-start!important;align-self:center!important}
+body.page-index .category .row .qty-sum{grid-area:count!important;text-align:center!important;font-size:12px!important}
+body.page-index .category .row .row-total{grid-area:value!important;text-align:right!important;font-size:12px!important;white-space:nowrap!important}
+body.page-index .category .qty-cube{width:43px!important;height:32px!important}
+body.page-index .category .cube-btn{width:27px!important;height:30px!important}
+body.page-index .category .category-head{min-height:64px!important;padding:10px 13px!important}
+body.page-index .category .category-head h2{font-size:20px!important}
+body.page-index .category .category-head .badge{font-size:8px!important;padding:4px 6px!important;margin-left:5px!important}
+body.page-index .category .category-subtotal{padding:11px 15px!important}
+@media(min-width:850px) and (max-width:1280px){
+ body.page-index .ledger-main{grid-template-columns:minmax(0,1fr)!important}
+ body.page-index .summary-panel{position:static!important;max-height:none!important}
+}
+@media(max-width:849px){body.page-index .section-grid{grid-template-columns:minmax(0,1fr)!important}}
+@media(max-width:420px){
+ body.page-index .category .row{grid-template-columns:minmax(0,1fr) 43px 35px 75px!important;gap:7px 5px!important}
+ body.page-index .category .qty-cube{width:38px!important}
+ body.page-index .category .cube-btn{width:26px!important}
+ body.page-index .category .category-head h2{font-size:18px!important}
+}
