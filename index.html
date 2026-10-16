@@ -91,152 +91,26 @@
 .quick .quick-orders{position:relative}
 .quick .quick-order-count{position:absolute;top:5px;right:8px;border-radius:99px;border:2px solid #efddbd;padding:4px 7px;min-width:29px;color:#fff;background:#b7352b;font:bold 13px Arial,sans-serif;text-align:center;box-shadow:0 2px 8px #0005}
 @media(max-width:760px){.index-hero-tools{justify-content:space-between;width:100%}.index-hero-tools .hero-mark{display:block;width:155px;height:auto}.index-hero-tools .hero-mark img{width:155px}}
-
-/* Layout compatto del registro: due colonne bilanciate, senza titoli "Forniture" ripetuti. */
-.catalog-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 12px;padding:13px 18px;background:linear-gradient(110deg,rgba(17,51,59,.96),rgba(44,94,98,.94));border:1px solid #bda677;border-top:3px solid #d0b888;box-shadow:var(--shadow-soft);color:#f4efde}
-.catalog-top .catalog-eyebrow{display:block;color:#e0d1a6;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
-.catalog-top h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:#f7f0da;font-size:30px;line-height:1;margin:0}
-.catalog-top p{font-size:11px;line-height:1.5;max-width:330px;margin:0;color:#e5e8d9;text-align:right}
-.ledger-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:14px}
-.ledger-column{display:flex;flex-direction:column;gap:14px;min-width:0}
-.ledger-column .category{width:100%;min-width:0;margin:0;border-radius:3px}
-.ledger-column .category-head{min-height:52px;padding:11px 14px}
-.ledger-column .category-head h2{font-size:20px!important;line-height:1.15}
-.ledger-column .column-heads{display:none}
-.ledger-column .row{display:grid;grid-template-columns:minmax(0,1fr) 58px 95px;grid-template-areas:"item item price" "cubes qty total";align-items:center;column-gap:10px;row-gap:6px;min-height:69px;padding:10px 13px}
-.ledger-column .item-name{grid-area:item;font-size:13px;line-height:1.35}
-.ledger-column .item-price{grid-area:price;font-size:12px;text-align:right}
-.ledger-column .qty-cubes{grid-area:cubes;gap:5px;min-width:0}
-.ledger-column .qty-sum{grid-area:qty;text-align:center;font-size:13px}
-.ledger-column .qty-sum::before{content:"Qtà ";font-family:'Libre Baskerville',Georgia,serif;font-size:10px;font-weight:normal;color:#56706e}
-.ledger-column .qty-sum::after{content:none!important}
-.ledger-column .row-total{grid-area:total;text-align:right;font-size:13px;white-space:nowrap;min-width:0}
-.ledger-column .category-subtotal{padding:10px 14px;font-size:12px}
-.ledger-column .category:not(.collapsed) .category-head .arrow{transform:rotate(0)}
-@media(max-width:1270px){.layout{grid-template-columns:1fr}.summary-panel{position:static}.summary-list{max-height:none}}
-@media(max-width:860px){.ledger-columns{grid-template-columns:1fr}.catalog-top{align-items:flex-start}.ledger-column{gap:12px}}
-@media(max-width:490px){.catalog-top{flex-direction:column;gap:6px}.catalog-top p{text-align:left;max-width:unset}.ledger-column .row{padding:9px 10px;grid-template-columns:minmax(0,1fr) 45px 82px;column-gap:5px}.ledger-column .qty-cube{width:43px}.ledger-column .cube-btn{width:24px}.ledger-column .category-head h2{font-size:19px!important}}
-
-/* Colonne fisse: i campi e i pulsanti sono allineati su ogni riga. */
-.ledger-column .row{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 40px 73px;
-  grid-template-areas:"entry qty total";
-  column-gap:8px;
-  align-items:center;
-  min-height:43px;
-  padding:6px 11px;
-}
-.ledger-column .item-entry{
-  grid-area:entry;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 97px;
-  gap:8px;
-  align-items:center;
-  min-width:0;
-  width:100%;
-}
-.ledger-column .item-details{
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-}
-.ledger-column .item-name{
-  display:block;
-  font-size:12px;
-  line-height:1.25;
-  overflow-wrap:break-word;
-}
-.ledger-column .item-price{
-  display:block;
-  font-size:10.5px;
-  line-height:1.2;
-  text-align:left;
-  color:var(--ink-soft);
-}
-.ledger-column .qty-cubes{
-  grid-area:auto;
-  display:grid;
-  grid-template-columns:40px 24px 24px;
-  gap:4px;
-  align-items:start;
-  justify-content:start;
-  min-width:0;
-  max-width:none;
-  width:97px;
-}
-.ledger-column .qty-inputs{
-  display:flex;
-  flex-direction:column;
-  align-items:stretch;
-  gap:3px;
-  min-width:0;
-}
-.ledger-column .qty-cube{
-  display:block;
-  width:40px;
-  height:28px;
-  padding:2px;
-  font-size:12px;
-  margin:0;
-}
-.ledger-column .cube-btn{
-  display:grid;
-  place-items:center;
-  width:24px;
-  height:28px;
-  padding:0;
-  font-size:14px;
-}
-.ledger-column .qty-sum{
-  grid-area:qty;
-  font-size:12px;
-  text-align:center;
-  white-space:nowrap;
-}
-.ledger-column .qty-sum::before{font-size:9px}
-.ledger-column .row-total{
-  grid-area:total;
-  font-size:12px;
-  text-align:right;
-  white-space:nowrap;
-  min-width:0;
-}
-.ledger-column .category-subtotal{padding:7px 11px}
-@media(max-width:490px){
-  .ledger-column .row{
-    grid-template-columns:minmax(0,1fr) 34px 67px;
-    column-gap:5px;
-    padding:6px 8px;
-  }
-  .ledger-column .item-entry{
-    grid-template-columns:minmax(0,1fr) 91px;
-    gap:5px;
-  }
-  .ledger-column .item-name{font-size:11.5px}
-  .ledger-column .item-price{font-size:10px}
-  .ledger-column .qty-cubes{
-    grid-template-columns:37px 23px 23px;
-    gap:4px;
-    width:91px;
-  }
-  .ledger-column .qty-cube{width:37px;height:27px}
-  .ledger-column .cube-btn{width:23px;height:27px}
-  .ledger-column .qty-sum{font-size:11px}
-  .ledger-column .qty-sum::before{font-size:8px}
-  .ledger-column .row-total{font-size:11px}
-}
 </style>
 
 <link rel="stylesheet" href="buckland-theme.css">
+<link rel="stylesheet" href="buckland-layout.css">
 </head>
 <body class="page-index">
 <div class="shell">
-<header class="hero"><div class="hero-inner"><div><div class="eyebrow">Registro di Pesca e forniture</div><h1>Buckland Angling Club</h1><p class="hero-sub">Pesce fresco · Esche · Canne · Forniture da pesca</p></div><div class="index-hero-tools"><a href="ordini.html" class="index-order-bell" data-order-bell hidden aria-label="Ordini da gestire"><span class="bell-symbol">🔔</span><span class="bell-count" data-bell-count>0</span></a><div class="hero-mark logo-mark"><img src="theme-assets/buckland-angling-club-logo.png" alt="Logo Buckland Angling Club"></div></div></div></header>
-<nav class="quick"><a href="ordini.html" class="quick-orders"><span>🧾</span>ORDINI<small>Ordini con fattura</small><span class="quick-order-count" data-order-count hidden>0</span></a><a href="eventi.html"><span>🏆</span>EVENTI<small>Gara di pesca</small></a><a href="regole.html"><span>📜</span>REGOLE<small>Come si usa il registro</small></a><a href="wiki.html"><span>📚</span>WIKI<small>Ricette e pesci</small></a></nav>
-<div class="guide"><div class="guide-icon">📦</div><div class="guide-main"><strong>Più casse dello stesso articolo?</strong> Ogni casella rappresenta una cassa/stack. Premi <strong>+</strong> per aggiungerne un'altra: la colonna <strong>Qtà</strong> somma tutto automaticamente.</div><div class="guide-hint">Esempio: 18 + 23 + 11 → Qtà 52</div></div>
-<div class="layout"><main class="sections" id="sections"></main><aside class="summary-panel"><div class="summary-head"><h2 class="summary-title">Registro corrente</h2><p class="summary-sub">Solo le voci con quantità inserita</p></div><div class="summary-list" id="summaryList"><p class="summary-empty">Nessun articolo inserito.</p></div><div class="summary-totals"><div class="summary-total give"><span>Da dare</span><strong id="summaryGive">$0.00</strong></div><div class="summary-total invoice"><span>Fattura</span><strong id="summaryInvoice">$0.00</strong></div></div></aside></div>
+<header class="hero"><div class="hero-inner"><div><div class="eyebrow">Registro di Pesca e forniture</div><h1>Buckland Angling Club</h1><p class="hero-sub">Pesce fresco · Esche · Canne · Forniture da pesca</p></div><div class="index-hero-tools"><a href="ordini.html" class="index-order-bell" data-order-bell hidden aria-label="Ordini da gestire"><span class="bell-symbol">🔔</span><span class="bell-count" data-bell-count>0</span></a><div class="hero-mark logo-mark"><img src="theme-assets/buckland-angling-club-logo.png" alt="Buckland Angling Club, insegna vittoriana con trota iridea"></div></div></div></header>
+<nav class="quick club-main-nav" aria-label="Navigazione principale"><a class="on" aria-current="page" href="index.html"><span>◈</span>REGISTRO<small>Acquisti e forniture</small></a><a href="ordini.html" class="quick-orders"><span>✧</span>ORDINI<small>Fatture e richieste</small><span class="quick-order-count" data-order-count hidden>0</span></a><a href="eventi.html"><span>✦</span>EVENTI<small>Gara di pesca</small></a><a href="regole.html"><span>❖</span>REGOLE<small>Il regolamento</small></a><a href="wiki.html"><span>⌘</span>WIKI<small>Pesci e ricette</small></a></nav>
+<section class="ledger-heading" aria-label="Strumenti del registro">
+<div class="ledger-heading-copy"><div class="ledger-eyebrow">REGISTRO COMMERCIALE · BUCKLAND ANGLING CLUB</div><h2>Il registro delle acque</h2><p>Annota il pescato acquistato e le forniture vendute. Ogni importo viene aggiornato automaticamente.</p></div>
+<div class="ledger-quick-status"><span class="status-dot"></span><span id="selectionCount" aria-live="polite">Nessun articolo selezionato</span><span class="status-divider"></span><span>Anno 1900</span></div>
+</section>
+<div class="ledger-toolbar">
+ <div class="ledger-filter" role="group" aria-label="Filtra il registro"><button type="button" class="ledger-tab active" data-ledger-filter="all" aria-pressed="true">Tutti gli articoli</button><button type="button" class="ledger-tab" data-ledger-filter="raccolta" aria-pressed="false">Pescato</button><button type="button" class="ledger-tab" data-ledger-filter="forniture" aria-pressed="false">Forniture</button></div>
+ <label class="ledger-search" for="ledgerSearch"><span aria-hidden="true">⌕</span><input id="ledgerSearch" type="search" placeholder="Cerca un articolo…" autocomplete="off" aria-label="Cerca un articolo"><kbd>/</kbd></label>
+</div>
+<details class="ledger-help"><summary>Come funziona il registro? <span>Guida rapida</span></summary><p>Ogni casella rappresenta una cassa o uno stack. Con <strong>+</strong> ne aggiungi un'altra, con <strong>−</strong> rimuovi l'ultima. La quantità totale e gli importi vengono calcolati automaticamente. Esempio: <strong>18 + 23 + 11 = 52</strong>.</p></details>
+<p class="ledger-no-results" id="ledgerNoResults" hidden>Nessun articolo trovato. Prova un altro nome o cambia il filtro.</p>
+<div class="layout ledger-main"><main class="sections" id="sections" aria-label="Listini articoli"></main><aside class="summary-panel"><div class="summary-head"><span class="summary-eyebrow">RIEPILOGO IN TEMPO REALE</span><h2 class="summary-title">Registro corrente</h2><p class="summary-sub">Solo le voci con quantità inserita</p></div><div class="summary-list" id="summaryList"><p class="summary-empty">Nessun articolo inserito.</p></div><div class="summary-totals"><div class="summary-total give"><span>Da dare</span><strong id="summaryGive">$0.00</strong></div><div class="summary-total invoice"><span>Fattura</span><strong id="summaryInvoice">$0.00</strong></div></div></aside></div>
 </div>
 <div class="footer-bar"><div class="footer-inner"><div class="footer-actions"><button class="reset-btn" type="button" onclick="resetAll()">Svuota registro</button><button class="poster-download" id="posterPesca" type="button">↓ Genera listino pesca</button></div><div class="totals"><div class="grand-total give"><span class="label">Da pagare al cliente</span><span class="amount" id="totalGive">$0.00</span></div><div class="grand-total invoice"><span class="label">Fattura cliente</span><span class="amount" id="totalInvoice">$0.00</span></div></div></div></div>
 
@@ -262,27 +136,13 @@ const data=[
   {group:"esche",name:"Esche Pesca",icon:"🪱",negative:true,items:[{n:"Esca Di Aragosta Leggendaria",p:5.00},{n:"Esca di Libellula",p:.15},{n:"Esca di Libellula Leggendaria",p:5.00},{n:"Esca Di Pesce",p:12.00},{n:"Esca Di Pesce Leggendaria",p:3.00},{n:"Esca Spinner V4 Leggendaria",p:10.00},{n:"Esca Spinner V6 Leggendaria",p:12.00},{n:"Grilli",p:.15}]}
 ];
 
+const groups=[{id:"raccolta",title:"Pescato e pesci leggendari"},{id:"attrezzatura",title:"Canne e attrezzatura"},{id:"trappole",title:"Trappole e relative esche"},{id:"esche",title:"Esche da pesca"}];
 const sections=document.getElementById("sections");
-function makeColumns(cat){const full=cat.full?" span-2":"";const typeClass=cat.negative?" negative":" positive";const legendaryFishing=cat.legendaryFishing?" pesca-leggendaria":"";const catDiv=document.createElement("article");catDiv.className=`category${typeClass}${full}${legendaryFishing}`;const ci=data.indexOf(cat);const statusBadge=cat.negative?`<span class="badge invoice">fattura</span>`:`<span class="badge buy">acquisto</span>`;catDiv.innerHTML=`<div class="category-head"><span class="icon">${cat.icon}</span><h2>${cat.name} ${statusBadge}</h2><span class="arrow">▼</span></div><div class="category-body"><div class="column-heads"><span class="column-head">Articolo</span><span class="column-head right">Prezzo</span><span class="column-head center">Casse / Stack</span><span class="column-head center">Qtà</span><span class="column-head right">Importo</span></div><div class="rows"></div><div class="category-subtotal"><span>Subtotale</span><strong id="subtotal-${ci}">$0.00</strong></div></div>`;catDiv.querySelector(".category-head").onclick=()=>catDiv.classList.toggle("collapsed");const rows=catDiv.querySelector(".rows");cat.items.forEach((item,ii)=>{const row=document.createElement("div");row.className="row";const price=item.tierQty?`$${item.p.toFixed(2)}<br><small>$${item.tierPrice.toFixed(2)} da ${item.tierQty}+</small>`:`$${item.p.toFixed(2)}`;row.innerHTML=`<div class="item-entry"><div class="item-details"><span class="item-name">${item.n}${item.maxQty?`<span class="max-note">MAX ${item.maxQty}</span>`:""}</span><span class="item-price">${price}</span></div><span class="qty-cubes" id="cubes-${ci}-${ii}"><span class="qty-inputs"><input type="number" min="0" ${item.maxQty?`max="${item.maxQty}"`:""} step="1" value="" placeholder="0" class="qty-cube" data-ci="${ci}" data-ii="${ii}" aria-label="${item.n} · Cassa 1" title="Cassa 1" oninput="calculate()"></span><button type="button" class="cube-btn add" onclick="addCube(${ci},${ii})" title="Aggiungi un'altra cassa/stack" aria-label="Aggiungi un'altra cassa">+</button><button type="button" class="cube-btn remove" onclick="removeCube(${ci},${ii})" title="Rimuovi l'ultima cassa/stack" aria-label="Rimuovi l'ultima cassa">−</button></span></div><span class="qty-sum" id="qty-${ci}-${ii}">0</span><span class="row-total" id="total-${ci}-${ii}">$0.00</span>`;rows.appendChild(row)});return catDiv}
-// Layout su due colonne indipendenti: niente intestazioni ripetute e niente spazi vuoti.
-sections.innerHTML = `<div class="catalog-top">
-  <div><span class="catalog-eyebrow">Registro del club</span><h2>Listino di pesca</h2></div>
-  <p>Pescato, canne, trappole ed esche. Inserisci le quantità per compilare il registro.</p>
-</div><div class="ledger-columns"><div class="ledger-column" id="ledgerLeft"></div><div class="ledger-column" id="ledgerRight"></div></div>`;
-const placement = [
-  {target:"ledgerLeft", names:["Pesca", "Esche Pesca"]},
-  {target:"ledgerRight",names:["Pesca Leggendaria", "Attrezzi", "Trappole"]}
-];
-placement.forEach(({target,names}) => {
-  const column=document.getElementById(target);
-  names.forEach(name => {
-    const cat=data.find(entry=>entry.name===name);
-    if(cat)column.appendChild(makeColumns(cat));
-  });
-});
+function makeColumns(cat){const full=cat.full?" span-2":"";const typeClass=cat.negative?" negative":" positive";const legendaryFishing=cat.legendaryFishing?" pesca-leggendaria":"";const catDiv=document.createElement("article");catDiv.className=`category${typeClass}${full}${legendaryFishing}`;if(!["Pesca","Pesca Leggendaria"].includes(cat.name))catDiv.classList.add("collapsed");const ci=data.indexOf(cat);const statusBadge=cat.negative?`<span class="badge invoice">fattura</span>`:`<span class="badge buy">acquisto</span>`;catDiv.innerHTML=`<div class="category-head"><span class="icon">${cat.icon}</span><h2>${cat.name} ${statusBadge}</h2><span class="arrow">▼</span></div><div class="category-body"><div class="column-heads"><span class="column-head">Articolo</span><span class="column-head right">Prezzo</span><span class="column-head center">Casse / Stack</span><span class="column-head center">Qtà</span><span class="column-head right">Importo</span></div><div class="rows"></div><div class="category-subtotal"><span>Subtotale</span><strong id="subtotal-${ci}">$0.00</strong></div></div>`;const catHead=catDiv.querySelector(".category-head");catHead.setAttribute("role","button");catHead.setAttribute("tabindex","0");catHead.setAttribute("aria-label",`Apri o chiudi ${cat.name}`);catHead.setAttribute("aria-expanded",String(!catDiv.classList.contains("collapsed")));const toggleCat=()=>{catDiv.classList.toggle("collapsed");catHead.setAttribute("aria-expanded",String(!catDiv.classList.contains("collapsed")))};catHead.onclick=toggleCat;catHead.onkeydown=(event)=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleCat()}};const rows=catDiv.querySelector(".rows");cat.items.forEach((item,ii)=>{const row=document.createElement("div");row.className="row";const price=item.tierQty?`$${item.p.toFixed(2)}<br><small>$${item.tierPrice.toFixed(2)} da ${item.tierQty}+</small>`:`$${item.p.toFixed(2)}`;row.innerHTML=`<span class="item-name">${item.n}${item.maxQty?`<span class="max-note">MAX ${item.maxQty}</span>`:""}</span><span class="item-price">${price}</span><span class="qty-cubes" id="cubes-${ci}-${ii}"><input type="number" min="0" ${item.maxQty?`max="${item.maxQty}"`:""} step="1" value="" placeholder="0" class="qty-cube" data-ci="${ci}" data-ii="${ii}" aria-label="${item.n} · Cassa 1" title="Cassa 1" oninput="calculate()"><button type="button" class="cube-btn add" onclick="addCube(${ci},${ii})" title="Aggiungi un'altra cassa/stack" aria-label="Aggiungi un'altra cassa">+</button><button type="button" class="cube-btn remove" onclick="removeCube(${ci},${ii})" title="Rimuovi l'ultima cassa/stack" aria-label="Rimuovi l'ultima cassa">−</button></span><span class="qty-sum" id="qty-${ci}-${ii}">0</span><span class="row-total" id="total-${ci}-${ii}">$0.00</span>`;rows.appendChild(row)});return catDiv}
+groups.forEach(group=>{const wrap=document.createElement("section");wrap.className="section-block";const heading=document.createElement("div");heading.className="section-heading";heading.innerHTML=`<span class="section-kicker">${group.title}</span><span class="section-count">${data.filter(cat=>cat.group===group.id).reduce((n,cat)=>n+cat.items.length,0)} articoli</span>`;wrap.appendChild(heading);const grid=document.createElement("div");grid.className="section-grid";data.filter(cat=>cat.group===group.id).forEach(cat=>grid.appendChild(makeColumns(cat)));wrap.appendChild(grid);sections.appendChild(wrap)});
 function updateCubeLabels(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);if(!container)return;const cubes=container.querySelectorAll(".qty-cube");const item=data[ci].items[ii];cubes.forEach((cube,idx)=>{cube.title=`Cassa ${idx+1}`;cube.setAttribute("aria-label",`${item.n} · Cassa ${idx+1}`)})}
-function addCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const input=document.createElement("input");input.type="number";input.min="0";const item=data[ci].items[ii];if(item.maxQty)input.max=String(item.maxQty);input.step="1";input.placeholder="0";input.className="qty-cube";input.dataset.ci=ci;input.dataset.ii=ii;input.oninput=calculate;container.querySelector(".qty-inputs").appendChild(input);updateCubeLabels(ci,ii);input.focus();calculate()}
-function removeCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const cubes=container.querySelectorAll(".qty-cube");if(cubes.length>1){cubes[cubes.length-1].remove();updateCubeLabels(ci,ii);calculate()}else{cubes[0].value="";calculate()}}
+function addCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const input=document.createElement("input");input.type="number";input.min="0";const item=data[ci].items[ii];if(item.maxQty)input.max=String(item.maxQty);input.step="1";input.placeholder="0";input.className="qty-cube";input.dataset.ci=ci;input.dataset.ii=ii;input.oninput=calculate;const addBtn=container.querySelector(".cube-btn.add");container.insertBefore(input,addBtn);updateCubeLabels(ci,ii);input.focus();calculate()}
+function removeCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const cubes=container.querySelectorAll(".qty-cube");if(cubes.length>1){container.removeChild(cubes[cubes.length-1]);updateCubeLabels(ci,ii);calculate()}else{cubes[0].value="";calculate()}}
 function calculate(){let give=0,invoice=0;const active=[];data.forEach((cat,ci)=>{let subtotal=0;const sign=cat.negative?-1:1;cat.items.forEach((item,ii)=>{const cubes=document.querySelectorAll(`.qty-cube[data-ci="${ci}"][data-ii="${ii}"]`);let qty=0,filledBoxes=0;cubes.forEach(cube=>{let value=Math.max(0,parseFloat(cube.value)||0);if(item.maxQty){const remaining=Math.max(0,item.maxQty-qty);if(value>remaining){value=remaining;cube.value=remaining>0?remaining:""}}qty+=value;if(value>0)filledBoxes++});if(item.maxQty&&qty>item.maxQty)qty=item.maxQty;const qtyEl=document.getElementById(`qty-${ci}-${ii}`);qtyEl.textContent=qty;qtyEl.classList.toggle("active",qty>0);let rowValue=item.tierQty&&qty>=item.tierQty?qty*item.tierPrice:qty*item.p;const rowTotal=sign*rowValue;document.getElementById(`total-${ci}-${ii}`).textContent=`${rowTotal<0?"-":""}$${Math.abs(rowTotal).toFixed(2)}`;subtotal+=rowTotal;if(qty>0)active.push({name:item.n,cat:cat.name,qty,boxes:filledBoxes,value:rowTotal})});document.getElementById(`subtotal-${ci}`).textContent=`${subtotal<0?"-":""}$${Math.abs(subtotal).toFixed(2)}`;if(cat.negative)invoice+=Math.abs(subtotal);else give+=subtotal});const fmt=v=>`$${v.toFixed(2)}`;document.getElementById("totalGive").textContent=fmt(give);document.getElementById("totalInvoice").textContent=fmt(invoice);renderSummary(active,give,invoice)}
 function renderSummary(active,give,invoice){const list=document.getElementById("summaryList");if(active.length===0){list.innerHTML=`<p class="summary-empty">Nessun articolo inserito.</p>`}else{list.innerHTML=active.map(a=>`<div class="summary-row"><div class="summary-row-main"><span class="summary-name">${a.name}</span><span class="summary-cat">${a.cat}${a.boxes>1?` · ${a.boxes} casse/stack`:""}</span></div><div class="summary-row-nums"><span class="summary-qty">×${a.qty}</span><span class="summary-val ${a.value<0?"neg":"pos"}">${a.value<0?"-":""}$${Math.abs(a.value).toFixed(2)}</span></div></div>`).join("")}document.getElementById("summaryGive").textContent=`$${give.toFixed(2)}`;document.getElementById("summaryInvoice").textContent=`$${invoice.toFixed(2)}`}
 function resetAll(){document.querySelectorAll(".qty-cubes").forEach(container=>{const cubes=container.querySelectorAll(".qty-cube");cubes.forEach((cube,idx)=>{if(idx===0)cube.value="";else cube.remove()});const first=container.querySelector(".qty-cube");if(first){const ci=Number(first.dataset.ci),ii=Number(first.dataset.ii);updateCubeLabels(ci,ii)}});calculate()}
@@ -547,5 +407,6 @@ document.getElementById('posterModal').addEventListener('click',event=>{if(event
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.getElementById('posterModal').hidden)posterClose();});
 
 </script>
+<script src="buckland-layout.js"></script>
 </body>
 </html>

@@ -1,0 +1,213 @@
+/* Buckland Angling Club | Ledger House redesign · October 2026
+   Presentation only: all original application data and logic are retained. */
+:root{--bac-night:#071b22;--bac-ink:#e9e5d8;--bac-muted:#a5bec0;--bac-reef:#133f48;--bac-lagoon:#2f6e77;--bac-gold:#c7a86b;--bac-fine:rgba(180,207,206,.16)}
+body{font-synthesis:none;line-height:1.52}
+a,button,input,summary{transition:color .16s ease,background-color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .16s ease}
+.shell,.mp-page-shell{max-width:1540px!important;margin-inline:auto!important}
+.shell{padding-inline:clamp(0px,1.2vw,14px)}
+.mp-page-shell{padding-inline:clamp(14px,2vw,36px)!important}
+.hero,header.site-hero{margin-bottom:16px!important;min-height:200px!important;isolation:isolate}
+.hero-inner,header.site-hero .site-hero-inner{min-height:200px!important;padding:24px clamp(22px,3.6vw,54px)!important;gap:28px!important;align-items:center!important}
+.hero h1,header.site-hero h1{font-size:clamp(42px,4.7vw,68px)!important;line-height:.99!important;max-width:860px}
+.hero-sub,.site-hero-sub{font-size:13px!important;line-height:1.7!important;max-width:630px}
+.hero .logo-mark,.site-logo{width:clamp(225px,25vw,390px)!important;max-width:100%!important;flex:none;transform:none!important;box-shadow:none!important;overflow:visible!important}
+.hero .logo-mark img,.site-logo img{width:100%!important;max-width:100%!important;height:auto!important;filter:drop-shadow(0 14px 15px rgba(0,0,0,.5))!important}
+.hero .index-hero-tools,.wiki-hero-tools{display:flex;align-items:center;gap:18px}
+.hero::after,header.site-hero::after{inset:10px!important;border-radius:12px!important}
+/* New compact 5-destination navigation */
+.quick.club-main-nav,.site-quick{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:8px!important;margin:0 0 20px!important}
+.quick.club-main-nav a,.site-quick a{position:relative!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;min-width:0!important;min-height:68px!important;padding:12px 12px!important;border:1px solid rgba(127,174,176,.22)!important;border-radius:14px!important;gap:10px!important;font:600 18px/1 'Cormorant Garamond',Georgia,serif!important;letter-spacing:.65px!important;text-align:left!important;text-decoration:none!important;background:linear-gradient(160deg,rgba(14,46,56,.95),rgba(10,32,40,.96))!important;box-shadow:0 8px 20px rgba(0,0,0,.20)!important;transform:none!important}
+.quick.club-main-nav a>span:first-child,.site-quick a>.site-nav-icon{display:grid!important;place-items:center!important;width:36px!important;height:36px!important;flex:none!important;border-radius:9px!important;background:rgba(202,164,100,.11)!important;color:#dec18d!important;font:24px/1 Georgia,serif!important}
+.quick.club-main-nav a small,.site-quick small{display:none!important}
+.quick.club-main-nav a:hover,.site-quick a:hover{background:linear-gradient(140deg,#184852,#11343d)!important;border-color:rgba(212,178,120,.43)!important;transform:translateY(-2px)!important}
+.quick.club-main-nav a.on,.site-quick a.on{background:linear-gradient(140deg,#1e515b,#153941)!important;border-color:rgba(216,178,115,.66)!important;box-shadow:inset 0 0 0 1px rgba(216,178,115,.16),0 8px 20px rgba(0,0,0,.2)!important}
+.site-quick .site-nav-label{font:600 18px/1 'Cormorant Garamond',Georgia,serif!important}
+.site-quick a::before{display:none!important}
+.quick.club-main-nav a:focus-visible,.site-quick a:focus-visible,.ledger-tab:focus-visible{outline:3px solid rgba(222,193,139,.8)!important;outline-offset:3px}
+/* Main ledger briefing and controls */
+.ledger-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:2px 0 17px}
+.ledger-heading-copy{min-width:0}
+.ledger-eyebrow,.summary-eyebrow{color:var(--bac-gold);font:700 10px/1.5 'Libre Baskerville',Georgia,serif;letter-spacing:1.75px}
+.ledger-heading h2{font:600 clamp(34px,3.6vw,52px)/1.05 'Cormorant Garamond',Georgia,serif!important;letter-spacing:.1px!important;margin:5px 0 5px!important;color:#f5e8cb!important}
+.ledger-heading p{color:#b8ced0;font-size:12px;max-width:650px;margin:0;line-height:1.7}
+.ledger-quick-status{display:flex;align-items:center;gap:10px;white-space:nowrap;background:rgba(13,45,53,.77);padding:12px 15px;border:1px solid rgba(160,189,188,.20);border-radius:12px;color:#ccd8d2;font-size:11px;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.status-dot{height:8px;width:8px;border-radius:50%;background:#86b6aa;box-shadow:0 0 0 3px rgba(134,182,170,.12)}
+.status-divider{width:1px;height:17px;background:rgba(206,199,170,.25)}
+.ledger-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:8px;padding:8px;background:linear-gradient(135deg,rgba(13,42,49,.94),rgba(7,27,35,.96));border:1px solid rgba(116,169,169,.22);border-radius:17px;box-shadow:0 10px 25px rgba(0,0,0,.24)}
+.ledger-filter{display:flex;gap:5px;flex-wrap:wrap}
+.ledger-tab{cursor:pointer;white-space:nowrap;padding:11px 17px!important;background:transparent!important;color:#b9cecb!important;border:1px solid transparent!important;box-shadow:none!important;border-radius:11px!important;font:600 13px 'Libre Baskerville',Georgia,serif!important}
+.ledger-tab:hover{background:rgba(255,255,255,.04)!important;color:white!important;transform:none!important}
+.ledger-tab.active{background:linear-gradient(135deg,#245660,#1a454f)!important;border-color:rgba(197,166,108,.48)!important;color:#ffeed0!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)!important;transform:none!important}
+.ledger-search{display:flex!important;flex-direction:row!important;align-items:center;gap:8px;width:min(310px,42%);min-width:180px;padding:0 13px;background:rgba(3,16,21,.62);border:1px solid rgba(117,167,172,.32);border-radius:12px;color:#c8b991;letter-spacing:normal;text-transform:none!important}
+.ledger-search span{font:28px/1 Georgia,serif}
+.ledger-search input{display:block;min-width:0;width:100%;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#eee5d7;font:12px 'Libre Baskerville',Georgia,serif!important;padding:13px 0!important;outline:none!important}
+.ledger-search input::-webkit-search-cancel-button{cursor:pointer}
+.ledger-search input::placeholder{color:#9ab3b4;opacity:1}
+.ledger-search kbd{border:1px solid rgba(145,169,170,.3);border-radius:4px;padding:0 5px;color:#8ca6a7;font-size:10px}
+.ledger-help{margin:0 0 19px;background:rgba(7,29,35,.72);border:1px solid rgba(114,159,162,.22);border-radius:12px;overflow:hidden}
+.ledger-help>summary{padding:9px 15px;cursor:pointer;color:#c0d2d0;font:600 12px 'Libre Baskerville',Georgia,serif;list-style-position:inside}
+.ledger-help>summary span{float:right;font:500 11px 'Cormorant Garamond',Georgia,serif;color:#d7bc88;letter-spacing:.3px}
+.ledger-help p{font-size:12px;line-height:1.75;color:#c8d5ce;margin:4px 18px 16px;max-width:85ch}
+.ledger-no-results{padding:24px;text-align:center;background:#13333d;border:1px solid rgba(186,163,112,.32);border-radius:14px;color:#f1e7d2}
+[hidden]{display:none!important}
+/* Layout rebuilt: one broad ledger column + neatly-contained side receipt. */
+.page-index .ledger-main{display:grid!important;grid-template-columns:minmax(0,1fr) 310px!important;gap:20px!important;align-items:start!important}
+.page-index .ledger-main .sections{min-width:0}
+.page-index .section-block{margin:0 0 22px!important}
+.page-index .section-heading{padding:0 4px;margin:0 0 10px!important;align-items:center!important}
+.page-index .section-kicker{font:600 clamp(24px,2vw,31px)/1.1 'Cormorant Garamond',Georgia,serif!important;white-space:normal!important;letter-spacing:.5px!important}
+.page-index .section-count{flex:none;font:600 10px 'Libre Baskerville',Georgia,serif;color:#87aeb0;background:rgba(31,81,90,.30);border:1px solid rgba(134,183,184,.18);padding:6px 9px;border-radius:40px}
+.page-index .section-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:13px!important}
+.page-index .section-grid .category{grid-column:auto!important}
+.page-index .category{overflow:hidden;border-radius:18px!important}
+.page-index .category-head{min-height:59px!important;gap:10px!important;padding:12px 20px!important;cursor:pointer}
+.page-index .category-head .icon{width:35px;height:35px;border-radius:10px;display:grid;place-items:center;background:rgba(225,197,131,.10);font-size:19px}
+.page-index .category-head h2{font-size:22px!important;font-weight:600!important;line-height:1.1}
+.page-index .category-head .badge{font:700 9px 'Libre Baskerville',Georgia,serif!important;letter-spacing:.4px;border-radius:99px;padding:5px 8px!important;margin-left:12px}
+.page-index .category .column-heads,.page-index .category .row{grid-template-columns:minmax(165px,1.8fr) 88px minmax(155px,1.3fr) 46px 92px!important;gap:10px!important}
+.page-index .category .column-heads{padding:8px 20px!important}
+.page-index .category .row{padding:10px 20px!important;min-height:54px!important}
+.page-index .item-name{font:500 12px/1.5 'Libre Baskerville',Georgia,serif!important;color:#eae5d8!important}
+.page-index .item-price{font:600 12px/1.5 'Libre Baskerville',Georgia,serif!important;text-align:right!important;color:#d3c5a9!important}
+.page-index .qty-cubes{display:flex!important;align-items:center;gap:5px!important;min-width:0;flex-wrap:wrap}
+.page-index .qty-cube{width:45px!important;height:33px!important;flex:none;font-size:12px!important;text-align:center!important;border-radius:8px!important}
+.page-index .cube-btn{width:29px!important;height:31px!important;flex:none;border-radius:8px!important;font-size:17px!important;padding:0!important}
+.page-index .qty-sum{text-align:center!important;color:#c8e2db!important}
+.page-index .row-total{font-size:13px!important;color:#efc77d!important;font-variant-numeric:tabular-nums}
+.page-index .category-subtotal{padding:12px 20px!important;color:#c6c9bb!important;background:rgba(18,57,66,.38)!important}
+.page-index .summary-panel{position:sticky!important;top:14px!important;border-radius:19px!important;max-height:calc(100vh - 24px)!important;display:flex!important;flex-direction:column!important;overflow:hidden}
+.page-index .summary-panel .summary-head{padding:20px 20px 17px!important;background:radial-gradient(circle at right,rgba(67,131,139,.15),transparent 60%)!important}
+.page-index .summary-eyebrow{display:block;margin-bottom:8px;font-size:9px;letter-spacing:1.1px}
+.page-index .summary-title{font:600 27px/1 'Cormorant Garamond',Georgia,serif!important}
+.page-index .summary-sub{font-size:11px;margin-top:8px}
+.page-index .summary-list{padding:12px 20px;max-height:calc(100vh - 280px);overflow:auto;min-height:120px}
+.page-index .summary-totals{padding:17px 20px 18px!important;margin-top:auto!important}
+.page-index .summary-total{padding:7px 0;font-size:12px}
+.page-index .summary-total strong{font-size:16px}
+.page-index .footer-bar{border-radius:0!important}
+.page-index .footer-actions button{font-size:12px!important;border-radius:11px!important}
+.page-index .grand-total .amount{font-variant-numeric:tabular-nums}
+/* Other pages now share coherent content hierarchy */
+#nav{margin-bottom:8px}
+.wiki-chapter-nav{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:9px;margin:0 0 20px;border:1px solid rgba(116,169,169,.22);border-radius:14px;background:rgba(7,28,35,.88)}
+.wiki-chapter-nav a{padding:9px 15px;border-radius:9px;text-decoration:none;color:#d9ddcf;font-size:12px;border:1px solid transparent;white-space:nowrap}
+.wiki-chapter-nav a:hover{background:#20525c;border-color:rgba(212,178,120,.3);color:#fff}
+.page-wiki .layout{grid-template-columns:minmax(0,1fr) 244px!important;gap:22px!important}
+.page-wiki .sidebar{position:sticky!important;top:15px;border-radius:16px!important}
+.page-wiki .craft-summary{display:flex!important;min-height:64px!important;align-items:center!important;padding:16px 22px!important;border-radius:15px!important}
+.page-wiki .fish-card,.page-wiki .recipe-card,.page-wiki .fish-map-explorer{padding:20px!important}
+.page-wiki .fish-card,.page-wiki .recipe-card{box-shadow:0 11px 27px rgba(0,0,0,.2)!important}
+.page-wiki .legend-fish{background:rgba(31,74,81,.34)!important;color:#e8ded1!important;border-radius:8px}
+.page-wiki .legend-fish strong{color:#f4e6d2!important}
+.page-wiki .fish-map-info,.page-wiki .recipe-box{background:rgba(8,28,34,.72)!important;border:1px solid rgba(125,166,171,.24)!important;color:#e6dfcf!important;border-radius:12px}
+.page-wiki .fish-map-frame{background:#071820!important;border-radius:12px!important}
+.page-wiki .fish-map-kicker,.page-wiki .recipe-box-head{color:#d9c18f!important}
+.page-wiki .fish-tip,.page-wiki .fish-map-intro,.page-wiki .fish-map-note,.page-wiki .card-meta p{color:#d4d3c5!important}
+.page-wiki .tag.level,.page-wiki .tag.qty{color:#e3c288!important;border-radius:7px}
+.page-wiki .fish-map-toolbar{align-items:flex-start}
+.page-wiki .fish-map-btn{min-height:34px;font-size:11px!important;box-shadow:none!important}
+.page-orders .orders-grid,.page-ordini .orders-grid{grid-template-columns:minmax(300px,390px) minmax(0,1fr)!important;align-items:start!important;gap:20px!important}
+.page-ordini .orders-form{position:sticky!important;top:15px;border-radius:18px!important}
+.page-ordini .orders-list{min-height:420px!important;border-radius:18px!important}
+.page-ordini .box-head{padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid rgba(137,173,172,.2)}
+.page-ordini .orders-main .card{background:rgba(9,31,38,.58)!important;border-radius:12px!important;border:1px solid rgba(127,174,174,.18)!important;padding:14px!important;margin-block:9px!important}
+.page-ordini .filter-row{align-items:flex-end!important;gap:10px!important}
+.page-ordini .page-lead,.page-regole .page-lead,.page-eventi .page-lead{border-left:3px solid #ba9a60!important;border-radius:13px!important;padding:17px 20px!important}
+.page-regole .rules-primary{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+.page-regole .rules-primary .box{padding:clamp(20px,3vw,35px)!important}
+.page-regole .rules-guide{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}
+.page-regole .rules-main li{padding-left:6px}
+.page-eventi .eventi-grid{grid-template-columns:minmax(0,1fr)!important;max-width:1200px!important;margin:0 auto!important}
+.page-eventi .evento-col{display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr)!important;gap:16px!important;align-items:stretch!important}
+.page-eventi .evento-banner{grid-column:1/-1!important;padding:20px 24px!important;border-radius:18px!important}
+.page-eventi .evento-form{grid-column:1!important;margin:0!important}
+.page-eventi .evento-totali{grid-column:2!important;margin:0!important}
+.page-eventi .evento-elenco{grid-column:1/-1!important;margin:0!important}
+.page-eventi .evento-errore{grid-column:1/-1!important}
+.page-eventi .evento-banner h2{font:600 32px 'Cormorant Garamond',Georgia,serif!important}
+.page-eventi .evento-form h3,.page-eventi .evento-totali h3,.page-eventi .evento-elenco h3{font:600 25px 'Cormorant Garamond',Georgia,serif!important;color:#e7ddc7!important}
+.page-eventi .evento-elenco table{border-spacing:0!important}
+.page-eventi .evento-elenco tr:nth-child(even){background:rgba(255,255,255,.03)}
+.page-regole .regole-actions,.page-eventi .evento-col>.box,.page-ordini .orders-grid>.box{border-radius:18px!important}
+@media(max-width:1200px){
+ .page-index .ledger-main{grid-template-columns:minmax(0,1fr) 278px!important;gap:14px!important}
+ .page-index .category .column-heads,.page-index .category .row{grid-template-columns:minmax(140px,1.5fr) 75px minmax(130px,1.1fr) 34px 80px!important;gap:7px!important}
+ .page-index .category .column-heads{padding-inline:15px!important}
+ .page-index .category .row{padding-inline:15px!important}
+ .page-index .qty-cube{width:39px!important}
+ .page-index .cube-btn{width:26px!important}
+ .page-index .section-kicker{font-size:27px!important}
+}
+@media(max-width:1020px){
+ .page-index .ledger-main{grid-template-columns:minmax(0,1fr)!important}
+ .page-index .summary-panel{position:static!important;max-height:none!important}
+ .page-index .summary-list{max-height:380px!important}
+ .page-index .category .column-heads,.page-index .category .row{grid-template-columns:minmax(180px,1.8fr) 88px minmax(155px,1fr) 48px 95px!important;gap:10px!important}
+ .page-wiki .layout{grid-template-columns:minmax(0,1fr)!important}
+ .page-wiki .sidebar{position:static!important}
+ .page-ordini .orders-grid{grid-template-columns:minmax(0,1fr)!important}
+ .page-ordini .orders-form{position:static!important}
+ .page-ordini .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:730px){
+ body.page-index,body.page-wiki{padding:10px 9px 210px!important}
+ .mp-page-shell{padding:10px 9px 36px!important}
+ .hero,header.site-hero{min-height:0!important}
+ .hero-inner,header.site-hero .site-hero-inner{min-height:0!important;padding:24px 19px!important;display:flex!important;flex-direction:column!important;align-items:start!important;gap:10px!important}
+ .hero h1,header.site-hero h1{font-size:clamp(37px,8vw,56px)!important}
+ .hero .index-hero-tools,.wiki-hero-tools{width:100%;justify-content:space-between!important}
+ .hero .logo-mark,.site-logo{width:235px!important;max-width:82%!important}
+ .hero .logo-mark img,.site-logo img{width:100%!important}
+ .site-logo{margin:0!important}
+ .quick.club-main-nav,.site-quick{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:5px!important}
+ .quick.club-main-nav a,.site-quick a{min-height:64px!important;padding:8px 2px!important;flex-direction:column!important;gap:4px!important;font-size:11px!important;border-radius:10px!important;text-align:center!important}
+ .quick.club-main-nav a>span:first-child,.site-quick a>.site-nav-icon{width:25px!important;height:25px!important;font-size:16px!important;border-radius:7px!important}
+ .site-quick .site-nav-label{font-size:11px!important;letter-spacing:0!important}
+ .quick.club-main-nav a .quick-order-count,.site-quick a .site-order-count{top:0!important;right:-2px!important}
+ .ledger-heading{display:block!important}
+ .ledger-heading h2{font-size:36px!important}
+ .ledger-quick-status{width:fit-content;margin-top:14px;padding:9px 12px;font-size:10px}
+ .ledger-toolbar{display:flex;flex-direction:column!important;align-items:stretch!important;gap:8px}
+ .ledger-filter{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+ .ledger-tab{padding:11px 5px!important;white-space:normal!important;text-align:center!important;font-size:10px!important}
+ .ledger-search{width:100%;min-width:0}
+ .page-index .category .column-heads{display:none!important}
+ .page-index .category .row{display:grid!important;grid-template-columns:minmax(0,1fr) 75px 84px!important;grid-template-areas:'name name price' 'cubes qty total'!important;gap:7px 5px!important;min-height:75px!important;padding:12px 14px!important}
+ .page-index .category .row .item-name{grid-area:name!important;min-width:0;align-self:center}
+ .page-index .category .row .item-price{grid-area:price!important;text-align:right!important}
+ .page-index .category .row .qty-cubes{grid-area:cubes!important}
+ .page-index .category .row .qty-sum{grid-area:qty!important;text-align:center!important}
+ .page-index .category .row .row-total{grid-area:total!important;text-align:right!important}
+ .page-index .category-head{padding:10px 13px!important}
+ .page-index .category-head h2{font-size:20px!important}
+ .page-index .category-head .badge{display:none!important}
+ .page-index .section-heading{gap:8px!important}
+ .page-index .section-kicker{font-size:24px!important}
+ .page-index .section-count{font-size:9px!important;padding:5px 6px}
+ .page-index .summary-panel{max-height:none!important}
+ .page-wiki .info-grid,.page-wiki .cards-grid{grid-template-columns:1fr!important}
+ .page-wiki .card-top{grid-template-columns:minmax(0,1fr)!important}
+ .page-wiki .fish-map-top{grid-template-columns:minmax(0,1fr)!important}
+ .page-regole .rules-guide{grid-template-columns:minmax(0,1fr)!important}
+ .page-eventi .evento-col{grid-template-columns:minmax(0,1fr)!important}
+ .page-eventi .evento-banner,.page-eventi .evento-form,.page-eventi .evento-totali,.page-eventi .evento-elenco,.page-eventi .evento-errore{grid-column:1!important}
+ .page-ordini .form-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+@media(max-width:440px){
+ .page-index .category .row{grid-template-columns:minmax(0,1fr) 44px 76px!important}
+ .page-index .qty-cube{width:37px!important;height:32px!important}
+ .page-index .cube-btn{width:26px!important}
+ .page-index .section-kicker{font-size:21px!important}
+ .page-index .category-head .icon{width:30px;height:30px;font-size:16px}
+ .page-index .category-head h2{font-size:18px!important}
+ .ledger-search kbd{display:none}
+ .wiki-chapter-nav{gap:5px}
+ .wiki-chapter-nav a{padding:8px 10px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+/* Ensure five destinations stay on a single mobile row, including Wiki. */
+@media(max-width:730px){.quick.club-main-nav a:last-child{grid-column:auto!important}}
+/* Native hidden semantics take precedence over responsive row grids. */
+.page-index .category .row[hidden],.page-index .category[hidden],.page-index .section-block[hidden]{display:none!important}
+.page-index .category .category-head .badge.buy{color:#ddf0df!important;background:rgba(44,102,96,.66)!important;border-color:rgba(172,218,202,.35)!important}
+.page-index .category .category-head .badge.invoice{color:#f4ddba!important;background:rgba(125,91,57,.36)!important;border-color:rgba(212,174,123,.38)!important}

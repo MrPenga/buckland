@@ -1,65 +1,90 @@
-/* Buckland Angling Club — Victorian river & lake fishing */
+/* Buckland Angling Club — Dark Victorian river & lake fishing */
 :root{
- --forest-950:#10282f;--forest-900:#15323b;--forest-800:#234650;
- --forest-700:#315b62;--forest-600:#4b7477;
- --paper:#d8e0cd;--paper-2:#cad8c2;--paper-soft:#eef0df;
- --ink:#1b353a;--ink-soft:#536763;--line:rgba(28,74,81,.26);
- --brass:#b79b6f;--brass-light:#e0d1a6;
- --bosco:#102c34;--bosco2:#153c42;--bosco3:#295d64;
- --carta:#d3e0cd;--carta2:#e5e8d6;--carta3:#aec4af;
- --inchiostro:#183d43;--soft:#536c6c;--ottone:#b5a06e;--ottone2:#e2ce9f;
- --ruggine:#a35448;--linea:rgba(43,86,90,.3);
+ --forest-950:#07171f;--forest-930:#0a1f29;--forest-900:#0d2831;--forest-850:#12313a;--forest-800:#18414a;
+ --forest-700:#205561;--forest-650:#2a6874;--forest-600:#3d7d86;
+ --paper:#ebdfc6;--paper-2:#d8c8a6;--paper-soft:#f3ead8;
+ --ink:#e9dfca;--ink-soft:#b9ab8d;--line:rgba(161,196,198,.18);
+ --brass:#b5945c;--brass-light:#dfc48a;--copper:#8a6340;--accent:#79a8ac;
+ --bosco:#081c25;--bosco2:#0c2c36;--bosco3:#164753;
+ --carta:#102b34;--carta2:#163741;--carta3:#0d232c;
+ --inchiostro:#e8dcc2;--soft:#aab6b2;--ottone:#b5945c;--ottone2:#dfc48a;
+ --ruggine:#c07b61;--linea:rgba(112,168,173,.26);
 }
-body{font-family:'Libre Baskerville',Georgia,serif;background-color:#446e77!important;color:var(--ink)}
-body.page-index{background-image:linear-gradient(rgba(6,29,38,.33),rgba(119,156,149,.40)),url('theme-assets/buckland-bg-index.png')!important}
-body.page-ordini{background-image:linear-gradient(rgba(6,29,38,.31),rgba(119,156,149,.42)),url('theme-assets/buckland-bg-ordini.png')!important}
-body.page-wiki{background-image:linear-gradient(rgba(6,29,38,.26),rgba(119,156,149,.37)),url('theme-assets/buckland-bg-wiki.png')!important}
-body.page-eventi{background-image:linear-gradient(rgba(6,29,38,.23),rgba(119,156,149,.35)),url('theme-assets/buckland-bg-eventi.png')!important}
-body.page-regole{background-image:linear-gradient(rgba(6,29,38,.35),rgba(119,156,149,.40)),url('theme-assets/buckland-bg-regole.png')!important}
-.hero, header.site-hero, header:not(.hero){background:linear-gradient(112deg,rgba(7,35,44,.97),rgba(23,69,75,.95))!important;border-color:#b5a06e!important}
-.hero h1,header.site-hero h1,header h1{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;letter-spacing:1px!important;text-transform:none!important}
-.hero h1{font-size:clamp(40px,6vw,70px)!important;line-height:1.06!important}
-header.site-hero h1{font-size:clamp(37px,5vw,57px)!important}
+html{color-scheme:dark}
+body{font-family:'Libre Baskerville',Georgia,serif;background-color:#071821!important;color:var(--ink)!important}
+body.page-index{background-image:linear-gradient(rgba(2,13,18,.76),rgba(10,27,35,.70)),radial-gradient(ellipse at top,rgba(25,88,99,.32),transparent 50%),url('theme-assets/buckland-bg-index.png')!important}
+body.page-ordini{background-image:linear-gradient(rgba(2,12,18,.78),rgba(7,25,31,.72)),radial-gradient(circle at 12% 8%,rgba(30,85,95,.28),transparent 34%),url('theme-assets/buckland-bg-ordini.png')!important}
+body.page-wiki{background-image:linear-gradient(rgba(2,12,18,.78),rgba(9,24,31,.73)),radial-gradient(circle at 88% 6%,rgba(31,95,105,.22),transparent 30%),url('theme-assets/buckland-bg-wiki.png')!important}
+body.page-eventi{background-image:linear-gradient(rgba(2,13,19,.78),rgba(8,25,32,.72)),radial-gradient(circle at 84% 16%,rgba(30,95,105,.22),transparent 32%),url('theme-assets/buckland-bg-eventi.png')!important}
+body.page-regole{background-image:linear-gradient(rgba(2,13,19,.80),rgba(8,25,33,.75)),radial-gradient(circle at 14% 9%,rgba(30,95,105,.20),transparent 35%),url('theme-assets/buckland-bg-regole.png')!important}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse 900px 520px at -10% 0%,rgba(34,120,132,.12),transparent 58%),radial-gradient(ellipse 860px 520px at 110% 100%,rgba(180,147,84,.09),transparent 60%),linear-gradient(rgba(255,255,255,.02),rgba(255,255,255,0));mix-blend-mode:screen}
+.hero, header.site-hero, header:not(.hero){position:relative;background:linear-gradient(135deg,rgba(4,18,24,.96),rgba(13,42,50,.94) 42%,rgba(11,35,42,.97))!important;border:1px solid rgba(181,148,92,.52)!important;box-shadow:0 20px 54px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.03)!important;border-radius:20px!important;overflow:hidden}
+.hero::before,header.site-hero::before,header:not(.hero)::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 18% 18%,rgba(114,184,194,.08),transparent 24%),radial-gradient(circle at 82% 20%,rgba(223,196,138,.08),transparent 18%),linear-gradient(transparent,rgba(0,0,0,.10));pointer-events:none}
+.hero::after,header.site-hero::after,header:not(.hero)::after{content:'';position:absolute;inset:12px;border:1px solid rgba(223,196,138,.16);border-radius:14px;pointer-events:none}
+.hero h1,header.site-hero h1,header h1{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;letter-spacing:1.1px!important;text-transform:none!important;color:#f4ead7!important;text-shadow:0 2px 18px rgba(0,0,0,.26)!important}
+.hero h1{font-size:clamp(42px,6vw,72px)!important;line-height:1.04!important}
+header.site-hero h1{font-size:clamp(39px,5vw,60px)!important}
 h1,h2,h3,.section-kicker,.category-head h2,.sidebar-title,.section-heading,.site-nav-label,.quick a,.craft-summary,.poster-modal-head h2{font-family:'Cormorant Garamond',Georgia,serif!important}
-h2{color:#24464d}
-.eyebrow,.site-eyebrow{color:#e2ce9f!important;letter-spacing:2.4px!important}
-.hero-sub,.site-hero-sub{color:#e0e8dc!important}
-.hero .logo-mark,.site-logo{width:245px!important;max-width:42vw!important}
-.hero .logo-mark img,.site-logo img{width:100%!important;filter:drop-shadow(0 6px 17px rgba(0,0,0,.45))!important}
-.site-quick a,.quick a,.sidebar,.category-head{background:linear-gradient(125deg,#10313a,#275660)!important;color:#f2edde!important;border-color:#577b7b!important}
-.site-quick a:hover,.quick a:hover,.sidebar a:hover{background:#376a73!important}
-.site-quick a.on{border-top-color:#e4cb92!important}
-.category,.box,.fish-card,.recipe-card,.fish-map-explorer,.rules-main .box{background:linear-gradient(125deg,rgba(239,240,219,.97),rgba(204,224,210,.97))!important;border-color:rgba(45,91,91,.4)!important;color:#193e43!important}
-.category-head h2{font-weight:700!important;color:#f7f0da!important}
-.category .category-body{background:rgba(227,236,220,.94)!important}
-.category.negative{border-top:4px solid #477b82!important}
-.category.positive{border-top:4px solid #b5a06e!important}
-.category .item-name,.row-total,.item-price,.summary-name,.summary-total{color:#193e43!important}
-.section-kicker{color:#1a4952!important;font-size:clamp(22px,3vw,30px)!important;font-weight:700!important}
-.section-heading::after{background:linear-gradient(90deg,#527e82,transparent)!important}
-.summary-panel{background:linear-gradient(#153b45,#0f3038)!important;color:#f2ecdb!important;border-color:#bdab7e!important}
-.summary-panel .summary-head,.summary-panel .summary-totals{background:rgba(255,255,255,.04)!important}
-.summary-panel .summary-name,.summary-panel .summary-qty,.summary-panel .summary-val{color:#f5ecd8!important}
-.guide{background:linear-gradient(105deg,#d8e5d5,#eef0dc)!important;border-color:#567b79!important}
-.craft-summary{background:linear-gradient(110deg,#1b4852,#356c71)!important;color:#f8efd9!important;border-color:#9eae96!important;font-size:25px!important}
-.craft-summary .section-kicker{color:#f7eacb!important}
-.craft-summary:hover{background:#31636b!important}
-.fish-map-btn.active,button:not(.x):not(.fish-map-btn),.footer-bar{background:linear-gradient(125deg,#153a45,#356b72)!important;color:#f8eed9!important}
-.fish-map-btn.active{border-color:#a1b5a0!important}
-footer,.footer-bar{border-color:#b5a06e!important}
-.regole-actions{background:linear-gradient(#d1e1cf,#e9ecda)!important;border-color:#6d9695!important}
-.regole-create,.regole-download{background:#16434c!important;color:#f2ead3!important}
-.regole-preview{background:#b0c9c2!important}
-.eventi-main .evento-col>.evento-banner{background:linear-gradient(114deg,#d7e9dd,#b4d1cb)!important;border-top:5px solid #2a6370!important}
-.eventi-grid{grid-template-columns:minmax(0,1fr)!important;max-width:1000px;margin:0 auto}
-@media (max-width:700px){.hero .logo-mark,.site-logo{max-width:200px!important}.hero h1{font-size:44px!important}.site-quick a{min-width:0}}
-
-/* Contrasto dei registri sui fondali acquatici */
-.section-heading .section-kicker {color:#f7edd3!important;text-shadow:0 2px 5px #0c2b30,0 1px 1px #0c2b30!important}
-.summary-panel .summary-title,.summary-panel .summary-sub,.summary-panel .summary-total,.summary-panel .summary-total>span,.summary-panel .summary-total strong {color:#f8efdc!important}
-.summary-panel .summary-row-main span, .summary-panel .summary-row-nums span{color:#f5eddb!important}
-.footer-bar .grand-total .label,.footer-bar .grand-total .amount,.footer-bar .footer-inner {color:#f8eddb!important}
-.footer-bar .grand-total.invoice .amount {color:#f2cf85!important}
-.category .category-head .badge.invoice{color:#e3c4a0!important;background:#4d5f60!important;border-color:#b79b6f!important}
-.category .category-head .badge.buy{color:#edf0d6!important;background:#376b69!important;border-color:#b2c0aa!important}
-.eventi-main .section-heading .section-kicker, .rules-main~.section-heading .section-kicker {color:#f7edd3!important}
+h2,.head-title,.fish-name,.recipe-title{color:#f0e4ce!important}
+.eyebrow,.site-eyebrow{color:#dfc48a!important;letter-spacing:2.4px!important;text-transform:uppercase!important}
+.hero-sub,.site-hero-sub{color:#bcd4d1!important}
+.hero .logo-mark,.site-logo{width:270px!important;max-width:42vw!important}
+.hero .logo-mark img,.site-logo img{width:100%!important;filter:drop-shadow(0 10px 20px rgba(0,0,0,.48))!important}
+.index-order-bell,.site-bell,.mp-bell{background:linear-gradient(145deg,#153944,#0a2129)!important;color:#f0e6d3!important;border:1px solid rgba(223,196,138,.45)!important;box-shadow:0 10px 24px rgba(0,0,0,.30)!important}
+.site-quick a,.quick a,.sidebar,.category-head{background:linear-gradient(125deg,#0e2b33,#1a4752)!important;color:#f2edde!important;border-color:rgba(112,168,173,.34)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)!important}
+.site-quick a:hover,.quick a:hover,.sidebar a:hover{background:linear-gradient(125deg,#17404b,#245c69)!important}
+.site-quick a.on{border-top-color:#e4cb92!important;box-shadow:0 0 0 1px rgba(223,196,138,.18),inset 0 1px 0 rgba(255,255,255,.06)!important}
+.guide,.page-lead,.regole-actions,.orders-main .card,.evento-banner,.eventi-main .evento-col>.evento-banner{background:linear-gradient(145deg,rgba(12,39,48,.90),rgba(16,52,60,.90))!important;color:#d9d1bf!important;border:1px solid rgba(112,168,173,.28)!important;box-shadow:0 12px 26px rgba(0,0,0,.22)!important}
+.guide strong,.page-lead strong{color:#f3e6cc!important}
+.guide-hint,.page-lead,.guide-main{color:#c6c7be!important}
+.category,.box,.fish-card,.recipe-card,.fish-map-explorer,.rules-main .box,.orders-main .box,.eventi-main .box{background:linear-gradient(180deg,rgba(10,29,35,.93),rgba(15,39,46,.96))!important;border:1px solid rgba(76,118,123,.34)!important;border-top:4px solid var(--brass)!important;color:#e7ddca!important;box-shadow:0 14px 34px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.03)!important;border-radius:18px!important;overflow:hidden}
+.category-head{border-bottom:1px solid rgba(255,255,255,.06)!important}
+.category-head h2,.category-head .icon,.category-head .arrow{font-weight:700!important;color:#f5ecd8!important}
+.category .category-body,.rows,.column-heads,.fish-meta,.recipe-body{background:transparent!important}
+.category.negative{border-top-color:#4f8790!important}
+.category.positive{border-top-color:#b5945c!important}
+.column-heads{border-top:1px solid rgba(255,255,255,.05)!important;border-bottom:1px solid rgba(255,255,255,.08)!important;background:linear-gradient(90deg,rgba(255,255,255,.03),rgba(255,255,255,.01))!important}
+.column-head{color:#8fb0b0!important;letter-spacing:.55px!important}
+.row{border-bottom:1px dashed rgba(154,198,202,.14)!important;min-height:46px!important}
+.row:hover{background:rgba(255,255,255,.035)!important}
+.item-name,.row-total,.item-price,.summary-name,.summary-total,.rules-list,.rules-note,.fish-species,.fish-desc,.recipe-body,.orders-main p,.eventi-main p,.rules-main p,.rules-main li,.mp-page-shell li{color:#e7dcc7!important}
+.item-price,.rules-note,.summary-cat,.summary-qty,.subtitle,.fish-meta,.page-lead,.small{color:#a7b5b1!important}
+.section-kicker{color:#f7edd3!important;font-size:clamp(24px,3vw,33px)!important;font-weight:700!important;text-shadow:0 2px 12px rgba(0,0,0,.45)!important}
+.section-heading::after{background:linear-gradient(90deg,rgba(121,168,172,.72),transparent)!important}
+.qty-cube,.evento-campi input,.evento-data input,.mp-page-shell input,.mp-page-shell select,input[type='text'],input[type='number'],textarea,select{background:linear-gradient(180deg,rgba(4,20,25,.92),rgba(10,31,37,.92))!important;border:1px solid rgba(121,168,172,.35)!important;color:#f1e7d1!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)!important;border-radius:10px!important}
+.qty-cube:focus,.evento-campi input:focus,.evento-data input:focus,.mp-page-shell input:focus,.mp-page-shell select:focus,input:focus,textarea:focus,select:focus{outline:none!important;border-color:rgba(223,196,138,.55)!important;box-shadow:0 0 0 3px rgba(181,148,92,.16)!important}
+.cube-btn,.regole-close,.fish-map-btn{background:linear-gradient(180deg,rgba(18,54,63,.96),rgba(10,33,40,.96))!important;color:#f1e7d1!important;border:1px solid rgba(121,168,172,.35)!important;border-radius:9px!important}
+.cube-btn.remove{color:#e29a88!important}
+.cube-btn:hover,.regole-create:hover,.regole-download:hover:not(:disabled),.fish-map-btn:hover{filter:brightness(1.08)!important}
+.qty-sum{color:#bcdcd7!important}
+.row-total{color:#f0c97f!important}
+.category-subtotal,.summary-total,.tot span{background:rgba(255,255,255,.03)!important;color:#d8d0bf!important;border-color:rgba(112,168,173,.16)!important}
+.summary-panel{background:linear-gradient(180deg,rgba(5,20,25,.98),rgba(8,27,33,.98))!important;color:#f2ecdb!important;border:1px solid rgba(181,148,92,.42)!important;border-top:4px solid var(--brass)!important;border-radius:22px!important;box-shadow:0 18px 42px rgba(0,0,0,.42)!important}
+.summary-panel .summary-head,.summary-panel .summary-totals{background:rgba(255,255,255,.02)!important}
+.summary-panel .summary-title,.summary-panel .summary-sub,.summary-panel .summary-total,.summary-panel .summary-total>span,.summary-panel .summary-total strong,.summary-panel .summary-row-main span,.summary-panel .summary-row-nums span {color:#f7edd8!important}
+.summary-empty{color:#a7b5b1!important}
+.summary-val.pos,.footer-bar .grand-total.give .amount{color:#efcb84!important}
+.summary-val.neg,.footer-bar .grand-total.invoice .amount{color:#f0a591!important}
+.footer-bar{background:linear-gradient(180deg,rgba(4,20,25,.95),rgba(8,28,33,.96))!important;color:#f7edd8!important;border-top:1px solid rgba(181,148,92,.34)!important;backdrop-filter:blur(10px)!important;box-shadow:0 -10px 30px rgba(0,0,0,.30)!important}
+.footer-bar .footer-inner,.footer-bar .grand-total .label,.footer-bar .grand-total .amount{color:#f8eddb!important}
+button:not(.x):not(.fish-map-btn),.regole-create,.regole-download,.btn,.poster-btn,.craft-summary{background:linear-gradient(135deg,#17414b,#245866)!important;color:#f8efd9!important;border:1px solid rgba(223,196,138,.34)!important;box-shadow:0 10px 24px rgba(0,0,0,.22)!important;border-radius:12px!important}
+button:not(.x):not(.fish-map-btn):hover,.btn:hover,.poster-btn:hover,.craft-summary:hover{filter:brightness(1.05)!important;transform:translateY(-1px)}
+.fish-map-btn.active{background:linear-gradient(135deg,#245866,#367c87)!important;border-color:#c9d2bb!important}
+.regole-preview{background:linear-gradient(180deg,#123039,#0b232b)!important}
+.regole-modal,.poster-modal{background:rgba(2,10,14,.78)!important}
+.regole-dialog,.poster-modal-dialog{background:linear-gradient(180deg,#0f2831,#13333d)!important;border:1px solid rgba(181,148,92,.40)!important;color:#eee3ca!important;border-radius:18px!important;box-shadow:0 20px 60px rgba(0,0,0,.50)!important}
+.regole-modal-header,.regole-modal-footer,.poster-modal-head,.poster-modal-actions{background:rgba(255,255,255,.03)!important;border-color:rgba(181,148,92,.20)!important}
+.icon-frame,.recipe-grid,.fish-map-canvas,.map-frame,.thumb,.rule-card,.event-card{border-radius:14px!important;box-shadow:0 10px 24px rgba(0,0,0,.24)!important}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-thumb{background:linear-gradient(#2a6874,#18414a);border:2px solid #081a20;border-radius:999px}
+::-webkit-scrollbar-track{background:#0a1f27}
+@media (max-width:900px){
+ .hero .logo-mark,.site-logo{max-width:220px!important}
+ .summary-panel{position:static!important}
+}
+@media (max-width:700px){
+ .hero .logo-mark,.site-logo{max-width:190px!important}
+ .hero h1{font-size:44px!important}
+ .site-quick a{min-width:0}
+ .category,.box,.fish-card,.recipe-card,.fish-map-explorer,.rules-main .box{border-radius:16px!important}
+}
