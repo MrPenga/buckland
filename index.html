@@ -140,11 +140,11 @@ const data=[
 
 const groups=[{id:"raccolta",title:"Pescato e pesci leggendari"},{id:"forniture",title:"Forniture e attrezzatura"}];
 const sections=document.getElementById("sections");
-function makeColumns(cat){const full=cat.full?" span-2":"";const typeClass=cat.negative?" negative":" positive";const legendaryFishing=cat.legendaryFishing?" pesca-leggendaria":"";const catDiv=document.createElement("article");catDiv.className=`category${typeClass}${full}${legendaryFishing}`;if(!["Pesca","Pesca Leggendaria"].includes(cat.name))catDiv.classList.add("collapsed");const ci=data.indexOf(cat);const statusBadge=cat.negative?`<span class="badge invoice">fattura</span>`:`<span class="badge buy">acquisto</span>`;catDiv.innerHTML=`<div class="category-head"><span class="icon">${cat.icon}</span><h2>${cat.name} ${statusBadge}</h2><span class="arrow">▼</span></div><div class="category-body"><div class="column-heads"><span class="column-head">Articolo</span><span class="column-head right">Prezzo</span><span class="column-head center">Casse / Stack</span><span class="column-head center">Qtà</span><span class="column-head right">Importo</span></div><div class="rows"></div><div class="category-subtotal"><span>Subtotale</span><strong id="subtotal-${ci}">$0.00</strong></div></div>`;const catHead=catDiv.querySelector(".category-head");catHead.setAttribute("role","button");catHead.setAttribute("tabindex","0");catHead.setAttribute("aria-label",`Apri o chiudi ${cat.name}`);catHead.setAttribute("aria-expanded",String(!catDiv.classList.contains("collapsed")));const toggleCat=()=>{catDiv.classList.toggle("collapsed");catHead.setAttribute("aria-expanded",String(!catDiv.classList.contains("collapsed")))};catHead.onclick=toggleCat;catHead.onkeydown=(event)=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleCat()}};const rows=catDiv.querySelector(".rows");cat.items.forEach((item,ii)=>{const row=document.createElement("div");row.className="row";const price=item.tierQty?`$${item.p.toFixed(2)}<br><small>$${item.tierPrice.toFixed(2)} da ${item.tierQty}+</small>`:`$${item.p.toFixed(2)}`;row.innerHTML=`<span class="item-info"><span class="item-name">${item.n}${item.maxQty?`<span class="max-note">MAX ${item.maxQty}</span>`:""}</span><span class="item-price">${price}</span></span><span class="qty-cubes" id="cubes-${ci}-${ii}"><input type="number" min="0" ${item.maxQty?`max="${item.maxQty}"`:""} step="1" value="" placeholder="0" class="qty-cube" data-ci="${ci}" data-ii="${ii}" aria-label="${item.n} · Cassa 1" title="Cassa 1" oninput="calculate()"><button type="button" class="cube-btn add" onclick="addCube(${ci},${ii})" title="Aggiungi un'altra cassa/stack" aria-label="Aggiungi un'altra cassa">+</button><button type="button" class="cube-btn remove" onclick="removeCube(${ci},${ii})" title="Rimuovi l'ultima cassa/stack" aria-label="Rimuovi l'ultima cassa">−</button></span><span class="qty-sum" id="qty-${ci}-${ii}">0</span><span class="row-total" id="total-${ci}-${ii}">$0.00</span>`;rows.appendChild(row)});return catDiv}
+function makeColumns(cat){const full=cat.full?" span-2":"";const typeClass=cat.negative?" negative":" positive";const legendaryFishing=cat.legendaryFishing?" pesca-leggendaria":"";const catDiv=document.createElement("article");catDiv.className=`category${typeClass}${full}${legendaryFishing}`;if(!["Pesca","Pesca Leggendaria"].includes(cat.name))catDiv.classList.add("collapsed");const ci=data.indexOf(cat);const statusBadge=cat.negative?`<span class="badge invoice">fattura</span>`:`<span class="badge buy">acquisto</span>`;catDiv.innerHTML=`<div class="category-head"><span class="icon">${cat.icon}</span><h2>${cat.name} ${statusBadge}</h2><span class="arrow">▼</span></div><div class="category-body"><div class="column-heads"><span class="column-head">Articolo</span><span class="column-head right">Prezzo</span><span class="column-head center">Casse / Stack</span><span class="column-head center">Qtà</span><span class="column-head right">Importo</span></div><div class="rows"></div><div class="category-subtotal"><span>Subtotale</span><strong id="subtotal-${ci}">$0.00</strong></div></div>`;const catHead=catDiv.querySelector(".category-head");catHead.setAttribute("role","button");catHead.setAttribute("tabindex","0");catHead.setAttribute("aria-label",`Apri o chiudi ${cat.name}`);catHead.setAttribute("aria-expanded",String(!catDiv.classList.contains("collapsed")));const toggleCat=()=>{catDiv.classList.toggle("collapsed");catHead.setAttribute("aria-expanded",String(!catDiv.classList.contains("collapsed")))};catHead.onclick=toggleCat;catHead.onkeydown=(event)=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleCat()}};const rows=catDiv.querySelector(".rows");cat.items.forEach((item,ii)=>{const row=document.createElement("div");row.className="row";const price=item.tierQty?`$${item.p.toFixed(2)}<br><small>$${item.tierPrice.toFixed(2)} da ${item.tierQty}+</small>`:`$${item.p.toFixed(2)}`;row.innerHTML=`<span class="item-info"><span class="item-name">${item.n}${item.maxQty?`<span class="max-note">MAX ${item.maxQty}</span>`:""}</span><span class="item-price">${price}</span></span><span class="qty-cubes" id="cubes-${ci}-${ii}"><span class="qty-cube-track"><input type="number" min="0" ${item.maxQty?`max="${item.maxQty}"`:""} step="1" value="" placeholder="0" class="qty-cube" data-ci="${ci}" data-ii="${ii}" aria-label="${item.n} · Cassa 1" title="Cassa 1" oninput="calculate()"></span><button type="button" class="cube-btn add" onclick="addCube(${ci},${ii})" title="Aggiungi un'altra cassa/stack" aria-label="Aggiungi un'altra cassa">+</button><button type="button" class="cube-btn remove" onclick="removeCube(${ci},${ii})" title="Rimuovi l'ultima cassa/stack" aria-label="Rimuovi l'ultima cassa">−</button></span><span class="qty-sum" id="qty-${ci}-${ii}">0</span><span class="row-total" id="total-${ci}-${ii}">$0.00</span>`;rows.appendChild(row)});return catDiv}
 groups.forEach(group=>{const wrap=document.createElement("section");wrap.className="section-block";const heading=document.createElement("div");heading.className="section-heading";heading.innerHTML=`<span class="section-kicker">${group.title}</span><span class="section-count">${data.filter(cat=>group.id==="forniture"?cat.negative:cat.group==="raccolta").reduce((n,cat)=>n+cat.items.length,0)} articoli</span>`;wrap.appendChild(heading);const grid=document.createElement("div");grid.className="section-grid";data.filter(cat=>group.id==="forniture"?cat.negative:cat.group==="raccolta").forEach(cat=>grid.appendChild(makeColumns(cat)));wrap.appendChild(grid);sections.appendChild(wrap)});
 function updateCubeLabels(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);if(!container)return;const cubes=container.querySelectorAll(".qty-cube");const item=data[ci].items[ii];cubes.forEach((cube,idx)=>{cube.title=`Cassa ${idx+1}`;cube.setAttribute("aria-label",`${item.n} · Cassa ${idx+1}`)})}
-function addCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const input=document.createElement("input");input.type="number";input.min="0";const item=data[ci].items[ii];if(item.maxQty)input.max=String(item.maxQty);input.step="1";input.placeholder="0";input.className="qty-cube";input.dataset.ci=ci;input.dataset.ii=ii;input.oninput=calculate;const addBtn=container.querySelector(".cube-btn.add");container.insertBefore(input,addBtn);updateCubeLabels(ci,ii);input.focus();calculate()}
-function removeCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const cubes=container.querySelectorAll(".qty-cube");if(cubes.length>1){container.removeChild(cubes[cubes.length-1]);updateCubeLabels(ci,ii);calculate()}else{cubes[0].value="";calculate()}}
+function addCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const input=document.createElement("input");input.type="number";input.min="0";const item=data[ci].items[ii];if(item.maxQty)input.max=String(item.maxQty);input.step="1";input.placeholder="0";input.className="qty-cube";input.dataset.ci=ci;input.dataset.ii=ii;input.oninput=calculate;const track=container.querySelector(".qty-cube-track");track.appendChild(input);updateCubeLabels(ci,ii);input.focus();input.scrollIntoView({block:'nearest',inline:'nearest'});calculate()}
+function removeCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const cubes=container.querySelectorAll(".qty-cube");if(cubes.length>1){cubes[cubes.length-1].remove();updateCubeLabels(ci,ii);calculate()}else{cubes[0].value="";calculate()}}
 function calculate(){let give=0,invoice=0;const active=[];data.forEach((cat,ci)=>{let subtotal=0;const sign=cat.negative?-1:1;cat.items.forEach((item,ii)=>{const cubes=document.querySelectorAll(`.qty-cube[data-ci="${ci}"][data-ii="${ii}"]`);let qty=0,filledBoxes=0;cubes.forEach(cube=>{let value=Math.max(0,parseFloat(cube.value)||0);if(item.maxQty){const remaining=Math.max(0,item.maxQty-qty);if(value>remaining){value=remaining;cube.value=remaining>0?remaining:""}}qty+=value;if(value>0)filledBoxes++});if(item.maxQty&&qty>item.maxQty)qty=item.maxQty;const qtyEl=document.getElementById(`qty-${ci}-${ii}`);qtyEl.textContent=qty;qtyEl.classList.toggle("active",qty>0);let rowValue=item.tierQty&&qty>=item.tierQty?qty*item.tierPrice:qty*item.p;const rowTotal=sign*rowValue;document.getElementById(`total-${ci}-${ii}`).textContent=`${rowTotal<0?"-":""}$${Math.abs(rowTotal).toFixed(2)}`;subtotal+=rowTotal;if(qty>0)active.push({name:item.n,cat:cat.name,qty,boxes:filledBoxes,value:rowTotal})});document.getElementById(`subtotal-${ci}`).textContent=`${subtotal<0?"-":""}$${Math.abs(subtotal).toFixed(2)}`;if(cat.negative)invoice+=Math.abs(subtotal);else give+=subtotal});const fmt=v=>`$${v.toFixed(2)}`;document.getElementById("totalGive").textContent=fmt(give);document.getElementById("totalInvoice").textContent=fmt(invoice);renderSummary(active,give,invoice)}
 function renderSummary(active,give,invoice){const list=document.getElementById("summaryList");if(active.length===0){list.innerHTML=`<p class="summary-empty">Nessun articolo inserito.</p>`}else{list.innerHTML=active.map(a=>`<div class="summary-row"><div class="summary-row-main"><span class="summary-name">${a.name}</span><span class="summary-cat">${a.cat}${a.boxes>1?` · ${a.boxes} casse/stack`:""}</span></div><div class="summary-row-nums"><span class="summary-qty">×${a.qty}</span><span class="summary-val ${a.value<0?"neg":"pos"}">${a.value<0?"-":""}$${Math.abs(a.value).toFixed(2)}</span></div></div>`).join("")}document.getElementById("summaryGive").textContent=`$${give.toFixed(2)}`;document.getElementById("summaryInvoice").textContent=`$${invoice.toFixed(2)}`}
 function resetAll(){document.querySelectorAll(".qty-cubes").forEach(container=>{const cubes=container.querySelectorAll(".qty-cube");cubes.forEach((cube,idx)=>{if(idx===0)cube.value="";else cube.remove()});const first=container.querySelector(".qty-cube");if(first){const ci=Number(first.dataset.ci),ii=Number(first.dataset.ii);updateCubeLabels(ci,ii)}});calculate()}
@@ -155,7 +155,8 @@ const POSTER_ART = {
  frame: 'listino-assets/ornate_border.png',
  landscape: 'listino-assets/mountain_footer.png',
  lodge: 'listino-assets/lodge_vignette.png',
- fishing: 'listino-assets/fishing_vignette.png'
+ fishing: 'listino-assets/fishing_vignette.png',
+ logo: 'theme-assets/buckland-angling-club-logo.png'
 };
 const POSTER_INFO = {
   Pesca: {title:'ACQUISTIAMO IL PESCATO',type:'acquisto'},
@@ -230,14 +231,21 @@ function posterFish(ctx,x,y,s=1) {
   ctx.restore();
 }
 function posterPaper(ctx,w,h,assets){
-  ctx.fillStyle='#ead3a7';ctx.fillRect(0,0,w,h);
-  if(assets.paper){ctx.drawImage(assets.paper,0,0,w,h);}
-  else {
-    const grad=ctx.createRadialGradient(w*.48,h*.40,20,w*.5,h*.5,Math.max(w,h)*.70);
-    grad.addColorStop(0,'#f5d9aa');grad.addColorStop(1,'#b98a54');ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+  if(assets.paper){
+    ctx.drawImage(assets.paper,0,0,w,h);
+  }else{
+    const grad=ctx.createLinearGradient(0,0,0,h);
+    grad.addColorStop(0,'#d7edf5');
+    grad.addColorStop(.4,'#c4e1ec');
+    grad.addColorStop(1,'#8fb9ca');
+    ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
   }
-  // Schiarire leggermente la carta sotto le scritte per assicurare leggibilità.
-  ctx.fillStyle='rgba(253,226,178,.16)';ctx.fillRect(67,470,w-134,h-650);
+  const sky=ctx.createLinearGradient(0,0,0,h);
+  sky.addColorStop(0,'rgba(170,219,235,.26)');
+  sky.addColorStop(.32,'rgba(142,198,220,.18)');
+  sky.addColorStop(1,'rgba(31,74,105,.08)');
+  ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='rgba(237,248,251,.36)';ctx.fillRect(68,110,w-136,h-250);
 }
 function posterDrawFrame(ctx,w,h,img){
   if(!img){ctx.strokeStyle='#52351d';ctx.lineWidth=7;ctx.strokeRect(30,30,w-60,h-60);return;}
@@ -264,41 +272,52 @@ function posterDrawMountain(ctx,w,h,assets){
 }
 
 function posterHeader(ctx,w,selection,assets){
-  // Grandi incisioni laterali: non interferiscono con il titolo centrale.
   ctx.save();
-  if(assets.lodge){ctx.globalAlpha=.73;ctx.drawImage(assets.lodge,68,130,330,350);}
-  if(selection==='pesca'){
-    // Al posto dei vecchi pesci stilizzati, incisione da listino-assets/fishing_vignette.png.
-    if(assets.fishing){ctx.globalAlpha=.77;ctx.drawImage(assets.fishing,1195,112,330,412);}
-
+  if(assets.lodge){ctx.globalAlpha=.58;ctx.drawImage(assets.lodge,88,174,288,302);}
+  if(selection==='pesca' && assets.fishing){
+    ctx.globalAlpha=.60;ctx.drawImage(assets.fishing,1218,154,280,342);
+    ctx.globalAlpha=.17;ctx.drawImage(assets.fishing,78,350,170,175);
+    ctx.save();ctx.translate(w,0);ctx.scale(-1,1);ctx.globalAlpha=.17;ctx.drawImage(assets.fishing,78,350,170,175);ctx.restore();
   }
   ctx.restore();
-  posterFlourish(ctx,w/2,94,1.24);
-  ctx.textAlign='center';ctx.fillStyle='#301c10';
-  const main='BUCKLAND ANGLING CLUB';
-  let headingSize=76;
-  do {ctx.font=`${headingSize}px "Rye", Georgia, serif`;headingSize-=2;}while(ctx.measureText(main).width>w-570&&headingSize>42);
-  ctx.fillText(main,w/2,196);
-  ctx.font='64px "IM Fell English SC", Georgia, serif';ctx.fillText('REGISTRO DI PESCA E FORNITURE',w/2,277);
-  posterLine(ctx,480,310,w-480,310,3,'#684225');posterFlourish(ctx,w/2,310,.66);
-  ctx.font='37px "IM Fell English SC", Georgia, serif';ctx.fillText(posterChoices[selection].caption,w/2,371);
-  ctx.font='23px Georgia, serif';ctx.fillText('Pesca d’acqua dolce · Fiumi, laghi e forniture per pescatori',w/2,419);
 
-  posterLine(ctx,94,486,w-94,486,3,'#613b1f');posterFlourish(ctx,w/2,486,.95);
+  const logo=assets.logo;
+  if(logo){
+    const maxW=980,maxH=250;
+    const scale=Math.min(maxW/logo.naturalWidth,maxH/logo.naturalHeight);
+    const dw=logo.naturalWidth*scale, dh=logo.naturalHeight*scale;
+    ctx.drawImage(logo,(w-dw)/2,82,dw,dh);
+  }
+
+  if(selection==='pesca' && assets.fishing){
+    ctx.save();ctx.globalAlpha=.10;ctx.drawImage(assets.fishing,640,86,320,180);ctx.restore();
+  }
+
+  ctx.textAlign='center';
+  posterLine(ctx,300,344,w-300,344,3,'#315e78');
+  posterFlourish(ctx,w/2,344,.72);
+  ctx.fillStyle='#24495e';
+  ctx.font='42px "IM Fell English SC", Georgia, serif';
+  ctx.fillText(posterChoices[selection].caption,w/2,412);
+  ctx.font='24px Georgia, serif';
+  ctx.fillStyle='#36586d';
+  ctx.fillText('Pesca d’acqua dolce · Fiumi, laghi e forniture per pescatori',w/2,454);
+  posterLine(ctx,98,492,w-98,492,3,'#2c576e');
+  posterFlourish(ctx,w/2,492,.95);
 }
 
 function posterDrawCard(ctx,section,x,y,width){
   const height=posterCardHeight(ctx,section,width);
-  ctx.save();ctx.fillStyle='rgba(249,224,174,.33)';ctx.fillRect(x,y,width,height);
-  ctx.lineWidth=3;ctx.strokeStyle='#724b2c';ctx.strokeRect(x,y,width,height);
-  ctx.strokeStyle='#b08c55';ctx.lineWidth=1.5;ctx.strokeRect(x+9,y+9,width-18,height-18);
-  ctx.fillStyle='#54341c';ctx.fillRect(x+12,y+12,width-24,62);
-  ctx.fillStyle='#f4ddb1';ctx.textAlign='center';
+  ctx.save();ctx.fillStyle='rgba(238,248,252,.78)';ctx.fillRect(x,y,width,height);
+  ctx.lineWidth=3;ctx.strokeStyle='#416985';ctx.strokeRect(x,y,width,height);
+  ctx.strokeStyle='#86a9bc';ctx.lineWidth=1.5;ctx.strokeRect(x+9,y+9,width-18,height-18);
+  ctx.fillStyle='#28506a';ctx.fillRect(x+12,y+12,width-24,62);
+  ctx.fillStyle='#eef8fc';ctx.textAlign='center';
   posterTextWidth(ctx,section.title,width-45,32,'"IM Fell English SC", Georgia, serif');ctx.fillText(section.title,x+width/2,y+55);
-  ctx.font='italic 17px Georgia';ctx.fillStyle='#9a754f';ctx.fillText(section.type==='acquisto'?'PREZZI DI ACQUISTO':'PREZZI DI VENDITA',x+width/2,y+96);
+  ctx.font='italic 17px Georgia';ctx.fillStyle='#6a8698';ctx.fillText(section.type==='acquisto'?'PREZZI DI ACQUISTO':'PREZZI DI VENDITA',x+width/2,y+96);
   let ry=y+127;
   for(const row of section.rows){
-    const rh=posterRowHeight(ctx,row,width);ctx.fillStyle='#3c2a19';ctx.textAlign='left';
+    const rh=posterRowHeight(ctx,row,width);ctx.fillStyle='#1c3240';ctx.textAlign='left';
     const amount=`$${row.price.toFixed(2)}`;
     ctx.font='bold 26px "IM Fell English SC", Georgia, serif';const nameWidth=width-165;
     const words=row.name.split(' ');let line='',parts=[];
@@ -306,10 +325,10 @@ function posterDrawCard(ctx,section,x,y,width){
     if(line)parts.push(line);
     if(parts.length>2){parts=[parts[0],parts.slice(1).join(' ')];}
     for(let j=0;j<parts.length;j++){ctx.fillText(parts[j],x+25,ry+j*29,width-158);}
-    ctx.textAlign='right';ctx.font='bold 25px Georgia';ctx.fillStyle='#492b17';ctx.fillText(amount,x+width-28,ry);
+    ctx.textAlign='right';ctx.font='bold 25px Georgia';ctx.fillStyle='#23485d';ctx.fillText(amount,x+width-28,ry);
     ctx.strokeStyle='rgba(90,58,32,.35)';ctx.lineWidth=1.5;ctx.setLineDash([3,5]);
-    const dotsY=ry+14+(parts.length-1)*29;posterLine(ctx,x+26,dotsY,x+width-26,dotsY,1,'rgba(90,58,32,.26)');ctx.setLineDash([]);
-    if(row.maxQty){ctx.textAlign='left';ctx.font='italic 18px Georgia';ctx.fillStyle='#873f30';ctx.fillText(`MAX ${row.maxQty} per cliente`,x+26,ry+(parts.length-1)*29+24);}
+    const dotsY=ry+14+(parts.length-1)*29;posterLine(ctx,x+26,dotsY,x+width-26,dotsY,1,'rgba(60,108,136,.22)');ctx.setLineDash([]);
+    if(row.maxQty){ctx.textAlign='left';ctx.font='italic 18px Georgia';ctx.fillStyle='#4e768f';ctx.fillText(`MAX ${row.maxQty} per cliente`,x+26,ry+(parts.length-1)*29+24);}
     ry+=rh;
   }
   ctx.restore();return height;
@@ -345,7 +364,7 @@ async function posterCreate(mode){
   const cols=[posterSections(posterChoices[mode].left),posterSections(posterChoices[mode].right)];
   const test=document.createElement('canvas').getContext('2d');
   const lengths=cols.map(col=>col.reduce((h,cat)=>h+posterCardHeight(test,cat,columnWidth)+gap,0));
-  const startY=518;
+  const startY=525;
   const totalHeight=Math.max(1550,Math.ceil(startY+Math.max(...lengths)+340));
   const canvas=document.createElement('canvas');canvas.width=w;canvas.height=totalHeight;
   const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw new Error('Il browser non supporta Canvas');
@@ -356,9 +375,10 @@ async function posterCreate(mode){
   posterHeader(ctx,w,mode,assets);
   for(let k=0;k<2;k++) {let y=startY;for(const section of cols[k]){y+=posterDrawCard(ctx,section,k?xRight:xLeft,y,columnWidth)+gap;}}
   const fy=totalHeight-276;
-  ctx.fillStyle='rgba(246,215,166,.76)';ctx.fillRect(275,fy+14,w-550,124);
-  posterLine(ctx,130,fy,w-130,fy,3,'#67472b');posterFlourish(ctx,w/2,fy,.85);
-  ctx.textAlign='center';ctx.fillStyle='#3d2719';ctx.font='bold 26px "IM Fell English SC", Georgia, serif';ctx.fillText('BUCKLAND ANGLING CLUB · PESCA E FORNITURE',w/2,fy+46);
+  ctx.fillStyle='rgba(230,244,249,.82)';ctx.fillRect(250,fy+14,w-500,124);
+  posterLine(ctx,130,fy,w-130,fy,3,'#315e78');posterFlourish(ctx,w/2,fy,.85);
+  if(assets.fishing){ctx.save();ctx.globalAlpha=.10;ctx.drawImage(assets.fishing,90,fy-26,145,150);ctx.translate(w,0);ctx.scale(-1,1);ctx.drawImage(assets.fishing,90,fy-26,145,150);ctx.restore();}
+  ctx.textAlign='center';ctx.fillStyle='#25475c';ctx.font='bold 26px "IM Fell English SC", Georgia, serif';ctx.fillText('BUCKLAND ANGLING CLUB · PESCA E FORNITURE',w/2,fy+46);
   ctx.font='italic 23px Georgia';ctx.fillText('Canne, esche e catture delle acque di fiumi e laghi.',w/2,fy+80);
   ctx.font='20px Georgia';ctx.fillText('I prezzi sono aggiornati secondo il registro corrente del Buckland Angling Club.',w/2,fy+111);
   return canvas;

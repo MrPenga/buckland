@@ -1,0 +1,16 @@
+BUCKLAND ANGLING CLUB — SITO COMPLETO · EDIZIONE AZZURRO PESCA
+
+Lo ZIP contiene il sito completo (Registro, Regole, Ordini, Wiki, Eventi), tutti gli stili, gli script e gli asset.
+
+Aggiornamenti di questa versione:
+- index.html: correzione dei cubetti di quantità e generatore volantino con il logo coordinato alla nuova grafica azzurra.
+- regole.html: manifesto PNG delle regole con stile coordinato al volantino del Registro, logo e decorazioni pesca.
+- buckland-one-line.css: mantiene i controlli quantità allineati, con scorrimento interno delle casse aggiuntive.
+- listino-assets/: nuove cornici, carta azzurra, paesaggi lacustri, canne ed elementi da pesca.
+- listino-assets/offline-assets.js: immagini incorporate per anteprima/esportazione offline, compreso il logo.
+- theme-assets/buckland-angling-club-logo.png: logo Buckland coordinato ai volantini.
+
+PUBBLICAZIONE
+Copia il contenuto della cartella buckland-angling-club nel repository GitHub già clonato, senza eliminare la cartella .git, quindi esegui .\push-buckland.ps1 (se presente nel tuo repository) o i comandi git add -A, git commit, git push.
+
+La logica commerciale esistente e le altre pagine sono state conservate. Verifica in un browser il volantino di Index e Regole dopo il deploy.

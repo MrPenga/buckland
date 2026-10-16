@@ -101,43 +101,115 @@ body.regole-modal-open{overflow:hidden}
 const byId=id=>document.getElementById(id);
 const modal=byId('regoleModal'),preview=byId('regolePreview'),status=byId('regoleStatus'),button=byId('regoleDownload');
 let currentCanvas=null,busy=false;
-function lines(ctx,s,width){const parts=s.split(/\s+/),result=[];let line='';for(const w of parts){const next=line?line+' '+w:w;if(line&&ctx.measureText(next).width>width){result.push(line);line=w}else{line=next}}if(line)result.push(line);return result;}
-function print(ctx,s,x,y,width,size=32,height=47,align='left'){
- ctx.font=`${size}px Georgia,serif`;ctx.textAlign=align;
- for(const line of lines(ctx,s,width)){ctx.fillText(line,x,y);y+=height;}return y;
+const POSTER_ART={
+ paper:'listino-assets/parchment_bg.png',
+ frame:'listino-assets/ornate_border.png',
+ landscape:'listino-assets/mountain_footer.png',
+ lodge:'listino-assets/lodge_vignette.png',
+ fishing:'listino-assets/fishing_vignette.png',
+ logo:'theme-assets/buckland-angling-club-logo.png'
+};
+function wrapLines(ctx,text,maxWidth){
+ const parts=String(text||'').replace(/\s+/g,' ').trim().split(' '),out=[];let line='';
+ for(const part of parts){const test=line?line+' '+part:part;if(line&&ctx.measureText(test).width>maxWidth){out.push(line);line=part}else line=test}
+ if(line)out.push(line);return out.length?out:[''];
 }
-function panel(ctx,x,y,w,h){ctx.fillStyle='rgba(242,231,204,.86)';ctx.fillRect(x,y,w,h);ctx.strokeStyle='#57797a';ctx.lineWidth=4;ctx.strokeRect(x,y,w,h);ctx.lineWidth=1.5;ctx.strokeRect(x+11,y+11,w-22,h-22);}
+function textBlockHeight(ctx,text,maxWidth,size=30,lineHeight=42){ctx.font=`${size}px Georgia,serif`;return wrapLines(ctx,text,maxWidth).length*lineHeight}
+function drawTextBlock(ctx,text,x,y,maxWidth,size=30,lineHeight=42,align='left',color='#203e43'){
+ ctx.save();ctx.font=`${size}px Georgia,serif`;ctx.textAlign=align;ctx.fillStyle=color;
+ for(const line of wrapLines(ctx,text,maxWidth)){ctx.fillText(line,x,y);y+=lineHeight}
+ ctx.restore();return y;
+}
+function posterLine(ctx,x1,y1,x2,y2,width=3,color='#315e78'){ctx.save();ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore()}
+function posterFlourish(ctx,x,y,scale=1,color='#45718a'){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.strokeStyle=color;ctx.lineWidth=3;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-60,0);ctx.bezierCurveTo(-44,-22,-18,-22,0,0);ctx.bezierCurveTo(18,22,44,22,60,0);ctx.moveTo(-18,-1);ctx.lineTo(18,-1);ctx.stroke();ctx.restore()}
+function posterPaper(ctx,w,h,assets){
+ ctx.fillStyle='#d9edf4';ctx.fillRect(0,0,w,h);
+ const g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,'#cbe6ef');g.addColorStop(.48,'#edf7fb');g.addColorStop(1,'#c0dde8');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+ if(assets.paper){ctx.save();ctx.globalAlpha=.50;ctx.drawImage(assets.paper,0,0,w,h);ctx.restore();}
+ ctx.save();ctx.globalAlpha=.14;ctx.fillStyle='#8fbdd0';
+ for(let i=0;i<9;i++){ctx.beginPath();ctx.arc(140+(i*165)%w,140+i*185,46+(i%3)*20,0,Math.PI*2);ctx.fill()}
+ ctx.restore();
+}
+function posterDrawFrame(ctx,w,h,img){
+ if(!img){ctx.strokeStyle='#416985';ctx.lineWidth=7;ctx.strokeRect(30,30,w-60,h-60);return;}
+ const sw=img.naturalWidth,sh=img.naturalHeight,a=210,b=260,dw=270,dh=300;
+ ctx.save();ctx.globalAlpha=.76;
+ const piece=(sx,sy,fw,fh,dx,dy,tw,th)=>ctx.drawImage(img,sx,sy,fw,fh,dx,dy,tw,th);
+ piece(0,0,a,b,0,0,dw,dh);piece(sw-a,0,a,b,w-dw,0,dw,dh);
+ piece(0,sh-b,a,b,0,h-dh,dw,dh);piece(sw-a,sh-b,a,b,w-dw,h-dh,dw,dh);
+ piece(a,0,sw-2*a,b,dw,0,w-2*dw,dh);piece(a,sh-b,sw-2*a,b,dw,h-dh,w-2*dw,dh);
+ piece(0,b,a,sh-2*b,0,dh,dw,h-2*dh);piece(sw-a,b,a,sh-2*b,w-dw,dh,dw,h-2*dh);
+ ctx.restore();
+}
+function posterDrawMountain(ctx,w,h,assets){
+ if(assets.landscape){ctx.save();ctx.globalAlpha=.62;ctx.drawImage(assets.landscape,64,h-265,w-128,190);ctx.restore();}
+}
+function cardChrome(ctx,x,y,w,h,title,subtitle=''){
+ ctx.save();ctx.fillStyle='rgba(238,248,252,.79)';ctx.fillRect(x,y,w,h);ctx.lineWidth=3;ctx.strokeStyle='#416985';ctx.strokeRect(x,y,w,h);ctx.strokeStyle='#86a9bc';ctx.lineWidth=1.5;ctx.strokeRect(x+9,y+9,w-18,h-18);
+ ctx.fillStyle='#28506a';ctx.fillRect(x+12,y+12,w-24,62);
+ ctx.fillStyle='#eef8fc';ctx.textAlign='center';ctx.font='32px "IM Fell English SC", Georgia, serif';ctx.fillText(title,x+w/2,y+54);
+ if(subtitle){ctx.font='italic 17px Georgia';ctx.fillStyle='#6a8698';ctx.fillText(subtitle,x+w/2,y+96)}
+ ctx.restore();
+}
+function numberedListHeight(ctx,items,w){let h=0;for(const item of items){h+=Math.max(44,textBlockHeight(ctx,item,w-102,28,38))+18}return h}
+ function drawNumberedList(ctx,items,x,y,w){
+ let cy=y;items.forEach((item,index)=>{ctx.save();ctx.fillStyle='#b0884d';ctx.font='bold 34px Georgia';ctx.textAlign='left';ctx.fillText(String(index+1).padStart(2,'0'),x,cy);ctx.restore();
+ const endY=drawTextBlock(ctx,item,x+70,cy,w-102,28,38,'left','#203e43');
+ cy=Math.max(cy+44,endY)+18;});return cy;
+}
+function bulletListHeight(ctx,items,w){let h=0;for(const item of items){h+=textBlockHeight(ctx,item,w-74,26,36)+16}return h}
+function drawBulletList(ctx,items,x,y,w){let cy=y;items.forEach(item=>{ctx.save();ctx.fillStyle='#4e768f';ctx.beginPath();ctx.arc(x+10,cy-10,5,0,Math.PI*2);ctx.fill();ctx.restore();cy=drawTextBlock(ctx,item,x+28,cy,w-74,26,36,'left','#244250')+16});return cy}
+async function posterLoadArt(){
+ const isLocal=location.protocol==='file:';
+ const entries=Object.entries(POSTER_ART);
+ const result=await Promise.all(entries.map(([key,path])=>new Promise(resolve=>{
+  const fallback=window.BUCKLAND_OFFLINE_ASSETS?.[key];
+  const src=(isLocal&&fallback)?fallback:path;
+  const img=new Image();
+  img.onload=()=>resolve([key,img]);
+  img.onerror=()=>{if(fallback&&src!==fallback){const backup=new Image();backup.onload=()=>resolve([key,backup]);backup.onerror=()=>resolve([key,null]);backup.src=fallback}else resolve([key,null]);};
+  img.src=src;
+ })));
+ return Object.fromEntries(result);
+}
 async function create(){
  if(document.fonts?.ready)await document.fonts.ready;
- const c=document.createElement('canvas');c.width=1500;c.height=2190;const ctx=c.getContext('2d',{alpha:false});
- const bg=new Image();await new Promise(resolve=>{bg.onload=resolve;bg.onerror=resolve;bg.src='theme-assets/buckland-bg-regole.png'});
- ctx.fillStyle='#c8d4c7';ctx.fillRect(0,0,c.width,c.height);
- if(bg.naturalWidth){ctx.globalAlpha=.25;ctx.drawImage(bg,0,0,c.width,c.height);ctx.globalAlpha=1}
- ctx.fillStyle='#0b3039';ctx.fillRect(40,40,1420,340);
- ctx.strokeStyle='#bfaa7e';ctx.lineWidth=7;ctx.strokeRect(58,58,1384,304);
- ctx.textAlign='center';ctx.fillStyle='#eadfc4';ctx.font='75px "Cormorant Garamond",Georgia,serif';ctx.fillText('BUCKLAND ANGLING CLUB',750,164);
- ctx.font='48px "IM Fell English SC",Georgia,serif';ctx.fillText('REGOLAMENTO DEL CLUB',750,243);
- ctx.font='26px Georgia';ctx.fillText('Pesca d’acqua dolce · Fiumi e laghi · Anno 1900',750,302);
+ const assets=await posterLoadArt();
+ const canvas=document.createElement('canvas');canvas.width=1600;canvas.height=2100;const ctx=canvas.getContext('2d',{alpha:false});
+ const w=canvas.width,h=canvas.height;
  const rules=[...byId('regoleBuckland').querySelectorAll('li')].map(el=>el.textContent.trim());
- panel(ctx,90,432,1320,1060);
- ctx.fillStyle='#234d55';ctx.textAlign='center';ctx.font='55px "IM Fell English SC",serif';ctx.fillText('REGOLE PER I VISITATORI',750,525);
- let y=615;
- rules.forEach((rule,i)=>{ctx.fillStyle='#b0884d';ctx.font='bold 43px Georgia';ctx.textAlign='left';ctx.fillText(String(i+1).padStart(2,'0'),155,y);ctx.fillStyle='#203e43';y=print(ctx,rule,250,y,1090,32,49)+34;});
- panel(ctx,90,1545,1320,455);ctx.fillStyle='#234d55';ctx.textAlign='center';ctx.font='55px "IM Fell English SC",serif';ctx.fillText('AVVISI E FORNITURE',750,1637);
  const notes=['noticeOne','noticeTwo','noticeThree'].map(id=>byId(id).textContent.trim());
- y=1712;notes.forEach(note=>{ctx.fillStyle='#263d3b';y=print(ctx,note,750,y,1150,28,43,'center')+23;});
- ctx.fillStyle='#15343b';ctx.textAlign='center';ctx.font='29px "IM Fell English SC",serif';ctx.fillText('BUCKLAND ANGLING CLUB · REGISTRO DI PESCA E FORNITURE',750,2113);
- return c;
+ const guide=[...document.querySelectorAll('.rules-guide .box li')].map(el=>el.textContent.trim());
+ posterPaper(ctx,w,h,assets);posterDrawFrame(ctx,w,h,assets.frame);posterDrawMountain(ctx,w,h,assets);
+ if(assets.lodge){ctx.save();ctx.globalAlpha=.58;ctx.drawImage(assets.lodge,88,174,288,302);ctx.restore();}
+ if(assets.fishing){ctx.save();ctx.globalAlpha=.60;ctx.drawImage(assets.fishing,1218,154,280,342);ctx.globalAlpha=.18;ctx.drawImage(assets.fishing,78,370,170,175);ctx.translate(w,0);ctx.scale(-1,1);ctx.drawImage(assets.fishing,78,370,170,175);ctx.restore();}
+ const logo=assets.logo;
+ if(logo){const maxW=980,maxH=250;const scale=Math.min(maxW/logo.naturalWidth,maxH/logo.naturalHeight);const dw=logo.naturalWidth*scale,dh=logo.naturalHeight*scale;ctx.drawImage(logo,(w-dw)/2,82,dw,dh)}
+ ctx.textAlign='center';posterLine(ctx,300,344,w-300,344,3,'#315e78');posterFlourish(ctx,w/2,344,.72);ctx.fillStyle='#24495e';ctx.font='42px "IM Fell English SC", Georgia, serif';ctx.fillText('REGOLAMENTO DEL CLUB',w/2,412);ctx.font='24px Georgia, serif';ctx.fillStyle='#36586d';ctx.fillText('Pesca d’acqua dolce · Fiumi, laghi e forniture per pescatori',w/2,454);posterLine(ctx,98,492,w-98,492,3,'#2c576e');posterFlourish(ctx,w/2,492,.95);
+ const leftX=92,rightX=812,colW=696;
+ const rulesH=180+numberedListHeight(ctx,rules,colW)+30;
+ const notesH=150+bulletListHeight(ctx,notes,colW);
+ const guideShort=guide.slice(0,6);
+ const guideH=150+bulletListHeight(ctx,guideShort,colW);
+ cardChrome(ctx,leftX,525,colW,rulesH,'REGOLE PER I VISITATORI','CLUB E PESCA RESPONSABILE');
+ drawNumberedList(ctx,rules,leftX+34,670,colW);
+ cardChrome(ctx,rightX,525,colW,notesH,'AVVISI E FORNITURE','NOTE IMPORTANTI');
+ drawBulletList(ctx,notes,rightX+28,660,colW);
+ cardChrome(ctx,rightX,525+notesH+18,colW,guideH,'GUIDA RAPIDA AL REGISTRO','COME USARE LE QUANTITÀ');
+ drawBulletList(ctx,guideShort,rightX+28,525+notesH+153,colW);
+ const fy=h-276;ctx.fillStyle='rgba(230,244,249,.82)';ctx.fillRect(250,fy+14,w-500,124);posterLine(ctx,130,fy,w-130,fy,3,'#315e78');posterFlourish(ctx,w/2,fy,.85);
+ if(assets.fishing){ctx.save();ctx.globalAlpha=.10;ctx.drawImage(assets.fishing,90,fy-26,145,150);ctx.translate(w,0);ctx.scale(-1,1);ctx.drawImage(assets.fishing,90,fy-26,145,150);ctx.restore();}
+ ctx.textAlign='center';ctx.fillStyle='#25475c';ctx.font='bold 26px "IM Fell English SC", Georgia, serif';ctx.fillText('BUCKLAND ANGLING CLUB · REGOLAMENTO E FORNITURE',w/2,fy+46);ctx.font='italic 23px Georgia';ctx.fillText('Norme del club, pesca corretta e istruzioni per il registro.',w/2,fy+80);ctx.font='20px Georgia';ctx.fillText('Il presente volantino riassume le regole e gli avvisi correnti del Buckland Angling Club.',w/2,fy+111);
+ return canvas;
 }
 function close(){modal.hidden=true;document.body.classList.remove('regole-modal-open')}
 async function open(){if(busy)return;modal.hidden=false;document.body.classList.add('regole-modal-open');byId('regoleClose').focus();busy=true;button.disabled=true;currentCanvas=null;preview.textContent='Preparazione del manifesto…';
  try{const c=await create();currentCanvas=c;preview.replaceChildren(c);status.textContent=`Manifesto pronto · ${c.width} × ${c.height} px`;button.disabled=false;}
- catch(e){status.textContent=e.message;preview.textContent='Impossibile generare il manifesto.'}
+ catch(e){console.error(e);status.textContent=e.message||'Errore';preview.textContent='Impossibile generare il manifesto.'}
  finally{busy=false}
 }
 function download(){if(!currentCanvas)return;currentCanvas.toBlob(blob=>{if(!blob){status.textContent='Errore durante l’esportazione.';return}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Buckland_Angling_Club_Regole.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)},'image/png')}
 byId('generaRegole').addEventListener('click',open);const topBtn=byId('scaricaRegoleTop');if(topBtn)topBtn.addEventListener('click',open);byId('regoleClose').addEventListener('click',close);byId('regoleCancel').addEventListener('click',close);button.addEventListener('click',download);modal.addEventListener('click',e=>{if(e.target===modal)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)close()});
-})();
-</script>
+})();</script>
 </body>
 </html>
