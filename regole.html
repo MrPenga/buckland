@@ -49,6 +49,7 @@ body.regole-modal-open{overflow:hidden}
     <li>Chiunque lascia incustoditi i cavalli all'interno del recinto è bandito per <b class="pena">3 giorni</b>.</li>
     <li>Chiunque salta la fila, o tenta di farlo, è bandito per <b class="pena">1 giorno</b>.</li>
     <li>Non entrare in casa, attendere il proprio turno fuori. Chi non rispetta questa regola è bandito per <b class="pena">1 giorno</b>.</li>
+    <li>La pesca e l'uso di trappole per pesci davanti all'attività non sono consentiti, salvo previa richiesta e autorizzazione dei dipendenti.</li>
   </ol>
   <p id="noticeOne">Ricordiamo inoltre che noi non siamo tenuti a comprare né a servire nessuno.</p>
   <p id="noticeTwo">Chi non rispetta tali regole può rivolgersi agli altri commercianti.</p>
@@ -77,6 +78,7 @@ body.regole-modal-open{overflow:hidden}
 <section class="regole-actions" aria-label="Generatore manifesto delle regole">
  <div class="description"><h2>Manifesto delle regole · Buckland Angling Club</h2><p>Genera il manifesto vittoriano del club, con regolamento e avvisi ai visitatori.</p></div>
  <button class="regole-create" id="generaRegole" type="button">↓ Genera manifesto delle regole</button>
+ <button class="regole-download" id="scaricaRegoleTop" type="button">↓ Scarica volantino PNG</button>
 </section>
 <p><a href="index.html">Torna al registro</a></p>
 </main></div>
@@ -134,7 +136,7 @@ async function open(){if(busy)return;modal.hidden=false;document.body.classList.
  finally{busy=false}
 }
 function download(){if(!currentCanvas)return;currentCanvas.toBlob(blob=>{if(!blob){status.textContent='Errore durante l’esportazione.';return}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Buckland_Angling_Club_Regole.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)},'image/png')}
-byId('generaRegole').addEventListener('click',open);byId('regoleClose').addEventListener('click',close);byId('regoleCancel').addEventListener('click',close);button.addEventListener('click',download);modal.addEventListener('click',e=>{if(e.target===modal)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)close()});
+byId('generaRegole').addEventListener('click',open);const topBtn=byId('scaricaRegoleTop');if(topBtn)topBtn.addEventListener('click',open);byId('regoleClose').addEventListener('click',close);byId('regoleCancel').addEventListener('click',close);button.addEventListener('click',download);modal.addEventListener('click',e=>{if(e.target===modal)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)close()});
 })();
 </script>
 </body>

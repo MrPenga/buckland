@@ -211,3 +211,56 @@ a,button,input,summary{transition:color .16s ease,background-color .16s ease,bor
 .page-index .category .row[hidden],.page-index .category[hidden],.page-index .section-block[hidden]{display:none!important}
 .page-index .category .category-head .badge.buy{color:#ddf0df!important;background:rgba(44,102,96,.66)!important;border-color:rgba(172,218,202,.35)!important}
 .page-index .category .category-head .badge.invoice{color:#f4ddba!important;background:rgba(125,91,57,.36)!important;border-color:rgba(212,174,123,.38)!important}
+
+
+/* === October 2026 polish: logo top, mountain-fishing blue theme, aligned cubes beside names === */
+body.page-index, body.page-regole, body.page-ordini, body.page-wiki, body.page-eventi{
+  background-attachment:fixed!important;
+}
+body.page-index{background-image:linear-gradient(rgba(4,18,40,.74),rgba(9,42,68,.58)),radial-gradient(circle at top,rgba(92,176,214,.18),transparent 34%),url('theme-assets/buckland-bg-index.png')!important}
+body.page-regole{background-image:linear-gradient(rgba(4,18,40,.78),rgba(8,34,60,.62)),radial-gradient(circle at top,rgba(108,190,226,.14),transparent 32%),url('theme-assets/buckland-bg-regole.png')!important}
+body.page-ordini{background-image:linear-gradient(rgba(4,18,40,.77),rgba(7,33,57,.62)),radial-gradient(circle at top,rgba(108,190,226,.12),transparent 30%),url('theme-assets/buckland-bg-ordini.png')!important}
+body.page-wiki{background-image:linear-gradient(rgba(4,18,40,.77),rgba(7,33,57,.62)),radial-gradient(circle at top,rgba(108,190,226,.12),transparent 30%),url('theme-assets/buckland-bg-wiki.png')!important}
+body.page-eventi{background-image:linear-gradient(rgba(4,18,40,.77),rgba(7,33,57,.62)),radial-gradient(circle at top,rgba(108,190,226,.12),transparent 30%),url('theme-assets/buckland-bg-eventi.png')!important}
+.hero,header.site-hero{background:linear-gradient(180deg,rgba(5,24,44,.96),rgba(9,42,67,.94) 54%,rgba(7,31,52,.97))!important}
+.hero-inner,header.site-hero .site-hero-inner{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:12px!important;min-height:0!important;padding-top:24px!important;padding-bottom:28px!important}
+.hero .index-hero-tools,.wiki-hero-tools{display:flex!important;flex-direction:column!important;align-items:center!important;gap:8px!important;order:-1!important;width:auto!important}
+.hero .logo-mark,.site-logo{width:clamp(250px,26vw,410px)!important;max-width:92%!important;margin:0 auto!important}
+.hero h1,header.site-hero h1{max-width:980px!important;text-align:center!important}
+.hero-sub,.site-hero-sub{max-width:840px!important;text-align:center!important;color:#d7e8ef!important}
+.site-hero-copy,.hero-inner>div:first-child{display:flex!important;flex-direction:column!important;align-items:center!important}
+.site-bell,.index-order-bell{position:absolute!important;top:20px!important;right:20px!important;z-index:4}
+.page-index .section-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+.page-index .section-grid .span-2{grid-column:1/-1!important}
+.page-index .category .column-heads{grid-template-columns:minmax(220px,1fr) minmax(155px,1.1fr) 62px 96px!important;gap:10px!important}
+.page-index .category .column-heads .column-head:nth-child(2){display:none!important}
+.page-index .category .column-heads .column-head:nth-child(3){grid-column:2!important}
+.page-index .category .column-heads .column-head:nth-child(4){grid-column:3!important}
+.page-index .category .column-heads .column-head:nth-child(5){grid-column:4!important}
+.page-index .category .row{display:grid!important;grid-template-columns:minmax(220px,1fr) minmax(155px,1.1fr) 62px 96px!important;grid-template-areas:'name cubes qty total' 'price cubes qty total'!important;gap:4px 10px!important;align-items:center!important;min-height:62px!important}
+.page-index .category .row .item-name{grid-area:name!important;align-self:end!important}
+.page-index .category .row .item-price{grid-area:price!important;text-align:left!important;align-self:start!important;font-size:11px!important}
+.page-index .category .row .qty-cubes{grid-area:cubes!important;align-self:center!important}
+.page-index .category .row .qty-sum{grid-area:qty!important;align-self:center!important}
+.page-index .category .row .row-total{grid-area:total!important;align-self:center!important}
+.page-index .qty-cubes{flex-wrap:nowrap!important}
+.page-index .qty-cube{width:42px!important}
+.page-index .cube-btn{width:28px!important;height:32px!important}
+.footer-actions{display:flex!important;gap:10px!important;flex-wrap:wrap!important}
+.footer-actions .poster-download,.footer-actions .reset-btn{min-width:190px!important}
+.regole-actions{justify-content:center!important}
+.regole-actions .regole-create,.regole-actions .regole-download{min-width:250px!important}
+@media(max-width:1100px){
+ .page-index .section-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .page-index .category .row{grid-template-columns:minmax(170px,1fr) minmax(145px,1fr) 56px 86px!important}
+}
+@media(max-width:900px){
+ .page-index .section-grid{grid-template-columns:minmax(0,1fr)!important}
+ .site-bell,.index-order-bell{top:14px!important;right:14px!important}
+}
+@media(max-width:730px){
+ .hero-inner,header.site-hero .site-hero-inner{padding-top:24px!important;padding-bottom:22px!important}
+ .site-bell,.index-order-bell{position:absolute!important;top:12px!important;right:12px!important}
+ .hero .index-hero-tools,.wiki-hero-tools{width:100%!important;align-items:center!important;justify-content:center!important}
+ .page-index .category .row{grid-template-columns:minmax(0,1fr) 75px 84px!important;grid-template-areas:'name name price' 'cubes qty total'!important;gap:7px 5px!important}
+}

@@ -1,0 +1,23 @@
+BUCKLAND ANGLING CLUB — DARK CONTRAST + LAYOUT AFFIANCATO (16/10/2026)
+
+NOVITÀ
+- Scritte più leggibili in tutto il sito, compresi moduli, totali e tabelle.
+- Menu espandibili e liste a discesa con sfondo blu petrolio molto scuro.
+- INDEX: due categorie espandibili affiancate su PC e tablet ampi (da 850px).
+  Pesca / Pesca Leggendaria, Attrezzi / Trappole; Esche Pesca nella riga successiva.
+- Sotto 850px le categorie tornano in una sola colonna, per mantenere leggibilità.
+- Campi cassa, pulsanti +/−, quantità e importo allineati nelle schede.
+- Mantiene ricerca, filtri, listino, prezzi, dati, Firebase e limiti.
+- Mantiene il logo con trota iridea e tutti gli asset del sito.
+
+PUBBLICAZIONE GITHUB
+Copia il CONTENUTO di buckland-angling-club nella root del repository già clonato.
+Non sovrascrivere o cancellare la cartella .git.
+Dopo la copia, dal repository esegui:
+  git add -A
+  git commit -m "Dark contrast e categorie affiancate Buckland"
+  git push origin main
+
+STILE
+Il nuovo file buckland-contrast.css completa, senza sostituirli,
+buckland-theme.css e buckland-layout.css. NON eliminarli.

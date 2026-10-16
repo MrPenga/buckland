@@ -1,0 +1,31 @@
+BUCKLAND ANGLING CLUB — DARK LEDGER HOUSE · RESTYLING LAYOUT
+
+Questa versione include tutte le pagine, gli script, le immagini e il logo con trota iridea.
+
+NUOVO LAYOUT
+- Registro: navigazione unificata, nuova intestazione del registro, ricerca per articolo,
+  filtri Tutti / Pescato / Forniture e guida rapida richiudibile.
+- Listini: schede a piena larghezza per avere comandi e campi numerici allineati,
+  con quantità, prezzi e totali sulla stessa griglia.
+- Mobile: listini adattati su due righe per voce, senza scorrimento orizzontale.
+- Registro corrente: riepilogo indipendente a destra su desktop e sotto il listino
+  su tablet e smartphone.
+- Wiki: navigazione principale del club e navigazione interna per capitoli,
+  sidebar ordinata, schede/mappe meglio distribuite.
+- Ordini: form e lista più leggibili.
+- Eventi: form consegne e totali distribuiti in due colonne su desktop.
+- Regole: pagina e istruzioni più pulite, schede uniformi.
+- Tema: dark mode blu lago e verde petrolio, dettagli oro antico, logo trota iridea.
+
+FUNZIONI MANTENUTE
+- Prezzi, articoli e calcoli del progetto pesca precedente.
+- Limiti già impostati sulle trappole e sulle esche grandi.
+- Registrazione di ordini ed eventi, notifiche e generazione PNG dei listini.
+- Stessa configurazione Firebase già presente nel progetto.
+
+PUBBLICAZIONE GITHUB PAGES
+Estrarre la cartella buckland-angling-club e caricarne il CONTENUTO nella
+radice del repository GitHub Pages. Il punto di ingresso rimane index.html.
+
+NON ELIMINARE i file buckland-theme.css, buckland-layout.css o
+buckland-layout.js: sono tutti necessari per il nuovo aspetto e i filtri.
