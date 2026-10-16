@@ -185,13 +185,14 @@ async function create(){
  const logo=assets.logo;
  if(logo){const maxW=980,maxH=250;const scale=Math.min(maxW/logo.naturalWidth,maxH/logo.naturalHeight);const dw=logo.naturalWidth*scale,dh=logo.naturalHeight*scale;ctx.drawImage(logo,(w-dw)/2,82,dw,dh)}
  ctx.textAlign='center';posterLine(ctx,300,344,w-300,344,3,'#315e78');posterFlourish(ctx,w/2,344,.72);ctx.fillStyle='#24495e';ctx.font='42px "IM Fell English SC", Georgia, serif';ctx.fillText('REGOLAMENTO DEL CLUB',w/2,412);ctx.font='24px Georgia, serif';ctx.fillStyle='#36586d';ctx.fillText('Pesca d’acqua dolce · Fiumi, laghi e forniture per pescatori',w/2,454);posterLine(ctx,98,492,w-98,492,3,'#2c576e');posterFlourish(ctx,w/2,492,.95);
- const leftX=92,rightX=812,colW=696;
- const rulesH=180+numberedListHeight(ctx,rules,colW)+30;
- const notesH=150+bulletListHeight(ctx,notes,colW);
- cardChrome(ctx,leftX,525,colW,rulesH,'REGOLE PER I VISITATORI','CLUB E PESCA RESPONSABILE');
- drawNumberedList(ctx,rules,leftX+34,670,colW);
- cardChrome(ctx,rightX,525,colW,notesH,'AVVISI E FORNITURE','NOTE IMPORTANTI');
- drawBulletList(ctx,notes,rightX+28,660,colW);
+ const colX=118,colW=1364,startY=525;
+ const rulesH=180+numberedListHeight(ctx,rules,colW)+26;
+ const notesH=150+bulletListHeight(ctx,notes,colW)+12;
+ cardChrome(ctx,colX,startY,colW,rulesH,'REGOLE PER I VISITATORI','CLUB E PESCA RESPONSABILE');
+ drawNumberedList(ctx,rules,colX+34,startY+145,colW);
+ const notesY=startY+rulesH+28;
+ cardChrome(ctx,colX,notesY,colW,notesH,'AVVISI E FORNITURE','NOTE IMPORTANTI');
+ drawBulletList(ctx,notes,colX+34,notesY+135,colW);
  const fy=h-276;ctx.fillStyle='rgba(230,244,249,.82)';ctx.fillRect(250,fy+14,w-500,124);posterLine(ctx,130,fy,w-130,fy,3,'#315e78');posterFlourish(ctx,w/2,fy,.85);
  if(assets.fishing){ctx.save();ctx.globalAlpha=.10;ctx.drawImage(assets.fishing,90,fy-26,145,150);ctx.translate(w,0);ctx.scale(-1,1);ctx.drawImage(assets.fishing,90,fy-26,145,150);ctx.restore();}
  ctx.textAlign='center';ctx.fillStyle='#25475c';ctx.font='bold 26px "IM Fell English SC", Georgia, serif';ctx.fillText('BUCKLAND ANGLING CLUB · REGOLAMENTO E FORNITURE',w/2,fy+46);ctx.font='italic 23px Georgia';ctx.fillText('Norme del club, pesca responsabile e avvisi ai visitatori.',w/2,fy+80);ctx.font='20px Georgia';ctx.fillText('Il presente volantino riassume le regole e gli avvisi correnti del Buckland Angling Club.',w/2,fy+111);
