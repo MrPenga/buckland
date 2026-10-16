@@ -179,7 +179,6 @@ async function create(){
  const w=canvas.width,h=canvas.height;
  const rules=[...byId('regoleBuckland').querySelectorAll('li')].map(el=>el.textContent.trim());
  const notes=['noticeOne','noticeTwo','noticeThree'].map(id=>byId(id).textContent.trim());
- const guide=[...document.querySelectorAll('.rules-guide .box li')].map(el=>el.textContent.trim());
  posterPaper(ctx,w,h,assets);posterDrawFrame(ctx,w,h,assets.frame);posterDrawMountain(ctx,w,h,assets);
  if(assets.lodge){ctx.save();ctx.globalAlpha=.58;ctx.drawImage(assets.lodge,88,174,288,302);ctx.restore();}
  if(assets.fishing){ctx.save();ctx.globalAlpha=.60;ctx.drawImage(assets.fishing,1218,154,280,342);ctx.globalAlpha=.18;ctx.drawImage(assets.fishing,78,370,170,175);ctx.translate(w,0);ctx.scale(-1,1);ctx.drawImage(assets.fishing,78,370,170,175);ctx.restore();}
@@ -189,17 +188,13 @@ async function create(){
  const leftX=92,rightX=812,colW=696;
  const rulesH=180+numberedListHeight(ctx,rules,colW)+30;
  const notesH=150+bulletListHeight(ctx,notes,colW);
- const guideShort=guide.slice(0,6);
- const guideH=150+bulletListHeight(ctx,guideShort,colW);
  cardChrome(ctx,leftX,525,colW,rulesH,'REGOLE PER I VISITATORI','CLUB E PESCA RESPONSABILE');
  drawNumberedList(ctx,rules,leftX+34,670,colW);
  cardChrome(ctx,rightX,525,colW,notesH,'AVVISI E FORNITURE','NOTE IMPORTANTI');
  drawBulletList(ctx,notes,rightX+28,660,colW);
- cardChrome(ctx,rightX,525+notesH+18,colW,guideH,'GUIDA RAPIDA AL REGISTRO','COME USARE LE QUANTITÀ');
- drawBulletList(ctx,guideShort,rightX+28,525+notesH+153,colW);
  const fy=h-276;ctx.fillStyle='rgba(230,244,249,.82)';ctx.fillRect(250,fy+14,w-500,124);posterLine(ctx,130,fy,w-130,fy,3,'#315e78');posterFlourish(ctx,w/2,fy,.85);
  if(assets.fishing){ctx.save();ctx.globalAlpha=.10;ctx.drawImage(assets.fishing,90,fy-26,145,150);ctx.translate(w,0);ctx.scale(-1,1);ctx.drawImage(assets.fishing,90,fy-26,145,150);ctx.restore();}
- ctx.textAlign='center';ctx.fillStyle='#25475c';ctx.font='bold 26px "IM Fell English SC", Georgia, serif';ctx.fillText('BUCKLAND ANGLING CLUB · REGOLAMENTO E FORNITURE',w/2,fy+46);ctx.font='italic 23px Georgia';ctx.fillText('Norme del club, pesca corretta e istruzioni per il registro.',w/2,fy+80);ctx.font='20px Georgia';ctx.fillText('Il presente volantino riassume le regole e gli avvisi correnti del Buckland Angling Club.',w/2,fy+111);
+ ctx.textAlign='center';ctx.fillStyle='#25475c';ctx.font='bold 26px "IM Fell English SC", Georgia, serif';ctx.fillText('BUCKLAND ANGLING CLUB · REGOLAMENTO E FORNITURE',w/2,fy+46);ctx.font='italic 23px Georgia';ctx.fillText('Norme del club, pesca responsabile e avvisi ai visitatori.',w/2,fy+80);ctx.font='20px Georgia';ctx.fillText('Il presente volantino riassume le regole e gli avvisi correnti del Buckland Angling Club.',w/2,fy+111);
  return canvas;
 }
 function close(){modal.hidden=true;document.body.classList.remove('regole-modal-open')}
