@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English+SC&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stile.css">
-  <title>Buckland Angling Club · Eventi di pesca</title>
+  <title>Buckland Angling Club · Eventi e iscrizioni</title>
   <style>
-    /* Unica gara del club: pesca */
+    /* Iscrizioni e consegne della gara di pesca, su due colonne. */
     .eventi-main{max-width:none;width:100%;margin:0 auto 50px}
     .eventi-intro{margin:0 0 18px;color:var(--inchiostro,#3d3025);line-height:1.55}
     .eventi-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:20px}
     .evento-col{min-width:0;display:flex;flex-direction:column;gap:14px}
     .evento-col>.box{margin:0;min-width:0}
     .evento-banner{border-top:5px solid #3b6570;padding-top:16px;background:linear-gradient(114deg,rgba(234,220,191,.98),rgba(196,206,182,.84))}
-    .evento-banner h2{font-family:'Rye',Georgia,serif;letter-spacing:.5px;font-weight:400;margin:0 0 8px;font-size:clamp(22px,2.3vw,32px)}
+    .evento-banner h2{font-family:'IM Fell English SC',Georgia,serif;letter-spacing:.5px;font-weight:400;margin:0 0 8px;font-size:clamp(22px,2.3vw,32px)}
     .evento-banner p{margin:0;color:var(--inchiostro,#625744);opacity:.85;font-size:.92em}
+    .iscrizioni-banner{border-top-color:#7b6541;background:linear-gradient(114deg,rgba(243,231,206,.98),rgba(210,210,183,.88))}
     .evento-form h3,.evento-totali h3,.evento-elenco h3{font-family:'IM Fell English SC',Georgia,serif;font-weight:400;font-size:1.45rem;margin:0 0 12px}
     .evento-campi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:10px}
     .evento-campi label,.evento-data label{display:flex;flex-direction:column;gap:5px;font-weight:700;font-size:.9rem;min-width:0}
@@ -41,25 +42,55 @@
     .aggiungi-qty button,.azioni-riga .x{white-space:nowrap;padding:7px 9px}
     .evento-elenco .x{color:#842b25}
     .evento-vuoto{font-size:.93em;opacity:.85}
+    .iscritti-numero{font-family:'IM Fell English SC',Georgia,serif;font-size:1.35rem;margin-top:12px}
+    .iscritti-numero strong{font-family:Georgia,serif;font-size:1rem}
     @media(max-width:1000px){.eventi-grid{grid-template-columns:minmax(0,1fr)}.evento-col{gap:12px}}
-    @media(max-width:500px){.eventi-main{width:calc(100% - 16px)}.evento-campi{grid-template-columns:1fr}.evento-campi .campo-oggetto{grid-column:auto}.evento-elenco table{min-width:460px}}
+    @media(max-width:500px){.eventi-main{width:calc(100% - 16px)}.evento-campi{grid-template-columns:1fr}.evento-campi .campo-oggetto{grid-column:auto}.evento-elenco table{min-width:460px}.evento-elenco .tabella-iscritti{min-width:360px}}
   </style>
-
-<link rel="stylesheet" href="buckland-theme.css">
-<link rel="stylesheet" href="buckland-layout.css">
-<link rel="stylesheet" href="buckland-contrast.css">
+  <link rel="stylesheet" href="buckland-theme.css">
+  <link rel="stylesheet" href="buckland-layout.css">
+  <link rel="stylesheet" href="buckland-contrast.css">
 </head>
 <body class="page-eventi">
 <div class="mp-page-shell"><header class="site-hero"><div class="site-hero-inner">
   <div class="site-hero-copy"><div class="site-eyebrow">Competizioni del club · Pesca sportiva</div>
-    <h1>Gara di pesca del Buckland Angling Club</h1><p class="site-hero-sub">La gara di pesca: partecipanti, consegne e classifiche per specie.</p></div>
+    <h1>Gara di pesca del Buckland Angling Club</h1>
+    <p class="site-hero-sub">Iscrizioni, partecipanti, consegne e classifiche per specie.</p></div>
   <a class="site-bell" href="ordini.html" data-order-bell hidden aria-label="Ordini da gestire"><span class="bell-symbol">🔔</span><span class="bell-count" data-bell-count>0</span></a>
   <a href="index.html" class="site-logo" aria-label="Buckland Angling Club · Registro"><img src="theme-assets/buckland-angling-club-logo.png" alt="Buckland Angling Club, insegna vittoriana con trota iridea"></a>
 </div></header><div id="nav"></div>
 <main class="eventi-main">
-<div class="section-heading"><span class="section-kicker">Gare e consegne</span></div>
-  <p class="eventi-intro page-lead">Il registro della gara di pesca raccoglie le catture e le consegne dei partecipanti. Puoi aggiornare le quantità, consultare i totali e cancellare le registrazioni.</p>
+  <div class="section-heading"><span class="section-kicker">Iscrizioni, gare e consegne</span></div>
+  <p class="eventi-intro page-lead">Registra i partecipanti alla gara di pesca, consulta gli iscritti e tieni traccia delle catture consegnate. Le iscrizioni sono separate dai totali delle consegne.</p>
   <div class="eventi-grid">
+    <!-- COLONNA SINISTRA: ISCRIZIONI -->
+    <section class="evento-col" aria-labelledby="titolo-iscrizioni">
+      <div class="box evento-banner iscrizioni-banner">
+        <h2 id="titolo-iscrizioni">Iscrizioni alla gara</h2>
+        <p>Registro dei partecipanti · Buckland Angling Club</p>
+        <div class="iscritti-numero">Partecipanti iscritti: <strong id="conteggio-iscritti">0</strong></div>
+      </div>
+      <p id="err-iscrizioni" class="evento-errore" role="alert"></p>
+      <form class="box evento-form" id="form-iscrizione">
+        <h3>Iscrivi un partecipante</h3>
+        <div class="evento-campi">
+          <label>Nome e cognome
+            <input id="persona-iscrizione" required autocomplete="off" placeholder="Nome del partecipante">
+          </label>
+          <label>Data di iscrizione
+            <input id="data-iscrizione" type="date" required>
+          </label>
+        </div>
+        <button type="submit">Registra iscrizione</button>
+      </form>
+      <div class="box evento-elenco">
+        <h3>Elenco iscritti · Pesca</h3>
+        <p class="nota-aggiunta">Ogni partecipante appare una sola volta. Puoi annullare la sua iscrizione senza cancellare le consegne già registrate.</p>
+        <div id="lista-iscritti"></div>
+      </div>
+    </section>
+
+    <!-- COLONNA DESTRA: CONSEGNE -->
     <section class="evento-col" data-tipo="pesca" aria-labelledby="titolo-pesca">
       <div class="box evento-banner">
         <h2 id="titolo-pesca">🎣 Gara di pesca</h2>
@@ -70,7 +101,10 @@
       <form class="box evento-form" id="form-pesca">
         <h3>Consegna di un partecipante</h3>
         <div class="evento-campi">
-          <label>Persona<input id="persona-pesca" required autocomplete="off"></label>
+          <label>Persona
+            <input id="persona-pesca" list="partecipanti-pesca" required autocomplete="off">
+            <datalist id="partecipanti-pesca"></datalist>
+          </label>
           <label>Quantità<input id="qty-pesca" type="number" min="0" step="1" value="0" required></label>
           <label class="campo-oggetto">Oggetto<input id="oggetto-pesca" required autocomplete="off"></label>
         </div>
@@ -79,7 +113,7 @@
       <div class="box evento-totali"><h3>Totali per oggetto · Pesca</h3><div class="tot" id="tot-pesca"></div></div>
       <div class="box evento-elenco">
         <h3>Consegne registrate · Pesca</h3>
-        <p class="nota-aggiunta">Puoi aggiungere quantità (anche 0) a un partecipante già censito oppure eliminare completamente la registrazione.</p>
+        <p class="nota-aggiunta">Puoi aggiungere quantità (anche 0) a un partecipante già censito oppure eliminare completamente la registrazione. I nomi degli iscritti vengono suggeriti nel modulo.</p>
         <div id="lista-pesca"></div>
       </div>
     </section>
@@ -94,9 +128,13 @@
 $('#nav').innerHTML=nav('e');
 
 const EVENTI_FISSI={pesca:'Gara di pesca'};
+// Le iscrizioni usano gli stessi campi e lo stesso archivio "Eventi" delle consegne.
+// Questo valore speciale permette di riconoscerle senza creare nuove collezioni o cambiare app.js.
+const MARCATORE_ISCRIZIONE='__BAC_ISCRIZIONE__';
 let rows=[];
 let busy=0;
 const gruppiVista={pesca:[]};
+let iscrittiVista=[];
 try{
   const mem=JSON.parse(localStorage.getItem('mp_eventi')||'[]');
   if(Array.isArray(mem))rows=mem;
@@ -104,17 +142,53 @@ try{
 
 function mostraErrore(tipo,msg){$('#err-'+tipo).textContent=msg||'';}
 function salvaCache(){try{localStorage.setItem('mp_eventi',JSON.stringify(rows));}catch(e){}}
+function normalizzaPersona(persona){return String(persona||'').trim().replace(/\s+/g,' ').toLocaleLowerCase('it');}
 
-// Includiamo anche le gare vecchie chiamate, ad esempio, "Gara di pesca storica".
-// Le righe con altri nomi non vengono modificate né cancellate.
+// Come nella pagina originale, restano visibili le gare storiche il cui nome contiene "pesca".
 function appartieneA(r,tipo){
   const nome=String(r.evento||'').toLocaleLowerCase('it').trim();
   return tipo==='pesca' && /\bpesca\b/.test(nome);
 }
+function eIscrizione(r){
+  return appartieneA(r,'pesca') && String(r.oggetto||'').trim()===MARCATORE_ISCRIZIONE;
+}
+function eConsegna(r){return appartieneA(r,'pesca') && !eIscrizione(r);}
 
+function iscrittiUnici(){
+  const persone=new Map();
+  for(const r of rows.filter(eIscrizione)){
+    const persona=String(r.persona||'').trim();
+    const key=normalizzaPersona(persona);
+    if(!key)continue;
+    const data=String(r.data||'');
+    if(!persone.has(key))persone.set(key,{key,persona,data});
+    else{
+      const precedente=persone.get(key);
+      if(data && (!precedente.data || data<precedente.data))precedente.data=data;
+    }
+  }
+  return [...persone.values()].sort((a,b)=>a.persona.localeCompare(b.persona,'it'));
+}
+function dataIt(iso){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(String(iso||'')))return '—';
+  const [anno,mese,giorno]=iso.split('-');
+  return giorno+'/'+mese+'/'+anno;
+}
+function disegnaIscrizioni(){
+  const iscritti=iscrittiUnici();
+  iscrittiVista=iscritti;
+  $('#conteggio-iscritti').textContent=String(iscritti.length);
+  $('#partecipanti-pesca').innerHTML=iscritti.map(r=>'<option value="'+esc(r.persona)+'"></option>').join('');
+  $('#lista-iscritti').innerHTML=iscritti.length
+    ? '<div class="tabella-scroll"><table class="tabella-iscritti"><thead><tr><th>Partecipante</th><th>Data iscrizione</th><th class="n">Azioni</th></tr></thead><tbody>'+
+      iscritti.map((r,i)=>'<tr><td><b>'+esc(r.persona)+'</b></td><td>'+esc(dataIt(r.data))+'</td><td class="n">'+
+        '<button type="button" class="x" onclick="eliminaIscrizione('+i+')">✕ Annulla</button></td></tr>').join('')+
+      '</tbody></table></div>'
+    : '<p class="evento-vuoto">Nessun partecipante ancora iscritto. Usa il modulo qui sopra per iniziare.</p>';
+}
 function gruppoPerTipo(tipo){
   const gruppi=new Map();
-  for(const r of rows.filter(r=>appartieneA(r,tipo))){
+  for(const r of rows.filter(eConsegna)){
     const persona=String(r.persona||'').trim();
     const oggetto=String(r.oggetto||'').trim();
     const key=persona+'\u0000'+oggetto;
@@ -123,9 +197,8 @@ function gruppoPerTipo(tipo){
   }
   return [...gruppi.values()];
 }
-
 function disegnaTipo(tipo){
-  const elenco=rows.filter(r=>appartieneA(r,tipo));
+  const elenco=rows.filter(eConsegna);
   const totali=new Map();
   for(const r of elenco){
     const oggetto=String(r.oggetto||'').trim();
@@ -149,14 +222,14 @@ function disegnaTipo(tipo){
       ).join('')+'</tbody></table></div>'
     : '<p class="evento-vuoto">Nessuna consegna registrata. Usa il modulo qui sopra per iniziare.</p>';
 
-  // Mostra l'ultima data registrata senza sovrascrivere una data scelta dall'utente.
+  // Non sovrascrivere la data scelta dall'utente.
   const dataEl=$('#data-'+tipo);
   if(!dataEl.value){
     const dataEsistente=[...elenco].reverse().find(r=>r.data);
     if(dataEsistente)dataEl.value=dataEsistente.data;
   }
 }
-function disegna(){disegnaTipo('pesca');}
+function disegna(){disegnaIscrizioni();disegnaTipo('pesca');}
 
 async function carica(){
   if(busy)return;
@@ -167,15 +240,14 @@ async function carica(){
     salvaCache();
     disegna();
     mostraErrore('pesca','');
-
   }catch(e){
-    // Manteniamo sullo schermo i dati della cache in caso di problemi di rete.
+    // In caso di problemi di rete lasciamo a schermo i dati salvati localmente.
     mostraErrore('pesca','Sincronizzazione non riuscita: '+e.message);
-
   }
 }
 
 async function registra(tipo,row,nuovaConsegna){
+  if(busy){mostraErrore(tipo,'Operazione in corso. Riprova quando è terminata.');return false;}
   const temp={id:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),...row};
   rows.push(temp);
   salvaCache();
@@ -189,15 +261,15 @@ async function registra(tipo,row,nuovaConsegna){
       $('#qty-'+tipo).value='0';
       $('#persona-'+tipo).focus();
     }
+    return true;
   }catch(e){
     rows=rows.filter(r=>r!==temp);
     salvaCache();
     disegna();
     mostraErrore(tipo,'Errore durante la registrazione: '+e.message);
+    return false;
   }finally{
     busy--;
-    // Sincronizza con gli ID generati dal server e con gli altri utenti.
-    // Non cancelliamo qui l'errore per poterlo mostrare all'utente.
     try{
       if(!busy){
         const result=await api('list','Eventi');
@@ -219,15 +291,10 @@ async function aggiungi(tipo,i){
     persona:g.persona,oggetto:g.oggetto,qty:delta},false);
 }
 
-async function eliminaGruppo(tipo,i){
-  const g=gruppiVista[tipo]?.[i];
-  if(!g)return;
-  const corrispondenti=rows.filter(r=>appartieneA(r,tipo)
-    &&String(r.persona||'').trim()===g.persona
-    &&String(r.oggetto||'').trim()===g.oggetto);
+async function eliminaRighe(tipo,corrispondenti,messaggio){
   if(!corrispondenti.length)return;
-  if(!confirm('Eliminare tutte le consegne di '+g.persona+' – '+g.oggetto+' dalla gara di '+tipo+'?'))return;
-  // Elimina solo gli oggetti corrispondenti, senza toccare eventuali altre righe prive di ID.
+  if(busy){mostraErrore(tipo,'Operazione in corso. Riprova quando è terminata.');return;}
+  if(!confirm(messaggio))return;
   rows=rows.filter(r=>!corrispondenti.includes(r));
   salvaCache();disegna();mostraErrore(tipo,'');busy++;
   try{
@@ -239,24 +306,63 @@ async function eliminaGruppo(tipo,i){
   }finally{
     busy--;
     try{
-      if(!busy){const result=await api('list','Eventi');
-        if(!busy&&Array.isArray(result.rows)){rows=result.rows;salvaCache();disegna();}}
+      if(!busy){
+        const result=await api('list','Eventi');
+        if(!busy&&Array.isArray(result.rows)){rows=result.rows;salvaCache();disegna();}
+      }
     }catch(e){}
   }
 }
-
-for(const tipo of Object.keys(EVENTI_FISSI)){
-  $('#form-'+tipo).addEventListener('submit',async e=>{
-    e.preventDefault();
-    const persona=$('#persona-'+tipo).value.trim();
-    const oggetto=$('#oggetto-'+tipo).value.trim();
-    const qty=Number($('#qty-'+tipo).value);
-    if(!persona||!oggetto){mostraErrore(tipo,'Inserisci persona e oggetto.');return;}
-    if(!Number.isInteger(qty)||qty<0){mostraErrore(tipo,'La quantità deve essere un intero uguale o maggiore di 0.');return;}
-    await registra(tipo,{evento:EVENTI_FISSI[tipo],data:$('#data-'+tipo).value,persona,oggetto,qty},true);
-  });
+async function eliminaGruppo(tipo,i){
+  const g=gruppiVista[tipo]?.[i];
+  if(!g)return;
+  const corrispondenti=rows.filter(r=>eConsegna(r)
+    &&String(r.persona||'').trim()===g.persona
+    &&String(r.oggetto||'').trim()===g.oggetto);
+  await eliminaRighe(tipo,corrispondenti,
+    'Eliminare tutte le consegne di '+g.persona+' – '+g.oggetto+' dalla gara di '+tipo+'?');
+}
+async function eliminaIscrizione(i){
+  const g=iscrittiVista[i];
+  if(!g)return;
+  const corrispondenti=rows.filter(r=>eIscrizione(r)&&normalizzaPersona(r.persona)===g.key);
+  await eliminaRighe('iscrizioni',corrispondenti,
+    'Annullare l’iscrizione di '+g.persona+'? Le sue consegne resteranno registrate.');
 }
 
+$('#form-iscrizione').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const persona=$('#persona-iscrizione').value.trim().replace(/\s+/g,' ');
+  const data=$('#data-iscrizione').value;
+  if(!persona||!data){mostraErrore('iscrizioni','Inserisci partecipante e data di iscrizione.');return;}
+  if(iscrittiUnici().some(r=>r.key===normalizzaPersona(persona))){
+    mostraErrore('iscrizioni','Questo partecipante è già iscritto alla gara.');return;
+  }
+  const salvato=await registra('iscrizioni',{
+    evento:EVENTI_FISSI.pesca,data,persona,oggetto:MARCATORE_ISCRIZIONE,qty:0
+  },false);
+  if(salvato){$('#persona-iscrizione').value='';$('#persona-iscrizione').focus();}
+});
+
+$('#form-pesca').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const persona=$('#persona-pesca').value.trim();
+  const oggetto=$('#oggetto-pesca').value.trim();
+  const qty=Number($('#qty-pesca').value);
+  if(!persona||!oggetto){mostraErrore('pesca','Inserisci persona e oggetto.');return;}
+  if(oggetto===MARCATORE_ISCRIZIONE){
+    mostraErrore('pesca','Questo nome oggetto è riservato alle iscrizioni.');return;
+  }
+  if(!Number.isInteger(qty)||qty<0){
+    mostraErrore('pesca','La quantità deve essere un intero uguale o maggiore di 0.');return;
+  }
+  await registra('pesca',{evento:EVENTI_FISSI.pesca,data:$('#data-pesca').value,
+    persona,oggetto,qty},true);
+});
+
+// Data odierna in ora locale, senza conversione UTC (evita slittamenti di giorno).
+const oggi=new Date();
+$('#data-iscrizione').value=[oggi.getFullYear(),String(oggi.getMonth()+1).padStart(2,'0'),String(oggi.getDate()).padStart(2,'0')].join('-');
 disegna();
 avvia(carica,'Eventi');
 </script>
