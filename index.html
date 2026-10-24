@@ -1,434 +1,461 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Buckland Angling Club · Registro</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English+SC&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{--forest-950:#17211a;--forest-900:#1d2b21;--forest-800:#27382b;--forest-700:#334a38;--forest-600:#44624a;--paper:#e8dcc0;--paper-2:#dfcfaa;--paper-3:#d3bd8d;--paper-soft:#f0e7d1;--ink:#2b2118;--ink-soft:#725f46;--line:rgba(54,42,29,.25);--brass:#aa8444;--brass-light:#d7b975;--rust:#8f3f2f;--rust-dark:#5e271f;--illegal:#431e1b;--illegal-2:#612a22;--shadow:0 12px 28px rgba(22,18,13,.16);--shadow-soft:0 5px 14px rgba(22,18,13,.12);box-sizing:border-box}
-*,*::before,*::after{box-sizing:inherit}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:'Merriweather',Georgia,'Times New Roman',serif;padding:20px 16px 132px;background-color:#9e8556;background-image:linear-gradient(rgba(70,51,31,.44),rgba(214,193,149,.79)),url('theme-assets/bg-index.png');background-position:center center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse 900px 460px at -8% -5%,rgba(41,68,45,.13),transparent 62%),radial-gradient(ellipse 800px 520px at 108% 106%,rgba(103,52,36,.10),transparent 64%)}.shell{max-width:1360px;margin:0 auto}
-.hero{position:relative;overflow:hidden;background:linear-gradient(115deg,rgba(23,33,26,.98),rgba(39,56,43,.96)),var(--forest-900);color:#f3ead6;border:1px solid rgba(29,43,33,.8);box-shadow:var(--shadow);margin-bottom:16px}.hero::before,.hero::after{content:"";position:absolute;border:1px solid rgba(215,185,117,.24);pointer-events:none}.hero::before{inset:7px}.hero::after{inset:12px;border-style:dashed;opacity:.55}.hero-inner{position:relative;z-index:1;padding:24px 28px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center}.eyebrow{font-family:'Merriweather',Georgia,serif;text-transform:uppercase;letter-spacing:2px;font-size:10px;color:var(--brass-light);margin-bottom:6px}.hero h1{margin:0;font-family:'Rye',Georgia,serif;font-weight:400;font-size:clamp(30px,5vw,52px);line-height:1;letter-spacing:1.5px}.hero-sub{margin:9px 0 0;color:#d9ceb6;font-size:13px;letter-spacing:.3px}.hero-mark{width:92px;height:92px;border:1px solid rgba(215,185,117,.5);outline:1px solid rgba(215,185,117,.18);outline-offset:6px;display:grid;place-items:center;text-align:center;transform:rotate(2deg);color:var(--brass-light)}.hero-mark .big{font-size:34px;line-height:1}.hero-mark .small{margin-top:5px;font-family:'IM Fell English SC',Georgia,serif;font-size:11px;letter-spacing:1px}.logo-mark{width:230px;height:auto;outline:none;border:0;background:none;display:block}.logo-mark img{display:block;width:230px;height:auto;filter:drop-shadow(0 8px 16px rgba(0,0,0,.26))}
-.guide{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:10px 14px;margin-bottom:18px;background:rgba(239,231,210,.82);border:1px solid var(--line);border-left:4px solid var(--brass);box-shadow:var(--shadow-soft)}.guide-icon{font-size:20px}.guide-main{font-size:12px;line-height:1.4}.guide-main strong{color:var(--forest-700)}.guide-hint{font-family:'Merriweather',Georgia,serif;color:var(--ink-soft);font-size:10px;white-space:nowrap}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:start}.sections{min-width:0}.section-block{margin-bottom:18px}.section-heading{display:flex;align-items:center;gap:10px;margin:0 0 8px;color:var(--forest-800)}.section-heading::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(51,74,56,.55),transparent)}.section-kicker{font-family:'IM Fell English SC',Georgia,serif;letter-spacing:.8px;font-size:15px;white-space:nowrap}.section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}.span-2{grid-column:1/-1}
-.category{overflow:hidden;background:linear-gradient(rgba(227,211,175,.96),rgba(227,211,175,.96)),repeating-linear-gradient(0deg,rgba(79,60,39,.025) 0 1px,transparent 1px 5px);border:1px solid rgba(65,49,32,.22);border-top:4px solid var(--brass);box-shadow:var(--shadow-soft)}.category.negative{border-top-color:var(--rust)}.category-head{min-height:46px;display:flex;align-items:center;gap:9px;padding:10px 12px;cursor:pointer;user-select:none;background:linear-gradient(90deg,rgba(255,255,255,.18),transparent)}.category-head:hover{background:rgba(255,255,255,.16)}.category-head .icon{font-size:18px}.category-head h2{margin:0;font-family:'IM Fell English SC',Georgia,serif;font-size:16px;font-weight:400;letter-spacing:.4px}.category-head .arrow{margin-left:auto;color:var(--brass);font-size:11px;transition:transform .18s ease}.category.collapsed .arrow{transform:rotate(-90deg)}.category.collapsed .category-body{display:none}.badge{display:inline-flex;align-items:center;padding:2px 6px;margin-left:5px;border:1px solid currentColor;font-family:'Merriweather',Georgia,serif;font-size:8.5px;letter-spacing:.4px;text-transform:uppercase;vertical-align:1px}.badge.invoice{color:var(--rust)}.badge.buy{color:var(--forest-700)}
-
-.column-heads,.row{display:grid;grid-template-columns:minmax(135px,1.7fr) 72px minmax(148px,1fr) 54px 82px;align-items:center;gap:8px}.column-heads{padding:5px 12px;border-top:1px solid rgba(60,45,30,.10);border-bottom:1px solid rgba(60,45,30,.14);background:rgba(255,255,255,.10)}.column-head{font-family:'Merriweather',Georgia,serif;color:var(--ink-soft);font-size:8.5px;letter-spacing:.35px;text-transform:uppercase}.column-head.right{text-align:right}.column-head.center{text-align:center}.rows{padding:0}.row{padding:7px 12px;border-bottom:1px dashed rgba(75,55,35,.22);min-height:42px}.row:last-child{border-bottom:0}.row:hover{background:rgba(255,255,255,.15)}.item-name{font-size:12px;line-height:1.2}.item-price{font-size:10.5px;color:var(--ink-soft);text-align:right;line-height:1.2}
-.qty-cubes{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:4px}.qty-cube{width:38px;height:27px;padding:2px 3px;text-align:center;font-family:'Courier New',monospace;font-size:11.5px;color:var(--ink);background:rgba(255,255,255,.16);border:1px solid rgba(94,74,52,.65);border-radius:3px}.qty-cube:focus{outline:none;border-color:var(--forest-600);box-shadow:0 0 0 2px rgba(68,98,74,.12)}.qty-cube::-webkit-outer-spin-button,.qty-cube::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.cube-btn{width:24px;height:24px;display:grid;place-items:center;padding:0;border:1px dashed rgba(94,74,52,.68);border-radius:3px;background:transparent;color:var(--forest-700);font-family:Georgia,serif;font-size:14px;cursor:pointer}.cube-btn:hover{background:rgba(51,74,56,.08)}.cube-btn.remove{color:var(--rust)}.qty-sum{text-align:center;font-family:'Courier New',monospace;font-size:12px;font-weight:bold;color:var(--forest-700)}.qty-sum.active::before{content:"×";opacity:.55;margin-right:1px}.row-total{text-align:right;min-width:62px;font-family:'Courier New',monospace;font-size:12px;font-weight:bold;color:var(--brass)}.category-subtotal{display:flex;justify-content:flex-end;gap:8px;padding:7px 12px;background:rgba(58,43,27,.055);border-top:1px solid rgba(60,45,30,.12);color:var(--ink-soft);font-size:11px}
-.rules-card{background:linear-gradient(rgba(235,222,193,.97),rgba(225,207,169,.97));border-top-color:var(--rust)}.rules-list{margin:0;padding:12px 20px 8px 38px;font-size:12.5px;line-height:1.5}.rules-list li{padding:4px 0}.pena{color:var(--rust);font-weight:bold}.rules-note{margin:0;padding:10px 14px 12px;border-top:1px dashed var(--line);color:var(--ink-soft);font-size:12px;font-style:italic}
-.summary-panel{position:sticky;top:16px;overflow:hidden;background:linear-gradient(rgba(31,45,35,.98),rgba(24,35,27,.99));color:#efe6d1;border:1px solid #162019;border-top:4px solid var(--brass);box-shadow:var(--shadow)}.summary-head{padding:14px 14px 10px;border-bottom:1px solid rgba(255,255,255,.10)}.summary-title{margin:0;font-family:'IM Fell English SC',Georgia,serif;font-size:18px;font-weight:400;letter-spacing:.5px}.summary-sub{margin:4px 0 0;color:#b7aa8e;font-size:10px;font-family:'Special Elite','Courier New',monospace}.summary-list{max-height:calc(100vh - 350px);overflow-y:auto;padding:5px 14px}.summary-empty{margin:10px 0;color:#9e927b;font-size:12px}.summary-row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.10)}.summary-row:last-child{border-bottom:0}.summary-row-main{min-width:0;display:flex;flex-direction:column;gap:2px}.summary-name{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#eee3ca;font-size:11.5px}.summary-cat{color:#9f947e;font-size:9px}.summary-row-nums{flex-shrink:0;display:flex;align-items:baseline;gap:7px}.summary-qty{color:#aaa087;font-size:10px}.summary-val{font-family:'Courier New',monospace;font-size:11.5px}.summary-val.pos{color:#d7b975}.summary-val.neg{color:#e38b77}.summary-totals{padding:12px 14px 14px;border-top:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.12)}.summary-total{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;font-size:11px;color:#bdb098}.summary-total strong{font-family:'Courier New',monospace;font-size:14px;color:#eee3ca}.summary-total.give strong{color:#d7b975}.summary-total.invoice strong{color:#e38b77}
-.footer-bar{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(232,220,192,.96);backdrop-filter:blur(6px);border-top:1px solid rgba(55,42,28,.28);box-shadow:0 -8px 24px rgba(45,32,20,.10)}.footer-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px}.reset-btn{border:1px solid var(--rust);background:transparent;color:var(--rust);padding:9px 14px;font-family:'IM Fell English SC',Georgia,serif;font-size:13px;cursor:pointer}.reset-btn:hover{background:var(--rust);color:#f4e9d2}.totals{display:flex;align-items:center;gap:30px}.grand-total{display:flex;flex-direction:column;align-items:flex-end}.grand-total .label{color:var(--ink-soft);font-family:'Merriweather',Georgia,serif;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px}.grand-total .amount{font-family:'Courier New',monospace;font-weight:bold;font-size:23px;line-height:1}.grand-total.give .amount{color:var(--forest-700)}.grand-total.invoice .amount{color:var(--rust)}
-@media(max-width:1060px){.layout{grid-template-columns:1fr}.summary-panel{position:static}.summary-list{max-height:none}}@media(max-width:760px){body{padding:10px 8px 145px}.hero-inner{padding:20px 18px;grid-template-columns:1fr}.hero-mark{display:none}.guide{grid-template-columns:auto 1fr}.guide-hint{display:none}.section-grid{grid-template-columns:1fr}.span-2{grid-column:auto}.column-heads{display:none}.row{grid-template-columns:minmax(0,1fr) 74px;grid-template-areas:"item price" "cubes cubes" "qty total";gap:5px 8px;padding:9px 10px}.item-name{grid-area:item;font-size:12.5px}.item-price{grid-area:price}.qty-cubes{grid-area:cubes;padding-top:2px}.qty-sum{grid-area:qty;text-align:left}.qty-sum::after{content:" q.tà totale";font-family:Georgia,'Times New Roman',serif;font-weight:normal;font-size:10.5px;color:var(--ink-soft)}.row-total{grid-area:total}.footer-inner{align-items:stretch;flex-direction:column;gap:8px}.reset-btn{order:2;padding:7px 12px}.totals{justify-content:space-between;width:100%;gap:10px}.grand-total{align-items:flex-start}.grand-total .amount{font-size:19px}}
-
-/* Leggibilità: font +2px e grassetto nelle liste */
-.column-heads,.row{grid-template-columns:minmax(150px,1.7fr) 82px minmax(160px,1fr) 62px 94px}
-.column-head{font-size:10.5px;font-weight:700}
-.item-name{font-size:14px;font-weight:700;line-height:1.25}.max-note{margin-left:6px;color:#b00020;font-size:11px;font-weight:700;white-space:nowrap}
-.item-price{font-size:12.5px;font-weight:700}
-.qty-cube{width:44px;height:31px;font-size:13.5px;font-weight:700}
-.qty-sum{font-size:14px}
-.qty-sum::after{font-size:12.5px;font-weight:700}
-.row-total{font-size:14px;min-width:70px}
-.summary-name{font-size:13.5px;font-weight:700;max-width:165px}
-.summary-cat{font-size:11px;font-weight:700}
-.summary-qty{font-size:12px;font-weight:700}
-.summary-val{font-size:13.5px;font-weight:700}
-.summary-total{font-size:13px;font-weight:700}
-@media(max-width:1060px){.row{grid-template-columns:minmax(0,1fr) 86px}.item-name{font-size:14.5px}}
-
-.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.quick a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 10px;text-decoration:none;text-align:center;font-family:'Rye',Georgia,serif;font-size:clamp(18px,3vw,26px);letter-spacing:1.5px;color:#f3ead6;background:linear-gradient(115deg,var(--forest-950),var(--forest-700));border:1px solid var(--forest-950);border-top:4px solid var(--brass);box-shadow:var(--shadow-soft)}
-.quick a:hover{background:var(--forest-600)}.quick a:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
-.quick a span{font-size:24px}.quick a small{font-family:'Merriweather',Georgia,serif;font-size:11px;font-weight:700;letter-spacing:.3px;color:var(--brass-light)}
-@media(max-width:600px){.quick{grid-template-columns:1fr 1fr}}
-
-.category.pesca-leggendaria{grid-column:2}
-@media(max-width:760px){.category.pesca-leggendaria{grid-column:auto}}
-
-.warning-guide{border-left-color:var(--rust);background:rgba(241,220,205,.86)}.warning-guide .guide-icon{color:var(--rust)}.warning-guide .guide-main strong{color:var(--rust)}
-
-/* Download listino */
-.footer-actions{display:flex;gap:9px;align-items:center}
-.poster-download{border:1px solid #6a532f;background:linear-gradient(130deg,#334a38,#1a2a20);color:#f7e7c6;padding:10px 19px;font:16px 'IM Fell English SC',Georgia,serif;letter-spacing:.5px;cursor:pointer;box-shadow:0 3px 10px rgba(33,27,18,.13)}
-.poster-download:hover{background:#44624a}
-.poster-download:focus-visible,.poster-modal button:focus-visible,.poster-modal select:focus-visible{outline:3px solid #ae8345;outline-offset:2px}
-.poster-modal-open{overflow:hidden}
-.poster-modal[hidden]{display:none!important}
-.poster-modal{position:fixed;inset:0;background:rgba(17,19,15,.74);z-index:100;display:flex;align-items:center;justify-content:center;padding:22px}
-.poster-dialog{width:min(900px,100%);max-height:min(94vh,1100px);background:#ebdaba;border:6px double #6e4828;box-shadow:0 20px 60px #090906aa;display:flex;flex-direction:column;overflow:hidden;color:#382619}
-.poster-modal-head{display:flex;justify-content:space-between;gap:12px;padding:18px 20px 10px}
-.poster-modal-head h2{font:27px 'Rye',Georgia,serif;margin:0}
-.poster-modal-head p{font-size:12px;margin:7px 0 0;color:#695135;line-height:1.5}
-.poster-x{align-self:start;border:1px solid #876b4b;background:transparent;color:#382619;font-size:23px;width:37px;height:37px;cursor:pointer}
-.poster-modal-settings{padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid #b49c72;font-size:14px;font-weight:700}
-.poster-modal-settings select{font:16px Georgia,serif;color:#35251a;min-width:200px;max-width:100%;padding:8px;border:1px solid #907049;background:#f8e9cb}
-.poster-preview{overflow-y:auto;background:#bda37b;min-height:160px;padding:15px;flex:1;text-align:center}
-.poster-preview canvas{display:block;width:min(100%,560px);height:auto;margin:0 auto;box-shadow:0 5px 18px #35251a66}
-.poster-modal-footer{padding:12px 18px 17px;display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
-.poster-status{font-size:12px;color:#6d5231;flex:1}
-.poster-modal-footer button{padding:10px 14px;border:1px solid #72522d;cursor:pointer;font:14px Georgia,serif}
-.poster-modal-footer button:disabled{opacity:.6;cursor:wait}
-.poster-cancel{background:transparent;color:#65482b}
-.poster-save{background:#314633;color:#f8e9c5}
-@media(max-width:760px){.footer-actions{width:100%;justify-content:space-between;order:2}.poster-download{flex:1;font-size:14px;padding:8px 10px}.reset-btn{flex:1}.poster-modal{padding:5px}.poster-dialog{max-height:96vh}.poster-modal-head h2{font-size:19px}.poster-modal-settings{gap:7px}}
-
-/* Due listini distinti, senza modifiche al registro */
-.poster-private-note{font-size:11px;font-weight:400;color:#7f553d}
-.footer-actions{flex-wrap:wrap}
-.footer-actions .poster-download{white-space:nowrap}
-@media(max-width:1050px){.footer-inner{align-items:stretch;flex-direction:column;gap:9px}.footer-actions{width:100%;justify-content:center}.totals{width:100%;justify-content:space-around}.footer-bar{padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}}
-@media(max-width:760px){body{padding-bottom:205px}.footer-actions{order:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.footer-actions .reset-btn{grid-column:1/-1;order:3}.footer-actions .poster-download{white-space:normal;font-size:13px;line-height:1.1;padding:9px 6px}.totals{order:0}.poster-private-note{line-height:1.5}}
-@media(max-width:430px){body{padding-bottom:216px}}
-
-/* Notifiche ordini in tempo reale anche nel Registro */
-.index-hero-tools{display:flex;align-items:center;gap:22px}
-.index-order-bell{position:relative;display:grid;place-items:center;flex:none;width:56px;height:56px;border-radius:50%;color:#f7e7c6;text-decoration:none;background:linear-gradient(135deg,#39523c,#1b2b21);border:1px solid #d2a968;box-shadow:0 5px 15px #0005}
-.index-order-bell .bell-symbol{font-size:25px}
-.index-order-bell .bell-count{position:absolute;top:-8px;right:-5px;color:#fff;background:#b7352b;border:2px solid #f4e2c2;border-radius:99px;min-width:27px;text-align:center;padding:4px;font:bold 12px Arial,sans-serif}
-.index-order-bell[hidden],.quick-order-count[hidden]{display:none!important}
-.quick .quick-orders{position:relative}
-.quick .quick-order-count{position:absolute;top:5px;right:8px;border-radius:99px;border:2px solid #efddbd;padding:4px 7px;min-width:29px;color:#fff;background:#b7352b;font:bold 13px Arial,sans-serif;text-align:center;box-shadow:0 2px 8px #0005}
-@media(max-width:760px){.index-hero-tools{justify-content:space-between;width:100%}.index-hero-tools .hero-mark{display:block;width:155px;height:auto}.index-hero-tools .hero-mark img{width:155px}}
-</style>
-
-<link rel="stylesheet" href="buckland-theme.css">
-<link rel="stylesheet" href="buckland-layout.css">
-<link rel="stylesheet" href="buckland-contrast.css">
-<link rel="stylesheet" href="buckland-one-line.css">
-</head>
-<body class="page-index">
-<div class="shell">
-<header class="hero"><div class="hero-inner"><div><div class="eyebrow">Registro di Pesca e forniture</div><h1>Buckland Angling Club</h1><p class="hero-sub">Pesce fresco · Esche · Canne · Forniture da pesca</p></div><div class="index-hero-tools"><a href="ordini.html" class="index-order-bell" data-order-bell hidden aria-label="Ordini da gestire"><span class="bell-symbol">🔔</span><span class="bell-count" data-bell-count>0</span></a><div class="hero-mark logo-mark"><img src="theme-assets/buckland-angling-club-logo.png" alt="Buckland Angling Club, insegna vittoriana con trota iridea"></div></div></div></header>
-<nav class="quick club-main-nav" aria-label="Navigazione principale"><a class="on" aria-current="page" href="index.html"><span>◈</span>REGISTRO<small>Acquisti e forniture</small></a><a href="ordini.html" class="quick-orders"><span>✧</span>ORDINI<small>Fatture e richieste</small><span class="quick-order-count" data-order-count hidden>0</span></a><a href="eventi.html"><span>✦</span>EVENTI<small>Gara di pesca</small></a><a href="regole.html"><span>❖</span>REGOLE<small>Il regolamento</small></a><a href="wiki.html"><span>⌘</span>WIKI<small>Pesci e ricette</small></a></nav>
-<section class="ledger-heading" aria-label="Strumenti del registro">
-<div class="ledger-heading-copy"><div class="ledger-eyebrow">REGISTRO COMMERCIALE · BUCKLAND ANGLING CLUB</div><h2>Il registro delle acque</h2><p>Annota il pescato acquistato e le forniture vendute. Ogni importo viene aggiornato automaticamente.</p></div>
-<div class="ledger-quick-status"><span class="status-dot"></span><span id="selectionCount" aria-live="polite">Nessun articolo selezionato</span><span class="status-divider"></span><span>Anno 1900</span></div>
-</section>
-<div class="ledger-toolbar">
- <div class="ledger-filter" role="group" aria-label="Filtra il registro"><button type="button" class="ledger-tab active" data-ledger-filter="all" aria-pressed="true">Tutti gli articoli</button><button type="button" class="ledger-tab" data-ledger-filter="raccolta" aria-pressed="false">Pescato</button><button type="button" class="ledger-tab" data-ledger-filter="forniture" aria-pressed="false">Forniture</button></div>
- <label class="ledger-search" for="ledgerSearch"><span aria-hidden="true">⌕</span><input id="ledgerSearch" type="search" placeholder="Cerca un articolo…" autocomplete="off" aria-label="Cerca un articolo"><kbd>/</kbd></label>
-</div>
-<details class="ledger-help"><summary>Come funziona il registro? <span>Guida rapida</span></summary><p>Ogni casella rappresenta una cassa o uno stack. Con <strong>+</strong> ne aggiungi un'altra, con <strong>−</strong> rimuovi l'ultima. La quantità totale e gli importi vengono calcolati automaticamente. Esempio: <strong>18 + 23 + 11 = 52</strong>.</p></details>
-<p class="ledger-no-results" id="ledgerNoResults" hidden>Nessun articolo trovato. Prova un altro nome o cambia il filtro.</p>
-<div class="layout ledger-main"><main class="sections" id="sections" aria-label="Listini articoli"></main><aside class="summary-panel"><div class="summary-head"><span class="summary-eyebrow">RIEPILOGO IN TEMPO REALE</span><h2 class="summary-title">Registro corrente</h2><p class="summary-sub">Solo le voci con quantità inserita</p></div><div class="summary-list" id="summaryList"><p class="summary-empty">Nessun articolo inserito.</p></div><div class="summary-totals"><div class="summary-total give"><span>Da dare</span><strong id="summaryGive">$0.00</strong></div><div class="summary-total invoice"><span>Fattura</span><strong id="summaryInvoice">$0.00</strong></div></div></aside></div>
-</div>
-<div class="footer-bar"><div class="footer-inner"><div class="footer-actions"><button class="reset-btn" type="button" onclick="resetAll()">Svuota registro</button><button class="poster-download" id="posterPesca" type="button">↓ Scarica volantino PNG</button></div><div class="totals"><div class="grand-total give"><span class="label">Da pagare al cliente</span><span class="amount" id="totalGive">$0.00</span></div><div class="grand-total invoice"><span class="label">Fattura cliente</span><span class="amount" id="totalInvoice">$0.00</span></div></div></div></div>
-
-<div id="posterModal" class="poster-modal" role="dialog" aria-modal="true" aria-labelledby="posterTitle" hidden>
-  <div class="poster-dialog">
-    <div class="poster-modal-head"><div><h2 id="posterTitle">Volantino del Buckland Angling Club</h2><p>Volantino PNG del club, generato con gli articoli e i prezzi del registro.</p></div><button id="posterClose" class="poster-x" type="button" aria-label="Chiudi">×</button></div>
-    <div class="poster-modal-settings"><span id="posterModeLabel">Listino della pesca</span></div>
-    <div id="posterPreview" class="poster-preview" aria-label="Anteprima volantino">Il volantino verrà visualizzato qui.</div>
-    <div class="poster-modal-footer"><span class="poster-status" id="posterStatus">Seleziona un listino per creare l'immagine.</span><button id="posterCancel" class="poster-cancel" type="button">Chiudi</button><button id="posterSave" class="poster-save" type="button" disabled>↓ Scarica PNG</button></div>
-  </div>
-</div>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="app.js"></script>
-<script>initChrome();</script>
-<script src="listino-assets/offline-assets.js"></script>
-<script>
-const data=[
-  {group:"raccolta",name:"Pesca",icon:"🐟",items:[{n:"Granchio",p:.10},{n:"Ostrica",p:.10},{n:"Perca di Scoglio Piccolo",p:.60},{n:"Perca Gialla Piccolo",p:.60},{n:"Persico Dalle Branchie Blue",p:.80},{n:"Pesce Gatto Nebuloso Piccolo",p:.70},{n:"Pickerel Piccolo",p:.70},{n:"Pickerel Rosso Piccolo",p:.70},{n:"Salmone Rosso Piccolo",p:1.00},{n:"Pesci Medi",p:1.00},{n:"Pesci Grandi",p:1.50}]},
-  {group:"raccolta",name:"Pesca Leggendaria",icon:"🏆",legendaryFishing:true,items:[{n:"Boccalone Grande",p:20.00},{n:"Persico Trota Dolomeu Grande",p:41.00},{n:"Salmone Rosso Grande",p:17.50},{n:"Trota Iridea Grande",p:28.00}]},
-  {group:"attrezzatura",name:"Attrezzi",icon:"🎣",negative:true,items:[{n:"Canna Da Pesca",p:11.00},{n:"Canna Migliorata (full kit)",p:20.00},{n:"Fusto",p:3.00},{n:"Impugnatura",p:3.00},{n:"Lenza",p:3.00},{n:"Mulinello",p:5.00},{n:"Mulinello In Metallo",p:10.00},{n:"Fuoco da campo",p:2.00}]},
-  {group:"trappole",name:"Trappole",icon:"🪤",negative:true,items:[{n:"Trappola per Pesci",p:5.00,maxQty:10},{n:"Esca Granchio",p:.30},{n:"Esca Per Pesci Grandi",p:1.00,maxQty:70},{n:"Esca Per Pesci Medi",p:.80},{n:"Esca Per Pesci Piccoli",p:.50}]},
-  {group:"esche",name:"Esche Pesca",icon:"🪱",negative:true,items:[{n:"Esca Di Aragosta Leggendaria",p:5.00},{n:"Esca di Libellula",p:.15},{n:"Esca di Libellula Leggendaria",p:5.00},{n:"Esca Di Pesce",p:12.00},{n:"Esca Di Pesce Leggendaria",p:3.00},{n:"Esca Spinner V4 Leggendaria",p:10.00},{n:"Esca Spinner V6 Leggendaria",p:12.00},{n:"Grilli",p:.15}]}
-];
-
-const groups=[{id:"raccolta",title:"Pescato e pesci leggendari"},{id:"forniture",title:"Forniture e attrezzatura"}];
-const sections=document.getElementById("sections");
-function makeColumns(cat){const full=cat.full?" span-2":"";const typeClass=cat.negative?" negative":" positive";const legendaryFishing=cat.legendaryFishing?" pesca-leggendaria":"";const catDiv=document.createElement("article");catDiv.className=`category${typeClass}${full}${legendaryFishing}`;if(!["Pesca","Pesca Leggendaria"].includes(cat.name))catDiv.classList.add("collapsed");const ci=data.indexOf(cat);const statusBadge=cat.negative?`<span class="badge invoice">fattura</span>`:`<span class="badge buy">acquisto</span>`;catDiv.innerHTML=`<div class="category-head"><span class="icon">${cat.icon}</span><h2>${cat.name} ${statusBadge}</h2><span class="arrow">▼</span></div><div class="category-body"><div class="column-heads"><span class="column-head">Articolo</span><span class="column-head right">Prezzo</span><span class="column-head center">Casse / Stack</span><span class="column-head center">Qtà</span><span class="column-head right">Importo</span></div><div class="rows"></div><div class="category-subtotal"><span>Subtotale</span><strong id="subtotal-${ci}">$0.00</strong></div></div>`;const catHead=catDiv.querySelector(".category-head");catHead.setAttribute("role","button");catHead.setAttribute("tabindex","0");catHead.setAttribute("aria-label",`Apri o chiudi ${cat.name}`);catHead.setAttribute("aria-expanded",String(!catDiv.classList.contains("collapsed")));const toggleCat=()=>{catDiv.classList.toggle("collapsed");catHead.setAttribute("aria-expanded",String(!catDiv.classList.contains("collapsed")))};catHead.onclick=toggleCat;catHead.onkeydown=(event)=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleCat()}};const rows=catDiv.querySelector(".rows");cat.items.forEach((item,ii)=>{const row=document.createElement("div");row.className="row";const price=item.tierQty?`$${item.p.toFixed(2)}<br><small>$${item.tierPrice.toFixed(2)} da ${item.tierQty}+</small>`:`$${item.p.toFixed(2)}`;row.innerHTML=`<span class="item-info"><span class="item-name">${item.n}${item.maxQty?`<span class="max-note">MAX ${item.maxQty}</span>`:""}</span><span class="item-price">${price}</span></span><span class="qty-cubes" id="cubes-${ci}-${ii}"><span class="qty-cube-track"><input type="number" min="0" ${item.maxQty?`max="${item.maxQty}"`:""} step="1" value="" placeholder="0" class="qty-cube" data-ci="${ci}" data-ii="${ii}" aria-label="${item.n} · Cassa 1" title="Cassa 1" oninput="calculate()"></span><button type="button" class="cube-btn add" onclick="addCube(${ci},${ii})" title="Aggiungi un'altra cassa/stack" aria-label="Aggiungi un'altra cassa">+</button><button type="button" class="cube-btn remove" onclick="removeCube(${ci},${ii})" title="Rimuovi l'ultima cassa/stack" aria-label="Rimuovi l'ultima cassa">−</button></span><span class="qty-sum" id="qty-${ci}-${ii}">0</span><span class="row-total" id="total-${ci}-${ii}">$0.00</span>`;rows.appendChild(row)});return catDiv}
-groups.forEach(group=>{const wrap=document.createElement("section");wrap.className="section-block";const heading=document.createElement("div");heading.className="section-heading";heading.innerHTML=`<span class="section-kicker">${group.title}</span><span class="section-count">${data.filter(cat=>group.id==="forniture"?cat.negative:cat.group==="raccolta").reduce((n,cat)=>n+cat.items.length,0)} articoli</span>`;wrap.appendChild(heading);const grid=document.createElement("div");grid.className="section-grid";data.filter(cat=>group.id==="forniture"?cat.negative:cat.group==="raccolta").forEach(cat=>grid.appendChild(makeColumns(cat)));wrap.appendChild(grid);sections.appendChild(wrap)});
-function updateCubeLabels(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);if(!container)return;const cubes=container.querySelectorAll(".qty-cube");const item=data[ci].items[ii];cubes.forEach((cube,idx)=>{cube.title=`Cassa ${idx+1}`;cube.setAttribute("aria-label",`${item.n} · Cassa ${idx+1}`)})}
-function addCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const input=document.createElement("input");input.type="number";input.min="0";const item=data[ci].items[ii];if(item.maxQty)input.max=String(item.maxQty);input.step="1";input.placeholder="0";input.className="qty-cube";input.dataset.ci=ci;input.dataset.ii=ii;input.oninput=calculate;const track=container.querySelector(".qty-cube-track");track.appendChild(input);updateCubeLabels(ci,ii);input.focus();input.scrollIntoView({block:'nearest',inline:'nearest'});calculate()}
-function removeCube(ci,ii){const container=document.getElementById(`cubes-${ci}-${ii}`);const cubes=container.querySelectorAll(".qty-cube");if(cubes.length>1){cubes[cubes.length-1].remove();updateCubeLabels(ci,ii);calculate()}else{cubes[0].value="";calculate()}}
-function calculate(){let give=0,invoice=0;const active=[];data.forEach((cat,ci)=>{let subtotal=0;const sign=cat.negative?-1:1;cat.items.forEach((item,ii)=>{const cubes=document.querySelectorAll(`.qty-cube[data-ci="${ci}"][data-ii="${ii}"]`);let qty=0,filledBoxes=0;cubes.forEach(cube=>{let value=Math.max(0,parseFloat(cube.value)||0);if(item.maxQty){const remaining=Math.max(0,item.maxQty-qty);if(value>remaining){value=remaining;cube.value=remaining>0?remaining:""}}qty+=value;if(value>0)filledBoxes++});if(item.maxQty&&qty>item.maxQty)qty=item.maxQty;const qtyEl=document.getElementById(`qty-${ci}-${ii}`);qtyEl.textContent=qty;qtyEl.classList.toggle("active",qty>0);let rowValue=item.tierQty&&qty>=item.tierQty?qty*item.tierPrice:qty*item.p;const rowTotal=sign*rowValue;document.getElementById(`total-${ci}-${ii}`).textContent=`${rowTotal<0?"-":""}$${Math.abs(rowTotal).toFixed(2)}`;subtotal+=rowTotal;if(qty>0)active.push({name:item.n,cat:cat.name,qty,boxes:filledBoxes,value:rowTotal})});document.getElementById(`subtotal-${ci}`).textContent=`${subtotal<0?"-":""}$${Math.abs(subtotal).toFixed(2)}`;if(cat.negative)invoice+=Math.abs(subtotal);else give+=subtotal});const fmt=v=>`$${v.toFixed(2)}`;document.getElementById("totalGive").textContent=fmt(give);document.getElementById("totalInvoice").textContent=fmt(invoice);renderSummary(active,give,invoice)}
-function renderSummary(active,give,invoice){const list=document.getElementById("summaryList");if(active.length===0){list.innerHTML=`<p class="summary-empty">Nessun articolo inserito.</p>`}else{list.innerHTML=active.map(a=>`<div class="summary-row"><div class="summary-row-main"><span class="summary-name">${a.name}</span><span class="summary-cat">${a.cat}${a.boxes>1?` · ${a.boxes} casse/stack`:""}</span></div><div class="summary-row-nums"><span class="summary-qty">×${a.qty}</span><span class="summary-val ${a.value<0?"neg":"pos"}">${a.value<0?"-":""}$${Math.abs(a.value).toFixed(2)}</span></div></div>`).join("")}document.getElementById("summaryGive").textContent=`$${give.toFixed(2)}`;document.getElementById("summaryInvoice").textContent=`$${invoice.toFixed(2)}`}
-function resetAll(){document.querySelectorAll(".qty-cubes").forEach(container=>{const cubes=container.querySelectorAll(".qty-cube");cubes.forEach((cube,idx)=>{if(idx===0)cube.value="";else cube.remove()});const first=container.querySelector(".qty-cube");if(first){const ci=Number(first.dataset.ci),ii=Number(first.dataset.ii);updateCubeLabels(ci,ii)}});calculate()}
-calculate();
-/* === Buckland Angling Club: manifesto dei listini (Canvas, senza librerie esterne) === */
-const POSTER_ART = {
- paper: 'listino-assets/parchment_bg.png',
- frame: 'listino-assets/ornate_border.png',
- landscape: 'listino-assets/mountain_footer.png',
- lodge: 'listino-assets/lodge_vignette.png',
- fishing: 'listino-assets/fishing_vignette.png',
- logo: 'theme-assets/buckland-angling-club-logo.png'
-};
-const POSTER_INFO = {
-  Pesca: {title:'ACQUISTIAMO IL PESCATO',type:'acquisto'},
-  'Pesca Leggendaria': {title:'PESCA LEGGENDARIA',type:'acquisto'},
-  Attrezzi: {title:'CANNE E ATTREZZI',type:'vendita'},
-  Trappole: {title:'TRAPPOLE ED ESCHE',type:'vendita'},
-  'Esche Pesca': {title:'ESCHE DA PESCA',type:'vendita'}
-};
-let posterCanvas = null;
-let posterBusy = false;
-let posterMode = "pesca";
-const posterChoices = {
-  pesca: {caption:'LISTINO DELLA PESCA',left:['Pesca','Pesca Leggendaria'],right:['Attrezzi','Trappole','Esche Pesca']}
-};
-function posterSections(keys) {
-  return keys.map(key => {
-    const [name, subtype] = key.split(':');
-    const cat = data.find(entry => entry.name === name);
-    if (!cat) return null;
-    const items = cat.items;
-    if (!items.length) return null;
-    const rows = [];
-    for (const item of items) {
-      rows.push({name:item.n, price:item.p, maxQty:item.maxQty || null});
-      if (item.tierQty) rows.push({name:`${item.n} (da ${item.tierQty}+)`,price:item.tierPrice});
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>IL CORVO — Il Bracconiere delle Wildlands</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Pirata+One&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nero: #080807;
+      --pannello: #181713;
+      --bordo: #484037;
+      --inchiostro: #ded8ca;
+      --sbiadito: #a79e90;
+      --rosso: #8b3730;
+      --rosso-luce: #ba574b;
+      --oro: #c2a67d;
+      --font-titolo: 'Pirata One', 'IM Fell English SC', Georgia, serif;
+      --font-testo: 'Special Elite', 'Courier New', monospace;
     }
-    return {title:POSTER_INFO[name]?.title || name.toUpperCase(),type:POSTER_INFO[name]?.type || 'vendita',rows};
-  }).filter(Boolean);
-}
-function posterTextWidth(ctx,text,maxWidth,fontSize,fontFamily) {
-  let size=fontSize;
-  do {ctx.font=`${size}px ${fontFamily}`;if(ctx.measureText(text).width<=maxWidth)break;size-=1;} while(size>19);
-  return size;
-}
-function posterRowHeight(ctx,row,width) {
-  const labelLimit=width-165;
-  ctx.font='24px Georgia';
-  const wrapped=ctx.measureText(row.name).width>labelLimit;
-  return (wrapped ? 60 : 42) + (row.maxQty ? 19 : 0);
-}
-function posterCardHeight(ctx,cat,width) {return 94+cat.rows.reduce((sum,row)=>sum+posterRowHeight(ctx,row,width),0)+12;}
-function posterLine(ctx,x1,y1,x2,y2,width=2,color='#64462a') {ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
-function posterOval(ctx,x,y,w,h,color='#785234',lineWidth=1.5) {ctx.beginPath();ctx.ellipse(x,y,w,h,0,0,Math.PI*2);ctx.strokeStyle=color;ctx.lineWidth=lineWidth;ctx.stroke();}
-function posterFlourish(ctx,x,y,scale=1) {
-  ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.lineWidth=2.1;ctx.strokeStyle='#593719';
-  for (let s of [-1,1]) {ctx.save();ctx.scale(s,1);ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(30,-21,51,-21,73,0);ctx.bezierCurveTo(90,14,110,4,125,-6);ctx.stroke();ctx.beginPath();ctx.moveTo(39,-12);ctx.bezierCurveTo(50,-38,84,-26,68,-14);ctx.bezierCurveTo(61,-7,49,-10,58,-18);ctx.stroke();ctx.beginPath();ctx.moveTo(84,2);ctx.bezierCurveTo(94,30,120,18,112,10);ctx.stroke();ctx.restore();}
-  ctx.beginPath();ctx.moveTo(-10,0);ctx.quadraticCurveTo(0,-19,10,0);ctx.quadraticCurveTo(0,19,-10,0);ctx.fillStyle='#593719';ctx.fill();ctx.restore();
-}
-function posterPine(ctx,x,y,h,ink='#6a4b32',a=1) {
-  ctx.save();ctx.globalAlpha=a;ctx.strokeStyle=ink;ctx.fillStyle=ink;
-  ctx.lineWidth=Math.max(2,h/42);posterLine(ctx,x,y,x,y-h,Math.max(2,h/45),ink);
-  for(let k=0;k<7;k++) {const q=(k+.8)/8,wy=y-h+h*q,w=h*(.06+q*.20);ctx.beginPath();ctx.moveTo(x,wy-h*.12);ctx.lineTo(x-w,wy+h*.035);ctx.lineTo(x-w*.45,wy-h*.002);ctx.lineTo(x,wy+h*.038);ctx.lineTo(x+w*.45,wy-h*.002);ctx.lineTo(x+w,wy+h*.035);ctx.closePath();ctx.fill();}
-  ctx.restore();
-}
-function posterLandscape(ctx,width,height) {
-  const base=height-130;
-  ctx.save();ctx.strokeStyle='#97734c';ctx.lineWidth=2.3;ctx.globalAlpha=.66;
-  ctx.beginPath();ctx.moveTo(18,base+60);
-  for(let i=0;i<=width;i+=34) {const peak=Math.sin(i*.029)*28+Math.cos(i*.011)*40+Math.sin(i*.062)*13;ctx.lineTo(i,base-45-peak);}ctx.stroke();
-  ctx.globalAlpha=.48;
-  for(let i=24;i<width;i+=42)posterPine(ctx,i,height-45,36+(i*23%24),'#6a4b32',.56);
-  ctx.globalAlpha=.65;for(let j=0;j<6;j++){posterLine(ctx,85,height-64+j*5,width-85,height-66+j*4,.8,'#a28059');}
-  ctx.restore();
-}
-function posterFish(ctx,x,y,s=1) {
-  ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.strokeStyle='#533318';ctx.lineWidth=3;
-  ctx.beginPath();ctx.moveTo(-76,0);ctx.bezierCurveTo(-45,-37,32,-30,75,0);ctx.bezierCurveTo(29,34,-43,35,-76,0);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(-76,0);ctx.lineTo(-105,-26);ctx.lineTo(-105,26);ctx.closePath();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(-4,-25);ctx.lineTo(6,-48);ctx.lineTo(26,-22);ctx.stroke();
-  ctx.beginPath();ctx.arc(55,-5,3,0,Math.PI*2);ctx.fillStyle='#533318';ctx.fill();
-  ctx.beginPath();ctx.arc(18,0,11,-Math.PI/2,Math.PI/2);ctx.stroke();
-  ctx.restore();
-}
-function posterPaper(ctx,w,h,assets){
-  if(assets.paper){
-    ctx.drawImage(assets.paper,0,0,w,h);
-  }else{
-    const grad=ctx.createLinearGradient(0,0,0,h);
-    grad.addColorStop(0,'#d7edf5');
-    grad.addColorStop(.4,'#c4e1ec');
-    grad.addColorStop(1,'#8fb9ca');
-    ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
-  }
-  const sky=ctx.createLinearGradient(0,0,0,h);
-  sky.addColorStop(0,'rgba(170,219,235,.26)');
-  sky.addColorStop(.32,'rgba(142,198,220,.18)');
-  sky.addColorStop(1,'rgba(31,74,105,.08)');
-  ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
-  ctx.fillStyle='rgba(237,248,251,.36)';ctx.fillRect(68,110,w-136,h-250);
-}
-function posterDrawFrame(ctx,w,h,img){
-  if(!img){ctx.strokeStyle='#52351d';ctx.lineWidth=7;ctx.strokeRect(30,30,w-60,h-60);return;}
-  // Cornice a nove segmenti: non si stirano gli ornamenti degli angoli sui manifesti alti.
-  const sw=img.naturalWidth,sh=img.naturalHeight;
-  const a=210,b=260,dw=270,dh=300;
-  ctx.save();ctx.globalAlpha=.77;
-  const piece=(sx,sy,fw,fh,dx,dy,tw,th)=>ctx.drawImage(img,sx,sy,fw,fh,dx,dy,tw,th);
-  piece(0,0,a,b,0,0,dw,dh);piece(sw-a,0,a,b,w-dw,0,dw,dh);
-  piece(0,sh-b,a,b,0,h-dh,dw,dh);piece(sw-a,sh-b,a,b,w-dw,h-dh,dw,dh);
-  piece(a,0,sw-2*a,b,dw,0,w-2*dw,dh);
-  piece(a,sh-b,sw-2*a,b,dw,h-dh,w-2*dw,dh);
-  piece(0,b,a,sh-2*b,0,dh,dw,h-2*dh);
-  piece(sw-a,b,a,sh-2*b,w-dw,dh,dw,h-2*dh);
-  ctx.restore();
-}
-function posterDrawMountain(ctx,w,h,assets){
-  if(assets.landscape){
-    ctx.save();ctx.globalAlpha=.65;
-    const ih=190;
-    ctx.drawImage(assets.landscape,64,h-ih-69,w-128,ih);
-    ctx.restore();
-  }else posterLandscape(ctx,w,h);
-}
+    * { box-sizing: border-box; }
+    html { min-width: 320px; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--inchiostro);
+      font-family: var(--font-testo);
+      background:
+        radial-gradient(ellipse at 49% -14%, #42312944 0%, transparent 52%),
+        radial-gradient(circle at 90% 96%, #24170f 0%, transparent 34%),
+        repeating-linear-gradient(90deg, #ffffff02 0 1px, transparent 1px 9px),
+        var(--nero);
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      pointer-events: none;
+      opacity: .14;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+      mix-blend-mode: screen;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, input:focus-visible { outline: 2px solid var(--rosso-luce); outline-offset: 2px; }
+    .page { max-width: 1250px; padding: 21px 25px 32px; margin: 0 auto; }
+    .top {
+      position: relative;
+      padding: 9px 20px 15px;
+      margin-bottom: 17px;
+      border-top: 1px solid #736252;
+      border-bottom: 1px solid var(--bordo);
+      text-align: center;
+      background:
+        linear-gradient(135deg, transparent 12%, #371d191b 12.3%, transparent 12.6%),
+        repeating-linear-gradient(177deg, transparent 0 14px, #c5b7a205 15px 16px),
+        #15130f;
+      box-shadow: 0 8px 22px #0009, inset 0 0 0 4px #080807, inset 0 0 0 5px #342c25;
+    }
+    .crest { display: flex; justify-content: center; align-items: center; gap: clamp(2px, 1.5vw, 17px); }
+    .skull {
+      display: block;
+      width: clamp(75px, 12vw, 155px);
+      height: clamp(57px, 9vw, 117px);
+      flex: 0 1 auto;
+      overflow: visible;
+      opacity: .92;
+      filter: drop-shadow(2px 4px 3px #000) drop-shadow(0 0 6px #58251b55);
+    }
+    .skull { object-fit: contain; }
+    .skull.right { transform: none; }
+    .masthead {
+      margin: 0;
+      white-space: nowrap;
+      font-family: var(--font-titolo);
+      font-size: clamp(3.5rem, 8.2vw, 6.6rem);
+      letter-spacing: .07em;
+      line-height: .98;
+      font-weight: 400;
+      background: repeating-linear-gradient(174deg, #e5ded0 0px, #ddd4c5 3px, #7e766a 4px, #d2c8b6 5px, #ece4d5 10px, #83786c 11px, #d9d0c0 14px);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(3px 4px 0 #000);
+    }
+    .subtitle {
+      margin-top: 1px;
+      color: var(--rosso-luce);
+      font-family: 'IM Fell English SC', Georgia, serif;
+      text-transform: uppercase;
+      font-size: .88rem;
+      letter-spacing: .34em;
+    }
+    .missiva {
+      margin-top: 7px;
+      color: #c9b8a0;
+      font-family: 'Special Elite', Georgia, serif;
+      font-size: .78rem;
+      letter-spacing: .17em;
+      text-shadow: 1px 2px 2px #000;
+    }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 268px; gap: 18px; align-items: start; }
+    .listino, .conto {
+      position: relative;
+      min-width: 0;
+      border: 1px solid var(--bordo);
+      background:
+        repeating-linear-gradient(-38deg, #ffffff02 0 1px, transparent 1px 7px),
+        linear-gradient(135deg, #1e1c17, #12110f 70%);
+      box-shadow: 6px 8px 0 #0008, inset 0 0 0 4px #0c0c0a;
+    }
+    .listino::before, .conto::before { content: ''; position: absolute; pointer-events: none; inset: 8px; border: 1px solid #74634b24; }
+    .panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 14px 22px 11px;
+      border-bottom: 1px solid #504537;
+      background: linear-gradient(90deg, #08080861, transparent);
+    }
+    .panel-head h2, .conto h2 {
+      margin: 0;
+      font: 400 1.86rem/1 var(--font-titolo);
+      letter-spacing: .06em;
+      color: #e4dccc;
+      text-shadow: 2px 2px 0 #070705, -1px 0 #625342;
+    }
+    .count { font-size: .65rem; letter-spacing: .13em; color: var(--sbiadito); }
+    #catalogo { padding: 3px 14px 11px; }
+    .articolo {
+      display: grid;
+      grid-template-columns: minmax(140px, 1.1fr) minmax(168px, 1.5fr) 101px;
+      align-items: center;
+      column-gap: 12px;
+      padding: 8px 9px;
+      min-height: 57px;
+      border-bottom: 1px dashed #5a4b3b;
+    }
+    .articolo:last-child { border-bottom: none; }
+    .descrizione { min-width: 0; }
+    .nome {
+      display: block;
+      font: 400 1.13rem/1.1 'IM Fell English SC', Georgia, serif;
+      text-transform: uppercase;
+      letter-spacing: .025em;
+      overflow-wrap: anywhere;
+      color: #e2dacb;
+      text-shadow: 1px 1px #070705;
+    }
+    .prezzo { display: block; margin-top: 3px; color: var(--oro); font-size: .71rem; font-variant-numeric: tabular-nums; }
+    .stack-workspace { min-width: 0; display: flex; align-items: flex-start; gap: 6px; }
+    .cubes { display: flex; min-width: 0; flex: 0 1 auto; flex-wrap: wrap; gap: 5px; }
+    .quantita {
+      flex: 0 0 48px;
+      width: 48px;
+      height: 30px;
+      padding: 2px 3px 0;
+      border: 1px solid #655340;
+      border-radius: 0;
+      background: #0d0d0b;
+      box-shadow: inset 0 1px 4px #000a;
+      color: #f1e7d7;
+      text-align: center;
+      font-size: .84rem;
+      font-variant-numeric: tabular-nums;
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+    .quantita::-webkit-outer-spin-button, .quantita::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .stack-actions { display: flex; flex: 0 0 auto; gap: 4px; }
+    .qbtn {
+      width: 29px;
+      height: 30px;
+      border: 1px solid #655340;
+      color: #d6cbba;
+      background: #242019;
+      font-size: 1.14rem;
+      line-height: 1;
+      transition: background .15s ease, color .15s ease;
+    }
+    .qbtn:hover:not(:disabled) { background: #492a24; color: #fff; }
+    .qbtn:disabled { cursor: not-allowed; color: #605a50; opacity: .62; }
+    .parziale { min-width: 0; text-align: right; font-variant-numeric: tabular-nums; }
+    .parziale .piccolo { display: block; margin-bottom: 3px; color: #a3988a; font-size: .62rem; letter-spacing: .03em; }
+    .somma { color: #e5dbcc; white-space: nowrap; font-size: .83rem; }
+    .articolo.attivo .nome { color: #fff3e3; }
+    .articolo.attivo .somma { color: #ddaa81; }
+    .conto { padding: 20px 19px 18px; position: sticky; top: 20px; }
+    .conto h2 { padding-bottom: 14px; border-bottom: 1px solid #60503e; }
+    .riepilogo { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 19px 0 16px; }
+    .riepilogo span { color: var(--sbiadito); font-size: .65rem; }
+    .riepilogo strong { font: .95rem var(--font-testo); font-variant-numeric: tabular-nums; }
+    .totale-wrap {
+      padding: 18px 4px 20px;
+      border-top: 1px dashed #604d3b;
+      border-bottom: 1px dashed #604d3b;
+      text-align: center;
+      background: radial-gradient(ellipse at center, #6d241918, transparent 80%);
+    }
+    .totale-wrap .label { display: block; margin-bottom: 8px; font: 400 1rem 'IM Fell English SC', Georgia, serif; letter-spacing: .2em; color: #b8aa98; }
+    #totale {
+      display: block;
+      color: #e7c3a8;
+      font-family: 'IM Fell English SC', Georgia, serif;
+      font-size: clamp(1.95rem, 2.8vw, 2.65rem);
+      line-height: 1.15;
+      font-variant-numeric: tabular-nums;
+      overflow-wrap: anywhere;
+      text-shadow: 1px 1px #080807;
+    }
+    .azzera {
+      display: block;
+      width: 100%;
+      margin-top: 16px;
+      min-height: 40px;
+      padding: 9px;
+      background: #211714;
+      border: 1px solid #7b3a32;
+      color: #d4b8aa;
+      text-transform: uppercase;
+      font-size: .69rem;
+      letter-spacing: .12em;
+    }
+    .azzera:hover:not(:disabled) { background: #4a251f; color: #fff1e5; }
+    .azzera:disabled { opacity: .48; cursor: not-allowed; }
+    .vuoto { text-align: center; color: var(--sbiadito); padding: 35px 12px; }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .conto { position: static; }
+    }
+    @media (max-width: 620px) {
+      .page { padding: 12px 10px 27px; }
+      .top { padding: 12px 8px 15px; margin-bottom: 15px; }
+      .crest { gap: 0; }
+      .skull { width: clamp(40px, 13vw, 75px); height: 60px; }
+      .masthead { font-size: clamp(2.3rem, 9vw, 4.7rem); letter-spacing: .02em; }
+      .subtitle { font-size: .7rem; letter-spacing: .13em; }
+      .panel-head { padding: 14px 16px 10px; }
+      #catalogo { padding: 3px 9px 10px; }
+      .articolo { grid-template-columns: minmax(0, 1fr) 95px; gap: 7px 10px; padding: 10px 6px; }
+      .descrizione { grid-column: 1; }
+      .stack-workspace { grid-column: 1; grid-row: 2; }
+      .parziale { grid-column: 2; grid-row: 1 / 3; }
+      .nome { font-size: 1.07rem; }
+      .prezzo { font-size: .71rem; }
+      .conto { padding: 19px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="top">
+      <div class="crest">
+        <img class="skull left" src="teschio-corvo-sx.png" alt="Teschio di corvo rivolto a sinistra">
+        <h1 class="masthead">IL CORVO</h1>
+        <img class="skull right" src="teschio-corvo-dx.png" alt="Teschio di corvo rivolto a destra">
+      </div>
+      <div class="subtitle">IL BRACCONIERE DELLE WILDLANDS</div>
+      <div class="missiva">MISSIVA: YG950</div>
+    </header>
 
-function posterHeader(ctx,w,selection,assets){
-  ctx.save();
-  if(assets.lodge){ctx.globalAlpha=.58;ctx.drawImage(assets.lodge,88,174,288,302);}
-  if(selection==='pesca' && assets.fishing){
-    ctx.globalAlpha=.60;ctx.drawImage(assets.fishing,1218,154,280,342);
-    ctx.globalAlpha=.17;ctx.drawImage(assets.fishing,78,350,170,175);
-    ctx.save();ctx.translate(w,0);ctx.scale(-1,1);ctx.globalAlpha=.17;ctx.drawImage(assets.fishing,78,350,170,175);ctx.restore();
-  }
-  ctx.restore();
+    <div class="layout">
+      <section class="listino" aria-labelledby="listino-title">
+        <div class="panel-head">
+          <h2 id="listino-title">La merce</h2>
+          <span class="count" id="numero-articoli"></span>
+        </div>
+        <div id="catalogo"></div>
+      </section>
+      <aside class="conto" aria-labelledby="conto-title">
+        <h2 id="conto-title">Il conto</h2>
+        <div class="riepilogo"><span>PEZZI SELEZIONATI</span><strong id="pezzi">0</strong></div>
+        <div class="totale-wrap"><span class="label">TOTALE</span><output id="totale" aria-live="polite">$0.00</output></div>
+        <button class="azzera" type="button" id="azzera" disabled>✕ &nbsp; Azzera quantità</button>
+      </aside>
+    </div>
+  </main>
 
-  const logo=assets.logo;
-  if(logo){
-    const maxW=980,maxH=250;
-    const scale=Math.min(maxW/logo.naturalWidth,maxH/logo.naturalHeight);
-    const dw=logo.naturalWidth*scale, dh=logo.naturalHeight*scale;
-    ctx.drawImage(logo,(w-dw)/2,82,dw,dh);
-  }
+  <script>
+    'use strict';
+    // Prezzi per singolo pezzo. Ogni casella corrisponde a uno stack indipendente.
+    const CATALOGO = [
+      { nome: 'Artigli Aquila', prezzo: 4.00 },
+      { nome: 'Piume Aquila', prezzo: 6.00 },
+      { nome: 'Pelliccia Wapiti', prezzo: 3.00 },
+      { nome: 'Carne di Wapiti', prezzo: 2.00 },
+      { nome: 'Pelliccia Bufalo', prezzo: 3.00 },
+      { nome: 'Carne Bufalo', prezzo: 2.00 },
+      { nome: 'Pelliccia di Alce', prezzo: 4.00 },
+      { nome: 'Corna Alce', prezzo: 2.00 }
+    ];
+    const MAX_STACK = 99999;
+    const MAX_CASELLE = 100;
+    const stacks = CATALOGO.map(() => [0]);
+    const prezziCentesimi = CATALOGO.map(({ prezzo }) => Math.round(prezzo * 100));
+    const catalogoEl = document.getElementById('catalogo');
+    const pezziEl = document.getElementById('pezzi');
+    const totaleEl = document.getElementById('totale');
+    const azzeraEl = document.getElementById('azzera');
+    const soldi = (n) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-  if(selection==='pesca' && assets.fishing){
-    ctx.save();ctx.globalAlpha=.10;ctx.drawImage(assets.fishing,640,86,320,180);ctx.restore();
-  }
+    function numeroValido(valore) {
+      const n = Number(valore);
+      return Number.isFinite(n) && n > 0 ? Math.min(MAX_STACK, Math.trunc(n)) : 0;
+    }
 
-  ctx.textAlign='center';
-  posterLine(ctx,300,344,w-300,344,3,'#315e78');
-  posterFlourish(ctx,w/2,344,.72);
-  ctx.fillStyle='#24495e';
-  ctx.font='42px "IM Fell English SC", Georgia, serif';
-  ctx.fillText(posterChoices[selection].caption,w/2,412);
-  ctx.font='24px Georgia, serif';
-  ctx.fillStyle='#36586d';
-  ctx.fillText('Pesca d’acqua dolce · Fiumi, laghi e forniture per pescatori',w/2,454);
-  posterLine(ctx,98,492,w-98,492,3,'#2c576e');
-  posterFlourish(ctx,w/2,492,.95);
-}
+    function creaRiga(prodotto, indice) {
+      const riga = document.createElement('div');
+      riga.className = 'articolo';
+      riga.dataset.indice = indice;
+      const desc = document.createElement('div');
+      desc.className = 'descrizione';
+      const nome = document.createElement('span');
+      nome.className = 'nome';
+      nome.textContent = prodotto.nome;
+      const prezzo = document.createElement('span');
+      prezzo.className = 'prezzo';
+      prezzo.textContent = soldi(prezziCentesimi[indice] / 100) + ' / pz';
+      desc.append(nome, prezzo);
 
-function posterDrawCard(ctx,section,x,y,width){
-  const height=posterCardHeight(ctx,section,width);
-  ctx.save();ctx.fillStyle='rgba(238,248,252,.78)';ctx.fillRect(x,y,width,height);
-  ctx.lineWidth=3;ctx.strokeStyle='#416985';ctx.strokeRect(x,y,width,height);
-  ctx.strokeStyle='#86a9bc';ctx.lineWidth=1.5;ctx.strokeRect(x+9,y+9,width-18,height-18);
-  ctx.fillStyle='#28506a';ctx.fillRect(x+12,y+12,width-24,62);
-  ctx.fillStyle='#eef8fc';ctx.textAlign='center';
-  posterTextWidth(ctx,section.title,width-45,32,'"IM Fell English SC", Georgia, serif');ctx.fillText(section.title,x+width/2,y+55);
-  ctx.font='italic 17px Georgia';ctx.fillStyle='#6a8698';ctx.fillText(section.type==='acquisto'?'PREZZI DI ACQUISTO':'PREZZI DI VENDITA',x+width/2,y+96);
-  let ry=y+127;
-  for(const row of section.rows){
-    const rh=posterRowHeight(ctx,row,width);ctx.fillStyle='#1c3240';ctx.textAlign='left';
-    const amount=`$${row.price.toFixed(2)}`;
-    ctx.font='bold 26px "IM Fell English SC", Georgia, serif';const nameWidth=width-165;
-    const words=row.name.split(' ');let line='',parts=[];
-    for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>nameWidth&&line){parts.push(line);line=word;}else{line=test;}}
-    if(line)parts.push(line);
-    if(parts.length>2){parts=[parts[0],parts.slice(1).join(' ')];}
-    for(let j=0;j<parts.length;j++){ctx.fillText(parts[j],x+25,ry+j*29,width-158);}
-    ctx.textAlign='right';ctx.font='bold 25px Georgia';ctx.fillStyle='#23485d';ctx.fillText(amount,x+width-28,ry);
-    ctx.strokeStyle='rgba(90,58,32,.35)';ctx.lineWidth=1.5;ctx.setLineDash([3,5]);
-    const dotsY=ry+14+(parts.length-1)*29;posterLine(ctx,x+26,dotsY,x+width-26,dotsY,1,'rgba(60,108,136,.22)');ctx.setLineDash([]);
-    if(row.maxQty){ctx.textAlign='left';ctx.font='italic 18px Georgia';ctx.fillStyle='#4e768f';ctx.fillText(`MAX ${row.maxQty} per cliente`,x+26,ry+(parts.length-1)*29+24);}
-    ry+=rh;
-  }
-  ctx.restore();return height;
-}
-// Copia compressa per consentire il PNG anche aprendo index.html direttamente (file://).
+      const workspace = document.createElement('div');
+      workspace.className = 'stack-workspace';
+      const cubes = document.createElement('div');
+      cubes.className = 'cubes';
+      const actions = document.createElement('div');
+      actions.className = 'stack-actions';
+      for (const [azione, segno, label] of [
+        ['meno', '−', 'Rimuovi ultimo stack'],
+        ['piu', '+', 'Aggiungi uno stack']
+      ]) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'qbtn';
+        btn.dataset.azione = azione;
+        btn.textContent = segno;
+        btn.title = label;
+        btn.setAttribute('aria-label', label + ': ' + prodotto.nome);
+        actions.append(btn);
+      }
+      workspace.append(cubes, actions);
 
-async function posterLoadArt(){
-  const isLocal=location.protocol==='file:';
-  const entries=Object.entries(POSTER_ART);
-  const result=await Promise.all(entries.map(([key,path])=>new Promise(resolve=>{
-    // Chromium blocca l'esportazione Canvas con PNG locali (file://).
-    // In quel caso, immagini compatte incorporate in offline-assets.js.
-    const fallback=window.BUCKLAND_OFFLINE_ASSETS?.[key];
-    const src=(isLocal && fallback)?fallback:path;
-    const img=new Image();
-    img.onload=()=>resolve([key,img]);
-    img.onerror=()=>{
-      if(fallback && src!==fallback){const backup=new Image();backup.onload=()=>resolve([key,backup]);backup.onerror=()=>resolve([key,null]);backup.src=fallback;}
-      else resolve([key,null]);
-    };
-    img.src=src;
-  })));
-  const art=Object.fromEntries(result);
-  if(!art.paper)throw new Error('Impossibile caricare listino-assets/parchment_bg.png. Non separare index.html dalla cartella listino-assets.');
-  return art;
-}
+      const parziale = document.createElement('div');
+      parziale.className = 'parziale';
+      const dettagli = document.createElement('span');
+      dettagli.className = 'piccolo';
+      dettagli.textContent = 'QTÀ 0';
+      const importo = document.createElement('span');
+      importo.className = 'somma';
+      importo.textContent = soldi(0);
+      parziale.append(dettagli, importo);
+      riga.append(desc, workspace, parziale);
+      return riga;
+    }
 
-async function posterCreate(mode){
-  if(!posterChoices[mode])throw new Error('Tipo di listino non valido');
-  if(document.fonts?.ready)await document.fonts.ready;
-  const w=1600,xLeft=91,xRight=813,columnWidth=696,gap=19;
-  // I dati sono presi in tempo reale dalla stessa costante `data` usata dal registro.
-  const cols=[posterSections(posterChoices[mode].left),posterSections(posterChoices[mode].right)];
-  const test=document.createElement('canvas').getContext('2d');
-  const lengths=cols.map(col=>col.reduce((h,cat)=>h+posterCardHeight(test,cat,columnWidth)+gap,0));
-  const startY=525;
-  const totalHeight=Math.max(1550,Math.ceil(startY+Math.max(...lengths)+340));
-  const canvas=document.createElement('canvas');canvas.width=w;canvas.height=totalHeight;
-  const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw new Error('Il browser non supporta Canvas');
-  const assets=await posterLoadArt();
-  posterPaper(ctx,w,totalHeight,assets);
-  posterDrawFrame(ctx,w,totalHeight,assets.frame);
-  posterDrawMountain(ctx,w,totalHeight,assets);
-  posterHeader(ctx,w,mode,assets);
-  for(let k=0;k<2;k++) {let y=startY;for(const section of cols[k]){y+=posterDrawCard(ctx,section,k?xRight:xLeft,y,columnWidth)+gap;}}
-  const fy=totalHeight-276;
-  ctx.fillStyle='rgba(230,244,249,.82)';ctx.fillRect(250,fy+14,w-500,124);
-  posterLine(ctx,130,fy,w-130,fy,3,'#315e78');posterFlourish(ctx,w/2,fy,.85);
-  if(assets.fishing){ctx.save();ctx.globalAlpha=.10;ctx.drawImage(assets.fishing,90,fy-26,145,150);ctx.translate(w,0);ctx.scale(-1,1);ctx.drawImage(assets.fishing,90,fy-26,145,150);ctx.restore();}
-  ctx.textAlign='center';ctx.fillStyle='#25475c';ctx.font='bold 26px "IM Fell English SC", Georgia, serif';ctx.fillText('BUCKLAND ANGLING CLUB · PESCA E FORNITURE',w/2,fy+46);
-  ctx.font='italic 23px Georgia';ctx.fillText('Canne, esche e catture delle acque di fiumi e laghi.',w/2,fy+80);
-  ctx.font='20px Georgia';ctx.fillText('I prezzi sono aggiornati secondo il registro corrente del Buckland Angling Club.',w/2,fy+111);
-  return canvas;
-}
-function posterOpen(mode){
-  if(!posterChoices[mode])return;
-  posterMode=mode;posterCanvas=null;
-  document.getElementById('posterTitle').textContent='Listino della pesca';
-  document.getElementById('posterModeLabel').textContent='Volantino · Pesca';
-  const modal=document.getElementById('posterModal');modal.hidden=false;
-  document.body.classList.add('poster-modal-open');
-  document.getElementById('posterClose').focus();
-  posterRefresh();
-}
-function posterClose(){document.getElementById('posterModal').hidden=true;document.body.classList.remove('poster-modal-open');}
-async function posterRefresh(){
-  if(posterBusy)return;
-  posterBusy=true;const button=document.getElementById('posterSave');const status=document.getElementById('posterStatus');
-  const preview=document.getElementById('posterPreview');
-  button.disabled=true;status.textContent='Preparazione del volantino in corso…';
-  try{
-    const mode=posterMode;
-    const canvas=await posterCreate(mode);posterCanvas=canvas;
-    preview.replaceChildren(canvas);
-    status.textContent=`Anteprima pronta · ${canvas.width} × ${canvas.height} px`;
-    button.disabled=false;
-  }catch(err){posterCanvas=null;preview.textContent='Impossibile creare il volantino.';status.textContent=err.message;}
-  finally{posterBusy=false;}
-}
-function posterSave(){
-  if(!posterCanvas)return;
-  const canvas=posterCanvas;const mode=posterMode;
-  const button=document.getElementById('posterSave');button.disabled=true;
-  canvas.toBlob(blob=>{
-    button.disabled=false;
-    if(!blob){document.getElementById('posterStatus').textContent='Salvataggio non riuscito. Riprova.';return;}
-    const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;
-    a.download=`Buckland_Angling_Club_Listino_${mode}.png`;document.body.appendChild(a);a.click();a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),30000);
-    document.getElementById('posterStatus').textContent='Volantino PNG pronto per il download.';
-  },'image/png');
-}
-document.getElementById('posterPesca').addEventListener('click',()=>posterOpen('pesca'));
-document.getElementById('posterClose').addEventListener('click',posterClose);
-document.getElementById('posterCancel').addEventListener('click',posterClose);
-document.getElementById('posterSave').addEventListener('click',posterSave);
-document.getElementById('posterModal').addEventListener('click',event=>{if(event.target.id==='posterModal')posterClose();});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.getElementById('posterModal').hidden)posterClose();});
+    function disegnaStack(indice, focusUltimo = false) {
+      const riga = catalogoEl.querySelector(`.articolo[data-indice="${indice}"]`);
+      const contenitore = riga.querySelector('.cubes');
+      contenitore.replaceChildren();
+      stacks[indice].forEach((valore, pos) => {
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.inputMode = 'numeric';
+        input.className = 'quantita';
+        input.min = '0';
+        input.max = String(MAX_STACK);
+        input.step = '1';
+        input.dataset.stack = pos;
+        input.value = valore || '';
+        input.placeholder = '0';
+        input.title = `Stack ${pos + 1}: ${CATALOGO[indice].nome}`;
+        input.setAttribute('aria-label', `Quantità stack ${pos + 1} di ${CATALOGO[indice].nome}`);
+        contenitore.append(input);
+      });
+      riga.querySelector('[data-azione="meno"]').disabled = stacks[indice].length === 1 && !stacks[indice][0];
+      riga.querySelector('[data-azione="piu"]').disabled = stacks[indice].length >= MAX_CASELLE;
+      if (focusUltimo) {
+        const ultimo = contenitore.lastElementChild;
+        if (ultimo) ultimo.focus();
+      }
+    }
 
-</script>
-<script src="buckland-layout.js"></script>
+    function aggiornaTotali() {
+      let centesimi = 0;
+      let pezzi = 0;
+      for (const [indice, riga] of catalogoEl.querySelectorAll('.articolo').entries()) {
+        const q = stacks[indice].reduce((somma, n) => somma + n, 0);
+        const subtotale = prezziCentesimi[indice] * q;
+        centesimi += subtotale;
+        pezzi += q;
+        riga.classList.toggle('attivo', q > 0);
+        riga.querySelector('.piccolo').textContent = 'QTÀ ' + q.toLocaleString('it-IT');
+        riga.querySelector('.somma').textContent = soldi(subtotale / 100);
+        riga.querySelector('[data-azione="meno"]').disabled = stacks[indice].length === 1 && !q;
+        riga.querySelector('[data-azione="piu"]').disabled = stacks[indice].length >= MAX_CASELLE;
+      }
+      pezziEl.textContent = pezzi.toLocaleString('it-IT');
+      totaleEl.textContent = soldi(centesimi / 100);
+      azzeraEl.disabled = pezzi === 0 && stacks.every(s => s.length === 1);
+    }
+
+    catalogoEl.addEventListener('click', (evento) => {
+      const pulsante = evento.target.closest('button[data-azione]');
+      if (!pulsante) return;
+      const indice = Number(pulsante.closest('.articolo').dataset.indice);
+      if (pulsante.dataset.azione === 'piu') {
+        if (stacks[indice].length >= MAX_CASELLE) return;
+        stacks[indice].push(0);
+        disegnaStack(indice, true);
+      } else {
+        if (stacks[indice].length > 1) stacks[indice].pop();
+        else stacks[indice][0] = 0;
+        disegnaStack(indice);
+      }
+      aggiornaTotali();
+    });
+
+    catalogoEl.addEventListener('input', (evento) => {
+      if (!evento.target.matches('input.quantita')) return;
+      const indice = Number(evento.target.closest('.articolo').dataset.indice);
+      const pos = Number(evento.target.dataset.stack);
+      const numero = numeroValido(evento.target.value);
+      stacks[indice][pos] = numero;
+      if (Number(evento.target.value) > MAX_STACK || Number(evento.target.value) < 0) evento.target.value = numero || '';
+      aggiornaTotali();
+    });
+
+    catalogoEl.addEventListener('change', (evento) => {
+      if (!evento.target.matches('input.quantita')) return;
+      const indice = Number(evento.target.closest('.articolo').dataset.indice);
+      const pos = Number(evento.target.dataset.stack);
+      stacks[indice][pos] = numeroValido(evento.target.value);
+      evento.target.value = stacks[indice][pos] || '';
+      aggiornaTotali();
+    });
+
+    azzeraEl.addEventListener('click', () => {
+      stacks.forEach((_, i) => { stacks[i] = [0]; disegnaStack(i); });
+      aggiornaTotali();
+    });
+
+    document.getElementById('numero-articoli').textContent = CATALOGO.length + ' ARTICOLI';
+    if (CATALOGO.length) {
+      catalogoEl.append(...CATALOGO.map(creaRiga));
+      stacks.forEach((_, i) => disegnaStack(i));
+    } else {
+      const vuoto = document.createElement('p');
+      vuoto.className = 'vuoto';
+      vuoto.textContent = 'Nessuna merce nel listino.';
+      catalogoEl.append(vuoto);
+    }
+    aggiornaTotali();
+  </script>
 </body>
 </html>
