@@ -1,9 +1,10 @@
-
-/* Rubrica del club: dati su Firestore (Contatti), cache locale. */
+/* Buckland Angling Club — rubrica Firestore con accesso Google.
+   Non è previsto il salvataggio locale: una modifica è riuscita solo
+   quando Firestore la conferma. I permessi dipendono dalle regole Firestore. */
 (() => {
   'use strict';
 
-  const $ = sel => document.querySelector(sel);
+  const $ = s => document.querySelector(s);
   const list = $('#contactsList');
   const search = $('#contactsSearch');
   const status = $('#status');
@@ -13,346 +14,250 @@
   const nameInput = $('#contactName');
   const letterInput = $('#contactLetter');
   const saveButton = $('#saveContact');
-
-  const KEY = 'buckland_contatti_v1';
-  const collator = new Intl.Collator('it', { sensitivity: 'base' });
+  const ledger = $('#contactsLedger');
+  const loginButton = $('#loginContact');
+  const logoutButton = $('#logoutContact');
+  const copyUidButton = $('#copyUid');
+  const uidLabel = $('#authUid');
+  const accountLabel = $('#authAccount');
+  const authDescription = $('#authDescription');
+  const collator = new Intl.Collator('it', { sensitivity:'base' });
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c =>
+    ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 
   let contacts = [];
   let editingId = null;
-  let mode = db ? 'cloud' : 'local';
-  let inProgress = false;
+  let busy = false;
+  let authorized = false;
+  let activeUser = null;
+  let unsubscribe = null;
+  let auth = null;
 
-  const escapeHtml = val =>
-    String(val ?? '').replace(/[&<>"']/g, c => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;'
-    }[c]));
-
-  const setStatus = (message, kind = '') => {
+  const notify = (message = '', kind = '') => {
     status.textContent = message;
     status.dataset.kind = kind;
   };
 
-  const saveCache = () => {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(contacts));
-    } catch (_) {
-      setStatus('Impossibile scrivere nella memoria del browser.', 'error');
-    }
-  };
-
-  const readCache = () => {
-    try {
-      const value = JSON.parse(localStorage.getItem(KEY) || '[]');
-      return Array.isArray(value)
-        ? value.filter(v => v && typeof v === 'object')
-        : [];
-    } catch (_) {
-      return [];
-    }
-  };
-
-  const sorted = () =>
-    [...contacts].sort((a, b) =>
-      collator.compare(String(a.nome || ''), String(b.nome || ''))
-    );
+  const canEdit = () => Boolean(authorized && activeUser && !busy);
 
   function render() {
     $('#contactCount').textContent = contacts.length;
-
     const term = search.value.trim().toLocaleLowerCase('it');
-
-    const found = sorted().filter(c =>
-      `${c.nome || ''} ${c.missiva || ''}`
-        .toLocaleLowerCase('it')
-        .includes(term)
-    );
+    const found = [...contacts]
+      .sort((a,b) => collator.compare(String(a.nome || ''), String(b.nome || '')))
+      .filter(c => `${c.nome || ''} ${c.missiva || ''}`.toLocaleLowerCase('it').includes(term));
 
     if (!found.length) {
-      list.innerHTML = `
-        <p class="contacts-empty">
-          ${contacts.length
-            ? 'Nessun contatto corrisponde alla ricerca.'
-            : 'Nessun contatto registrato. Premi «+ Nuovo contatto» per aggiungerne uno.'}
-        </p>`;
+      list.innerHTML = `<p class="contacts-empty">${contacts.length
+        ? 'Nessun contatto corrisponde alla ricerca.'
+        : 'Nessun contatto registrato. Premi «+ Nuovo contatto» per aggiungerne uno.'}</p>`;
       return;
     }
-
     list.innerHTML = found.map(c => {
-      const initials = String(c.nome || '')
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean)
-        .slice(0, 2)
-        .map(n => n[0])
-        .join('')
-        .toLocaleUpperCase('it');
-
+      const initials = String(c.nome || '').trim().split(/\s+/).filter(Boolean)
+        .slice(0,2).map(x => x[0]).join('').toLocaleUpperCase('it');
       const id = escapeHtml(c.id);
-
-      return `
-        <article class="contact-card">
-          <div class="contact-card-top">
-            <div class="contact-monogram" aria-hidden="true">
-              ${escapeHtml(initials)}
-            </div>
-            <div class="contact-title">
-              <h4>${escapeHtml(c.nome)}</h4>
-              <small>Corrispondenza del club</small>
-            </div>
-          </div>
-
-          <div class="contact-letter">
-            <span class="contact-letter-label">Missiva / Recapito</span>
-            <strong class="contact-letter-value">
-              ${escapeHtml(c.missiva)}
-            </strong>
-          </div>
-
-          <div class="contact-actions">
-            <button type="button" data-action="copy" data-id="${id}">
-              Copia
-            </button>
-            <button type="button" data-action="edit" data-id="${id}">
-              Modifica
-            </button>
-            <button type="button" class="contact-delete"
-              data-action="delete" data-id="${id}">
-              ✕
-            </button>
-          </div>
-        </article>`;
+      return `<article class="contact-card">
+        <div class="contact-card-top">
+          <div class="contact-monogram" aria-hidden="true">${escapeHtml(initials)}</div>
+          <div class="contact-title"><h4>${escapeHtml(c.nome)}</h4><small>Corrispondenza del club</small></div>
+        </div>
+        <div class="contact-letter">
+          <span class="contact-letter-label">Missiva / Recapito</span>
+          <strong class="contact-letter-value">${escapeHtml(c.missiva)}</strong>
+        </div>
+        <div class="contact-actions">
+          <button type="button" data-action="copy" data-id="${id}">Copia</button>
+          <button type="button" data-action="edit" data-id="${id}">Modifica</button>
+          <button type="button" class="contact-delete" data-action="delete" data-id="${id}">✕</button>
+        </div>
+      </article>`;
     }).join('');
   }
 
-  function showForm(contact = null) {
+  function openEditor(contact = null) {
+    if (!canEdit()) return;
     editingId = contact ? contact.id : null;
     form.reset();
-
     nameInput.value = contact?.nome || '';
     letterInput.value = contact?.missiva || '';
-
-    $('#editorHeading').textContent = contact
-      ? 'Modifica un contatto'
-      : 'Aggiungi un contatto';
-
-    saveButton.textContent = contact
-      ? 'Salva modifiche'
-      : 'Salva nel registro';
-
+    $('#editorHeading').textContent = contact ? 'Modifica un contatto' : 'Aggiungi un contatto';
+    saveButton.textContent = contact ? 'Salva modifiche' : 'Salva nel registro';
     editor.hidden = false;
     addButton.setAttribute('aria-expanded', 'true');
-
-    editor.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest'
-    });
-
-    nameInput.focus({ preventScroll: true });
+    editor.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    nameInput.focus({ preventScroll:true });
   }
 
-  function hideForm() {
-    if (inProgress) return;
-
+  function closeEditor() {
+    if (busy) return;
     editor.hidden = true;
     editingId = null;
     form.reset();
-
     addButton.setAttribute('aria-expanded', 'false');
-    addButton.focus({ preventScroll: true });
   }
 
-  function fallbackToLocal() {
-    mode = 'local';
-    setStatus('', '');
+  function updateAccessUI() {
+    addButton.hidden = !authorized;
+    addButton.disabled = !canEdit();
+    ledger.hidden = !authorized;
+    loginButton.hidden = !!activeUser;
+    logoutButton.hidden = !activeUser;
+    uidLabel.hidden = !activeUser;
+    copyUidButton.hidden = !activeUser;
+    accountLabel.hidden = !activeUser;
+    if (activeUser) {
+      authDescription.textContent = authorized
+        ? 'Rubrica online con accesso riservato.'
+        : 'Account collegato. Per abilitare la rubrica, autorizza il tuo UID nelle regole Firestore.';
+      accountLabel.textContent = `Account: ${activeUser.email || activeUser.displayName || 'Google'}`;
+      uidLabel.textContent = `UID Firebase: ${activeUser.uid}`;
+    } else {
+      authDescription.textContent = 'Accedi con Google per consultare e gestire i contatti online.';
+      accountLabel.textContent = '';
+      uidLabel.textContent = '';
+    }
   }
 
-  function localMutation(action, id, data) {
-    if (action === 'create') {
-      contacts.push({
-        id: `local-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
-        ...data
-      });
-    }
-
-    if (action === 'edit') {
-      contacts = contacts.map(c =>
-        c.id === id ? { ...c, ...data } : c
-      );
-    }
-
-    if (action === 'delete') {
-      contacts = contacts.filter(c => c.id !== id);
-    }
-
-    saveCache();
+  function resetListener() {
+    if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+    contacts = [];
+    authorized = false;
     render();
+    closeEditor();
+    updateAccessUI();
   }
 
-  addButton.addEventListener('click', () =>
-    editor.hidden ? showForm() : hideForm()
-  );
-
-  $('#closeEditor').addEventListener('click', hideForm);
-  $('#cancelEditor').addEventListener('click', hideForm);
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && !editor.hidden && !inProgress) {
-      hideForm();
-    }
-  });
-
-  search.addEventListener('input', render);
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (inProgress) return;
-
-    const nome = nameInput.value.trim().replace(/\s+/g, ' ');
-    const missiva = letterInput.value.trim();
-
-    if (!nome || !missiva) {
-      setStatus('Inserisci sia il nome che la missiva.', 'error');
-      return;
-    }
-
-    const payload = { nome, missiva };
-    const id = editingId;
-
-    inProgress = true;
-    saveButton.disabled = true;
-
-    try {
-      if (mode === 'cloud') {
-        if (id === null) {
-          await db.collection('Contatti').add({
-            ...payload,
-            creato: Date.now()
-          });
-        } else {
-          await db.collection('Contatti').doc(id).update(payload);
-        }
-
-        setStatus(
-          id === null
-            ? 'Contatto aggiunto alla rubrica online.'
-            : 'Contatto aggiornato nella rubrica online.',
-          'ok'
-        );
-      } else {
-        localMutation(
-          id === null ? 'create' : 'edit',
-          id,
-          payload
-        );
-
-        setStatus('Contatto salvato.', 'ok');
-      }
-
-      inProgress = false;
-      saveButton.disabled = false;
-      hideForm();
-
-    } catch (err) {
-      inProgress = false;
-      saveButton.disabled = false;
-
-      setStatus(
-        'Salvataggio non riuscito: ' +
-        (err.code === 'permission-denied'
-          ? 'Operazione non autorizzata.'
-          : err.message),
-        'error'
-      );
-    }
-  });
-
-  list.addEventListener('click', async e => {
-    const button = e.target.closest('button[data-action]');
-    if (!button || inProgress) return;
-
-    const id = button.dataset.id;
-    const c = contacts.find(c => String(c.id) === id);
-    if (!c) return;
-
-    switch (button.dataset.action) {
-      case 'edit':
-        showForm(c);
-        break;
-
-      case 'copy':
-        try {
-          await navigator.clipboard.writeText(String(c.missiva));
-          setStatus(
-            `Missiva di ${c.nome} copiata negli appunti.`,
-            'ok'
-          );
-        } catch (_) {
-          setStatus(
-            'Copia non disponibile. Seleziona la missiva e copiala manualmente.',
-            'error'
-          );
-        }
-        break;
-
-      case 'delete':
-        if (!confirm(`Eliminare il contatto «${c.nome}»?`)) return;
-
-        inProgress = true;
-
-        try {
-          if (mode === 'cloud') {
-            await db.collection('Contatti').doc(id).delete();
-          } else {
-            localMutation('delete', id);
-          }
-
-          setStatus('Contatto eliminato.', 'ok');
-
-          if (editingId === id) {
-            inProgress = false;
-            hideForm();
-          }
-        } catch (err) {
-          setStatus('Eliminazione non riuscita.', 'error');
-        } finally {
-          inProgress = false;
-        }
-        break;
-    }
-  });
+  function listenOnline() {
+    if (!db || !activeUser) return;
+    // Autenticazione completa: Firestore applica le regole sul token Google.
+    unsubscribe = db.collection('Contatti').onSnapshot(snapshot => {
+      authorized = true;
+      contacts = snapshot.docs.map(doc => ({ ...doc.data(), id:doc.id }));
+      updateAccessUI();
+      render();
+      notify('Rubrica sincronizzata online.', 'ok');
+    }, err => {
+      authorized = false;
+      contacts = [];
+      render();
+      updateAccessUI();
+      notify(err.code === 'permission-denied'
+        ? 'Questo account non è ancora autorizzato. Copia l’UID e aggiungilo nelle regole Firestore.'
+        : `Impossibile leggere i contatti online: ${err.message}`, 'error');
+    });
+  }
 
   $('#nav').innerHTML = nav('c');
-
-  contacts = readCache();
   render();
 
-  if (db) {
-    db.collection('Contatti').onSnapshot(
-      snapshot => {
-        contacts = snapshot.docs.map(doc => ({
-          ...doc.data(),
-          id: doc.id
-        }));
-
-        saveCache();
-        render();
-
-        if (!status.textContent ||
-            status.textContent.includes('Caricamento')) {
-          setStatus('', '');
-        }
-      },
-      err => {
-        contacts = readCache();
-        fallbackToLocal();
-        render();
-      }
-    );
+  if (!db || typeof firebase === 'undefined' || !firebase.auth) {
+    notify('Firebase non è stato caricato correttamente.', 'error');
+    loginButton.disabled = true;
   } else {
-    setStatus('', '');
+    auth = firebase.auth();
+    auth.onAuthStateChanged(user => {
+      resetListener();
+      activeUser = user;
+      updateAccessUI();
+      if (user) listenOnline();
+      else notify('Accedi con Google per aprire la rubrica.');
+    }, err => notify(`Errore autenticazione: ${err.message}`, 'error'));
   }
+
+  loginButton.addEventListener('click', async () => {
+    if (!auth) return;
+    loginButton.disabled = true;
+    try {
+      await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    } catch (err) {
+      notify(`Accesso Google non riuscito: ${err.message}`, 'error');
+    } finally {
+      loginButton.disabled = false;
+    }
+  });
+  logoutButton.addEventListener('click', async () => {
+    if (!auth) return;
+    try { await auth.signOut(); }
+    catch (err) { notify(`Uscita non riuscita: ${err.message}`, 'error'); }
+  });
+  copyUidButton.addEventListener('click', async () => {
+    if (!activeUser) return;
+    try {
+      await navigator.clipboard.writeText(activeUser.uid);
+      notify('UID copiato negli appunti.', 'ok');
+    } catch (_) {
+      notify('UID visibile accanto al pulsante; selezionalo e copialo manualmente.', 'error');
+    }
+  });
+
+  addButton.addEventListener('click', () => editor.hidden ? openEditor() : closeEditor());
+  $('#closeEditor').addEventListener('click', closeEditor);
+  $('#cancelEditor').addEventListener('click', closeEditor);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !editor.hidden) closeEditor();
+  });
+  search.addEventListener('input', render);
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!canEdit()) return;
+    const nome = nameInput.value.trim().replace(/\s+/g, ' ');
+    const missiva = letterInput.value.trim();
+    if (!nome || !missiva) {
+      notify('Inserisci sia nome che missiva.', 'error');
+      return;
+    }
+    const payload = { nome, missiva };
+    const id = editingId;
+    busy = true;
+    saveButton.disabled = true;
+    updateAccessUI();
+    try {
+      if (id === null) await db.collection('Contatti').add({ ...payload, creato:Date.now() });
+      else await db.collection('Contatti').doc(id).update(payload);
+      notify(id === null ? 'Contatto salvato online.' : 'Contatto modificato online.', 'ok');
+    } catch (err) {
+      notify(err.code === 'permission-denied'
+        ? 'Salvataggio negato dalle regole Firestore: controlla l’UID autorizzato.'
+        : `Salvataggio online non riuscito: ${err.message}`, 'error');
+      return;
+    } finally {
+      busy = false;
+      saveButton.disabled = false;
+      updateAccessUI();
+    }
+    closeEditor();
+  });
+
+  list.addEventListener('click', async event => {
+    const button = event.target.closest('button[data-action]');
+    if (!button || !authorized || busy) return;
+    const id = button.dataset.id;
+    const contact = contacts.find(c => String(c.id) === id);
+    if (!contact) return;
+    switch (button.dataset.action) {
+      case 'edit': openEditor(contact); break;
+      case 'copy':
+        try {
+          await navigator.clipboard.writeText(String(contact.missiva));
+          notify(`Missiva di ${contact.nome} copiata negli appunti.`, 'ok');
+        } catch (_) { notify('Copia non disponibile: seleziona la missiva manualmente.', 'error'); }
+        break;
+      case 'delete':
+        if (!canEdit() || !confirm(`Eliminare il contatto «${contact.nome}»?`)) return;
+        busy = true;
+        updateAccessUI();
+        try {
+          await db.collection('Contatti').doc(id).delete();
+          notify('Contatto eliminato online.', 'ok');
+        } catch (err) {
+          notify(`Eliminazione non riuscita: ${err.message}`, 'error');
+        } finally {
+          busy = false;
+          updateAccessUI();
+        }
+        break;
+    }
+  });
 })();
