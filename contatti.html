@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buckland Angling Club · Contatti e Missive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English+SC&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stile.css">
+  <link rel="stylesheet" href="buckland-theme.css">
+  <link rel="stylesheet" href="buckland-layout.css">
+  <link rel="stylesheet" href="buckland-contrast.css">
+  <link rel="stylesheet" href="contatti.css">
+</head>
+<body class="page-contatti">
+  <div class="mp-page-shell">
+    <header class="site-hero">
+      <div class="site-hero-inner">
+        <div class="site-hero-copy">
+          <div class="site-eyebrow">Rubrica del Club · Anno 1900</div>
+          <h1>Contatti &amp; Missive</h1>
+          <p class="site-hero-sub">Il registro della corrispondenza e dei conoscenti del Buckland Angling Club.</p>
+        </div>
+        <a class="site-bell" href="ordini.html" data-order-bell hidden aria-label="Ordini da gestire"><span class="bell-symbol">🔔</span><span class="bell-count" data-bell-count>0</span></a>
+        <a href="index.html" class="site-logo" aria-label="Buckland Angling Club · Registro"><img src="theme-assets/buckland-angling-club-logo.png" alt="Logo del Buckland Angling Club"></a>
+      </div>
+    </header>
+    <div id="nav"></div>
+    <main class="contacts-main">
+      <div class="contacts-heading">
+        <div>
+          <span class="contacts-eyebrow">Archivio privato di corrispondenza</span>
+          <h2>La rubrica dei contatti</h2>
+          <p>Conserva il nome di una persona e il recapito a cui indirizzare una missiva.</p>
+        </div>
+        <button type="button" class="contacts-add-btn" id="addContact" aria-controls="contactEditor" aria-expanded="false"><span class="contacts-plus" aria-hidden="true">+</span> Nuovo contatto</button>
+      </div>
+      <div class="contacts-status" id="status" role="status" aria-live="polite">Caricamento della rubrica…</div>
+      <section class="contacts-editor" id="contactEditor" hidden aria-labelledby="editorHeading">
+        <div class="contacts-editor-top">
+          <div><span class="contacts-eyebrow">Una nuova annotazione</span><h3 id="editorHeading">Aggiungi un contatto</h3></div>
+          <button type="button" class="contacts-close" id="closeEditor" aria-label="Chiudi modulo">×</button>
+        </div>
+        <form id="contactForm">
+          <div class="contacts-form-grid">
+            <label for="contactName"><span>Nome e cognome <span class="contacts-required">*</span></span><input id="contactName" name="nome" type="text" maxlength="120" autocomplete="off" placeholder="Es. John Smith" required></label>
+            <label for="contactLetter"><span>Missiva / Recapito <span class="contacts-required">*</span></span><input id="contactLetter" name="missiva" type="text" maxlength="120" autocomplete="off" placeholder="Es. YG950" required></label>
+          </div>
+          <div class="contacts-form-actions">
+            <button type="button" class="contacts-secondary" id="cancelEditor">Annulla</button>
+            <button type="submit" class="contacts-save" id="saveContact">Salva nel registro</button>
+          </div>
+        </form>
+      </section>
+      <section class="contacts-ledger" aria-labelledby="contactsListHeading">
+        <div class="contacts-ledger-head">
+          <div><span class="contacts-eyebrow">Elenco delle corrispondenze</span><h3 id="contactsListHeading">Nomi registrati <span class="contacts-count" id="contactCount">0</span></h3></div>
+          <label class="contacts-search" for="contactsSearch"><span aria-hidden="true">⌕</span><input type="search" id="contactsSearch" placeholder="Cerca nome o missiva…" autocomplete="off" aria-label="Cerca fra i contatti"></label>
+        </div>
+        <div id="contactsList" class="contacts-grid" aria-live="polite"><p class="contacts-empty">La rubrica è vuota. Premi «+ Nuovo contatto» per iniziare.</p></div>
+      </section>
+    </main>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="app.js"></script>
+  <script src="contatti.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+/* Buckland Angling Club · Rubrica (palette azzurra/ottone) */
+body.page-contatti{
+  background-color:#061d2d!important;
+  background-image:linear-gradient(rgba(4,18,40,.78),rgba(7,33,57,.68)),radial-gradient(circle at top,rgba(108,190,226,.12),transparent 32%),url('theme-assets/buckland-bg-ordini.png')!important;
+  background-size:cover!important;background-position:center!important;background-attachment:fixed!important;
+  color:#f1e9dc!important;
+}
+.page-contatti .contacts-main{width:100%;margin:0 auto 60px}
+.page-contatti .contacts-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;padding:22px 2px 23px;border-bottom:1px solid rgba(211,187,135,.25);margin-bottom:19px}
+.page-contatti .contacts-eyebrow{display:block;color:#e1c48c;font:700 10px/1.5 'Libre Baskerville',Georgia,serif;letter-spacing:1.6px;text-transform:uppercase}
+.page-contatti .contacts-heading h2{color:#f9efdc;font:600 clamp(36px,4vw,54px)/1.06 'Cormorant Garamond',Georgia,serif;margin:7px 0 9px}
+.page-contatti .contacts-heading p{color:#d5e1df;font:13px/1.7 'Libre Baskerville',Georgia,serif;margin:0}
+.page-contatti .contacts-add-btn{display:flex;align-items:center;justify-content:center;gap:10px;min-width:194px;min-height:54px;padding:12px 21px!important;font:700 14px 'Cormorant Garamond',Georgia,serif!important;letter-spacing:.4px;white-space:nowrap;cursor:pointer}
+.page-contatti .contacts-plus{font:30px/0.7 Georgia,serif;color:#f0d29b}
+.page-contatti .contacts-status{font:12px/1.5 'Libre Baskerville',Georgia,serif;color:#bfd7dc;min-height:22px;margin-bottom:15px}
+.page-contatti .contacts-status[data-kind="error"]{color:#ffbea9}
+.page-contatti .contacts-status[data-kind="ok"]{color:#c6e5cf}
+.page-contatti .contacts-editor{margin:0 0 22px;padding:24px 27px 26px;border-radius:18px;border:1px solid rgba(213,181,121,.53);border-top:4px solid #d4ad74;background:linear-gradient(160deg,rgba(13,47,58,.97),rgba(8,30,41,.98));box-shadow:0 16px 35px rgba(0,0,0,.31)}
+.page-contatti .contacts-editor-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:19px}
+.page-contatti .contacts-editor h3{font:600 31px 'Cormorant Garamond',Georgia,serif;color:#f6ead0;margin:2px 0 0}
+.page-contatti .contacts-close{font-size:25px!important;line-height:1!important;padding:7px 13px!important;min-width:43px;cursor:pointer}
+.page-contatti .contacts-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.page-contatti .contacts-form-grid label{display:flex;flex-direction:column;gap:9px;color:#f1e6ce!important;font-size:13px;font-weight:600}
+.page-contatti .contacts-required{display:inline;color:#d5ad71}
+.page-contatti .contacts-form-grid input{width:100%;min-height:51px;padding:12px 16px;color:#f9eedd;font:15px 'Libre Baskerville',Georgia,serif}
+.page-contatti .contacts-form-grid input::placeholder{color:#9db4b9}
+.page-contatti .contacts-form-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:22px}
+.page-contatti .contacts-form-actions button{min-height:44px;padding:11px 19px;cursor:pointer;font:600 14px 'Cormorant Garamond',Georgia,serif}
+.page-contatti .contacts-form-actions .contacts-secondary{background:rgba(7,31,41,.8)!important;color:#e0e4df!important}
+.page-contatti .contacts-save{min-width:169px}
+.page-contatti .contacts-save:disabled{opacity:.6;cursor:wait}
+.page-contatti .contacts-ledger{padding:25px;border-radius:18px;border:1px solid rgba(109,160,166,.33);background:linear-gradient(145deg,rgba(8,31,43,.95),rgba(8,28,37,.95));box-shadow:0 18px 38px rgba(0,0,0,.23)}
+.page-contatti .contacts-ledger-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}
+.page-contatti .contacts-ledger-head h3{display:flex;align-items:center;gap:12px;color:#f8eace;font:600 clamp(25px,2.8vw,34px)/1.13 'Cormorant Garamond',Georgia,serif;margin:4px 0 0}
+.page-contatti .contacts-count{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:30px;border:1px solid rgba(214,187,133,.35);border-radius:30px;background:rgba(224,193,132,.09);font:700 13px Georgia,serif;color:#e0c690}
+.page-contatti .contacts-search{display:flex;align-items:center;gap:8px;min-width:190px;width:min(340px,40%);height:48px;padding:0 15px;border-radius:12px;background:rgba(3,18,28,.8);border:1px solid rgba(119,167,173,.38)}
+.page-contatti .contacts-search>span{font:27px Georgia,serif;color:#dec48e}
+.page-contatti .contacts-search input{min-width:0;width:100%;height:100%;min-height:0;padding:5px 0;background:transparent!important;box-shadow:none!important;border:0!important;outline:0!important;border-radius:0!important;color:#f7ecdd;font:12px 'Libre Baskerville',Georgia,serif}
+.page-contatti .contacts-search:focus-within{outline:2px solid rgba(214,182,115,.65)}
+.page-contatti .contacts-search input::placeholder{color:#9ab7bc}
+.page-contatti .contacts-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.page-contatti .contact-card{min-width:0;display:flex;flex-direction:column;padding:20px 21px 16px;border:1px solid rgba(115,162,163,.3);border-top:3px solid rgba(212,174,108,.85);border-radius:14px;background:linear-gradient(145deg,rgba(17,53,62,.91),rgba(12,37,49,.96));box-shadow:0 9px 23px rgba(0,0,0,.18)}
+.page-contatti .contact-card-top{display:flex;align-items:center;gap:12px;min-width:0;padding-bottom:17px;border-bottom:1px solid rgba(193,174,133,.17)}
+.page-contatti .contact-monogram{flex:none;display:grid;place-items:center;width:52px;height:52px;border:1px solid rgba(227,189,123,.48);border-radius:50%;background:rgba(203,176,121,.09);color:#e8ca90;font:600 20px 'Cormorant Garamond',Georgia,serif}
+.page-contatti .contact-title{min-width:0}
+.page-contatti .contact-title h4{margin:0 0 4px;color:#fff2d8;overflow-wrap:anywhere;font:600 24px/1.1 'Cormorant Garamond',Georgia,serif}
+.page-contatti .contact-title small{font:10px 'Libre Baskerville',Georgia,serif;color:#a9c0be}
+.page-contatti .contact-letter{display:flex;flex-direction:column;gap:8px;padding:19px 0 20px;flex:1}
+.page-contatti .contact-letter-label{color:#b8d2d0;font:700 10px 'Libre Baskerville',Georgia,serif;letter-spacing:1.35px;text-transform:uppercase}
+.page-contatti .contact-letter-value{color:#f6dfad;overflow-wrap:anywhere;font:600 clamp(23px,2.2vw,28px) 'Cormorant Garamond',Georgia,serif;letter-spacing:.4px}
+.page-contatti .contact-actions{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid rgba(193,174,133,.17);padding-top:14px}
+.page-contatti .contact-actions button{flex:1;min-height:35px;min-width:58px;padding:8px 10px!important;cursor:pointer;font:600 12px 'Cormorant Garamond',Georgia,serif!important}
+.page-contatti .contact-actions .contact-delete{flex:0 0 auto;min-width:44px;border-color:rgba(244,143,135,.24)!important;color:#f1b6a9!important;background:rgba(76,25,29,.55)!important}
+.page-contatti .contacts-empty{grid-column:1/-1;padding:57px 20px;margin:0;text-align:center;border:1px dashed rgba(176,199,196,.31);border-radius:12px;background:rgba(10,37,47,.55);font:14px/1.65 'Libre Baskerville',Georgia,serif;color:#bfd2d1}
+@media(max-width:1100px){.page-contatti .contacts-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ .page-contatti .contacts-heading{align-items:stretch;flex-direction:column}
+ .page-contatti .contacts-add-btn{align-self:flex-start}
+ .page-contatti .contacts-ledger-head{align-items:stretch;flex-direction:column}
+ .page-contatti .contacts-search{width:100%;max-width:none}
+ .page-contatti .contacts-form-grid{grid-template-columns:1fr}
+ .page-contatti .contacts-ledger{padding:17px}
+}
+@media(max-width:590px){
+ .page-contatti .contacts-grid{grid-template-columns:1fr}
+ .page-contatti .contacts-editor{padding:18px}
+ .page-contatti .contacts-form-actions{flex-wrap:wrap}
+ .page-contatti .contacts-form-actions button{flex:1}
+}

@@ -38,7 +38,8 @@ function nav(p) {
     ['ordini.html','ORDINI','o','📦','Fatture e richieste'],
     ['eventi.html','EVENTI','e','🏆','Gara di pesca'],
     ['regole.html','REGOLE','r','📜','Il regolamento'],
-    ['wiki.html','WIKI','w','📚','Ricette e manuale']
+    ['wiki.html','WIKI','w','📚','Ricette e manuale'],
+    ['contatti.html','CONTATTI','c','✉','Nomi e missive']
   ];
   return `<nav class="site-quick" aria-label="Navigazione principale">${items.map(([href,label,key,ico,sub]) =>
     `<a href="${href}"${p===key?' class="on"':''}><span class="site-nav-icon">${ico}</span><span class="site-nav-label">${label}</span><small>${sub}</small>${key==='o'?'<span class="site-order-count" data-order-count hidden>0</span>':''}</a>`

@@ -264,3 +264,12 @@ body.page-eventi{background-image:linear-gradient(rgba(4,18,40,.77),rgba(7,33,57
  .hero .index-hero-tools,.wiki-hero-tools{width:100%!important;align-items:center!important;justify-content:center!important}
  .page-index .category .row{grid-template-columns:minmax(0,1fr) 75px 84px!important;grid-template-areas:'name name price' 'cubes qty total'!important;gap:7px 5px!important}
 }
+
+/* Sei sezioni principali: Contatti si affianca alle sezioni esistenti. */
+.quick.club-main-nav,.site-quick{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+@media(max-width:730px){
+  .quick.club-main-nav,.site-quick{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+@media(max-width:420px){
+  .quick.club-main-nav,.site-quick{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
